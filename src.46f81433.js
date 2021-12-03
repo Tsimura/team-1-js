@@ -5,4 +5,4 @@ const e=document.querySelector("#gallery");function t(){return fetch("https://ap
 },{}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/trending_films");
 },{"./sass/main.scss":"clu1","./js/trending_films":"JnV4"}]},{},["Focm"], null)
-//# sourceMappingURL=/team-1-js/src.4db683cb.js.map
+//# sourceMappingURL=/team-1-js/src.46f81433.js.map
