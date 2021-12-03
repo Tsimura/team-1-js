@@ -20,7 +20,7 @@
   }
   function toggleModalEsc(e) {
     if (e.keyCode === 27) {
-      console.log('Модалка з командою закрита');
+      console.log('Модалка з командою закрита кнопкою "Esc"');
       refs.modal.classList.toggle('is-hidden');
     }
   }
