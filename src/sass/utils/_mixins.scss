@@ -1,0 +1,90 @@
+/* // -- header ----------------------------- */
+.header_page {
+  font-size: 12px;
+
+  line-height: 1.17;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.header_placeholder {
+  font-weight: 400;
+  font-size: 14px;
+
+  line-height: 1.15;
+  color: #ffffff;
+}
+/* // -- end header ----------------------------- */
+
+/* // -- main section ----------------------------- */
+.film_title {
+  font-size: 12px;
+  line-height: 1.34;
+  text-transform: uppercase;
+}
+.film_genre {
+  font-size: 12px;
+  line-height: 1.34;
+  color: var(--color-accent);
+}
+.pagination-number_black {
+  font-size: 12px;
+  line-height: 1.34;
+}
+.pagination-number_white {
+  font-size: 12px;
+  line-height: 1.34;
+  color: #ffffff;
+}
+/* // -- end main section ----------------------------- */
+
+/* // -- card ----------------------------- */
+.card_title {
+  font-size: 30px;
+  line-height: 1.17;
+  text-transform: uppercase;
+  @media screen and (min-width: 320px) and (max-width: 1023px) {
+    font-size: 20px;
+    line-height: 1.15;
+  }
+}
+.card_descr_key {
+  font-size: 12px;
+  line-height: 1.34;
+  color: var(--color-secondary);
+}
+.card_descr_number {
+  font-size: 12px;
+  line-height: 1.17;
+}
+.card_descr_number_white {
+  font-size: 12px;
+  line-height: 1.17;
+  color: white;
+}
+.card_descr_title {
+  font-size: 12px;
+  line-height: 1.34;
+  text-transform: uppercase;
+}
+.card_descr_genre {
+  font-size: 12px;
+  line-height: 1.34;
+}
+.card_txt {
+  font-size: 12px;
+  line-height: 1.67;
+}
+/* // -- end card ----------------------------- */
+
+/* // --  footer ----------------------------- */
+.txt-footer {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.19;
+  color: var(--color-footer);
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    font-size: 14px;
+    line-height: 1.15;
+  }
+}
+/* // -- end footer ----------------------------- */
