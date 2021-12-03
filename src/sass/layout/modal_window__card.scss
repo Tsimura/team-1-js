@@ -1,0 +1,45 @@
+.modal-window-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.modal-window_card {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.film-exemple-photo {
+  display: block;
+  width: 240px;
+  height: 357px;
+  margin-bottom: 30px;
+}
+
+.film-card-modal-window {
+  width: 280px;
+  height: 958px;
+  border: solid 1px black;
+  padding: 48px 20px 41px 20px;
+  margin: 20px;
+}
+.close-modal-window-btn {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.icon-close-modal {
+  color: black;
+}
+.modal-window-signature {
+  display: flex;
+  flex-wrap: wrap;
+}
+.film-title-modal-window {
+  margin-bottom: 20px;
+}
+.modal-window-vote {
+  margin-bottom: 10px;
+}
+.modal-window-vote__span {
+  background-color: #ff6b01;
+}
