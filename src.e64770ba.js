@@ -7,4 +7,4 @@ const e=document.querySelector("#gallery"),n=[{id:28,name:"Action"},{id:12,name:
 },{}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/trending_films"),require("./js/local-storage");
 },{"./sass/main.scss":"clu1","./js/trending_films":"JnV4","./js/local-storage":"yGjV"}]},{},["Focm"], null)
-//# sourceMappingURL=/team-1-js/src.846f24cb.js.map
+//# sourceMappingURL=/team-1-js/src.e64770ba.js.map
