@@ -1,3 +1,25 @@
+// backdrop
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--color-bg-backdrop);
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.no-scroll {
+  overflow-y: hidden;
+}
+// modal window for cards
 .modal-window-section {
   display: flex;
   flex-wrap: wrap;
@@ -18,22 +40,34 @@
 }
 
 .film-card-modal-window {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
   width: 280px;
-  height: 958px;
+  height: auto;
   border: solid 1px black;
   padding: 48px 20px 41px 20px;
   margin: 20px;
 }
 .close-modal-window-btn {
-  display: flex;
+  position: absolute;
+  right: 10px;
+  top: 10px;
   background-color: rgb(255, 255, 255);
   width: 30px;
   height: 30px;
+  padding: 0;
+  border: none;
 }
 .icon-close-modal {
   color: black;
   width: 14px;
   height: 14px;
+}
+.icon-close-modal-svg {
+  text-align: center;
+  margin: auto;
+  left: 50%;
 }
 .modal-window-signature {
   display: flex;
@@ -42,9 +76,41 @@
 .film-title-modal-window {
   margin-bottom: 20px;
 }
+.window-characteristics {
+  display: flex;
+}
+.modal-window-characteristics {
+  margin-bottom: 20px;
+}
 .modal-window-vote {
   margin-bottom: 10px;
 }
 .modal-window-vote__span {
+  width: 36px;
   background-color: #ff6b01;
+  border-radius: 5px;
+  padding: 1px 10px;
+}
+.modal-window-popularity {
+  margin-bottom: 10px;
+}
+.modal-window-characteristics-value {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+.btn-watched-modal-window {
+  width: 113px;
+  min-height: 44;
+  background-color: #ff6b01;
+  border-radius: 5px;
+  border: none;
+  text-transform: uppercase;
+}
+.btn-queue-modal-window {
+  width: 113px;
+  min-height: 44;
+  border-radius: 5px;
+  border: solid 1px #000000;
+  text-transform: uppercase;
+  margin-left: auto;
 }
