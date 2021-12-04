@@ -1,0 +1,68 @@
+/* STYLES FOR CHECKBOX  */
+
+.switch-box {
+  display: flex;
+  min-height: 100vh;
+}
+.switch {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 160px;
+  height: 80px;
+  margin: auto;
+  padding: 5px;
+  text-align: center;
+  border-radius: 80px;
+}
+#range {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#checkbox {
+  display: none;
+}
+#checkbox:checked ~ .checkbox-background {
+  background-color: #1e90ff;
+  background-image: url('../src/images/team_proj/wings.com.webp');
+  background-size: contain;
+  background-position: right bottom;
+}
+.checkbox-background {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #191970;
+  background-image: url('../src/images/team_proj/stars.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 80px;
+}
+
+/* STYLES FOR ICONS  */
+.light-theme {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  align-self: center;
+  justify-content: flex-start;
+
+  background-image: url('../src/images/team_proj/sun.webp');
+  background-repeat: no-repeat;
+  box-shadow: inset 0px 0px 15px -6px #f0e68c;
+}
+
+.dark-theme {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  align-self: center;
+
+  background-image: url('../src/images/team_proj/moon.webp');
+  background-repeat: no-repeat;
+}
