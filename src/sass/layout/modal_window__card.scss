@@ -1,29 +1,9 @@
-// backdrop
-
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: var(--color-bg-backdrop);
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-.is-hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.no-scroll {
-  overflow-y: hidden;
-}
 // modal window for cards
 .modal-window-section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  border-color: white;
 }
 
 .modal-window_card {
@@ -42,13 +22,31 @@
 .film-card-modal-window {
   display: flex;
   flex-wrap: wrap;
-  position: relative;
-  width: 280px;
-  height: auto;
-  border: solid 1px black;
+  position: absolute;
+
+  height: 100%;
+  // border: solid 1px black;
+  background: white;
   padding: 48px 20px 41px 20px;
-  margin: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  border: transparent;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  // overflow-y: auto;
+  @media screen and (max-width: 767px) {
+    max-width: 280px;
+  }
+  @media screen and (min-width: 768px) {
+    max-width: 618px;
+  }
+  @media screen and (min-width: 1444px) {
+    max-width: 882px;
+  }
 }
+
 .close-modal-window-btn {
   position: absolute;
   right: 10px;
@@ -61,8 +59,8 @@
 }
 .icon-close-modal {
   color: black;
-  width: 14px;
-  height: 14px;
+  width: 30px;
+  height: 30px;
 }
 .icon-close-modal-svg {
   text-align: center;
