@@ -7,7 +7,7 @@
 .switch {
   position: relative;
   display: flex;
-  justify-content: space-between;
+
   width: 160px;
   height: 80px;
   margin: auto;
@@ -62,6 +62,7 @@
   height: 50px;
   border-radius: 50%;
   align-self: center;
+  margin-left: auto;
 
   background-image: url('../src/images/team_proj/moon.webp');
   background-repeat: no-repeat;
