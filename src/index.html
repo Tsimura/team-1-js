@@ -17,26 +17,23 @@
       rel="stylesheet"
     />
   </head>
+
   <body>
     <!-- Так добавляются фрагменты в главные HTML-файлы страниц. -->
+    <include src="./partials/header.html"></include>
     <div class="body__section">
-    <p style="text-align: center; margin-top: 25px">"Всім успіху і наснаги!" 🚀</p>
-    <div id="gallery" class="hp__gallery_wrapper">
-      <!-- <div><img src="https://image.tmdb.org/t/p/w500/rjkmN1dniUHVYAtwuV3Tji7FsDO.jpg" alt="" width="274px" height="398px"></div>
+      <div id="gallery" class="hp__gallery_wrapper">
+        <!-- <div><img src="https://image.tmdb.org/t/p/w500/rjkmN1dniUHVYAtwuV3Tji7FsDO.jpg" alt="" width="274px" height="398px"></div>
       <h2>Venom</h2>
       <p>drama | <span>2020</span></p> -->
+      </div>
     </div>
-    </div>
-    <include src="./partials/home_page.html"></include>
-
-    <!-- <include src="./partials/modal_window__card.html"></include> -->
-
     <include src="./partials/footer.html"></include>
+
     <include src="./partials/modal_window__card.html"></include>
     <include src="./partials/modal_team.html"></include>  
 
-
-    <!-- Скрипт идёт последним в разметке. В нём уже подключен главный SASS-файл. -->
+    <!-- script підключати тут -->
     <script src="./js/modal_window_team.js"></script>
     <script src="./index.js"></script>
   </body>

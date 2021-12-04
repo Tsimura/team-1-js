@@ -1,0 +1,123 @@
+header {
+  margin: 0 auto;
+  max-width: 1200px;
+  height: 230px;
+  left: 0px;
+  top: 0px;
+  background-image: url(.././image/header/header-index/mobile-index.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @media screen and (min-width: 768px) {
+    background-image: url(.././image/header/header-index/tablet-index.jpg);
+  }
+  @media screen and (min-width: 1024px) {
+    background-image: url(.././image/header/header-index/descktop-index.jpg);
+  }
+
+  @media (min-device-pixel-ratio: 2) and (min-width: 320px),
+    (min-resolution: 192dpi) and (min-width: 320px),
+    (min-resolution: 2dppx) and (min-width: 320px) {
+    background-image: url(.././image/header/header-index/mobile-index@2x.jpg);
+  }
+  @media (min-device-pixel-ratio: 2) and (min-width: 768px),
+    (min-resolution: 192dpi) and (min-width: 768px),
+    (min-resolution: 2dppx) and (min-width: 768px) {
+    background-image: url(.././image/header/header-index/tablet-index@2x.jpg);
+  }
+  @media (min-device-pixel-ratio: 2) and (min-width: 1024px),
+    (min-resolution: 192dpi) and (min-width: 1024px),
+    (min-resolution: 2dppx) and (min-width: 1024px) {
+    background-image: url(.././image/header/header-index/descktop-index@2x.jpg);
+  }
+}
+
+.navigation {
+  padding: 48px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.header__list {
+  display: flex;
+}
+
+.header-container {
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @media screen and (min-width: 320px) {
+    max-width: 320px;
+  }
+  @media screen and (min-width: 768px) {
+    max-width: 658px;
+  }
+  @media screen and (min-width: 1024px) {
+    max-width: 922px;
+  }
+}
+.header__list .header-item {
+  display: flex;
+  align-items: center;
+
+  &:first-child {
+    margin-right: 39px;
+  }
+}
+
+.header__logo {
+  display: block;
+  fill: black;
+}
+
+.logo__icon {
+  fill: currentColor;
+}
+
+.header-navigation-link {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #ffffff;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  border-bottom: 0.5px solid #ffffff;
+  max-width: 336px;
+  height: 20px;
+  margin: 0 auto;
+}
+
+.searchForm__button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.searchForm__input {
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  outline: none;
+
+  color: white;
+  &::placeholder {
+    color: white;
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
