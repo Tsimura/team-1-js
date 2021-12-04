@@ -61,10 +61,14 @@ function makeGenres(numbers) {
 }
 
 function articles({ poster_path, original_title, release_date, genre_ids }) {
-    return  `<div id="gallery">
-      <div><img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}" width="274px" height="398px"></div>
-      <h2>${original_title}</h2>
-      <p>${makeGenres(genre_ids)} | <span>${release_date.substr(0, 4)}</span></p>
+
+    return  `<div id="gallery" class="hp__gallery_el">
+      <div class="hp__gallery_img-wrapper"><img class="hp__gallery_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}" ></div>
+      <h2 class="film_title">${original_title}</h2>
+      <p class="film_genre">${genre_ids} | <span>${release_date.substr(0, 4)}</span></p>
+
     </div>`
-    }
+}
+    
+// width="274px" height="398px"
 
