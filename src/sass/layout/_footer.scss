@@ -1,0 +1,46 @@
+.footer {
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 28px;
+  padding-left: 48px;
+  padding-right: 36px;
+  background-color: #f7f7f7;
+}
+
+// .footer__text {
+//   font-size: 14px;
+//   line-height: 1.14;
+//   color: var( --color-footer);
+//   @media screen and (min-width: 768px) {
+//     font-size: 16px;
+//     line-height: 1.18;
+//   }
+// }
+.footer__link:active,
+.footer__link:hover,
+.footer__link {
+  text-decoration: none;
+  color: var(--color-footer);
+  text-decoration-line: underline;
+}
+
+// .footer__heart {
+// }
+// пульсація
+#heart {
+  position: relative;
+  margin: 0 auto;
+  animation: transformHeart 1.5s ease-in-out infinite;
+}
+
+@keyframes transformHeart {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.5, 1.5);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}

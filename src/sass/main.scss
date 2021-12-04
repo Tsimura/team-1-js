@@ -1,6 +1,7 @@
 // UTILS
 @import './utils/breakpoints';
-@import './utils/mixins';
+@import './utils/style_txt';
+@import './utils/variables';
 @import './utils/placeholder';
 // BASE
 @import './base/common';
@@ -9,7 +10,10 @@
 // COMPONENTS
 @import './components/backdrop';
 @import './components/button';
+@import './components/modal_team';
+// @import './components/page404';
 // LAYOUT
 @import './layout/home_page';
+@import './layout/footer';
 @import './layout/header';
 @import './layout/modal_window__card';
