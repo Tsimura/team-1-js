@@ -7,18 +7,25 @@
   background-color: #f7f7f7;
 }
 
-.footer__text {
-  font-size: 14px;
-  line-height: 1.14;
-  color: #545454;
-  @media screen and (min-width: 768px) {
-    font-size: 16px;
-    line-height: 1.18;
-  }
+// .footer__text {
+//   font-size: 14px;
+//   line-height: 1.14;
+//   color: var( --color-footer);
+//   @media screen and (min-width: 768px) {
+//     font-size: 16px;
+//     line-height: 1.18;
+//   }
+// }
+.footer__link:active,
+.footer__link:hover,
+.footer__link {
+  text-decoration: none;
+  color: var(--color-footer);
+  text-decoration-line: underline;
 }
 
-.footer__heart {
-}
+// .footer__heart {
+// }
 // пульсація
 #heart {
   position: relative;
