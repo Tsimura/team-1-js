@@ -6,7 +6,14 @@
   padding-right: 36px;
   background-color: #f7f7f7;
 }
-
+// .footer__team {
+//   border-width: 100%;
+//   border-top: 1px solid var(--color-footer);
+// }
+.footer__container {
+  padding-top: 15px;
+  border-top: 0.1px solid rgba(84, 84, 84, 0.2);
+}
 // .footer__text {
 //   font-size: 14px;
 //   line-height: 1.14;
@@ -24,8 +31,6 @@
   text-decoration-line: underline;
 }
 
-// .footer__heart {
-// }
 // пульсація
 #heart {
   position: relative;
