@@ -4,7 +4,10 @@ const switcherRefs = {
     lightTheme: document.querySelector('light-theme'),
     body: document.querySelector('body'),
     filmHeadings: document.getElementsByClassName('film_title'),
+    header: document.querySelector('.header'),
+    
 }
+console.log(switcherRefs.header.style)
 switcherRefs.switcher.addEventListener('change', onSwitch);
 function onSwitch(evt) {
     
@@ -15,6 +18,7 @@ function onSwitch(evt) {
     if (!switcherRefs.switcher.children[0].checked) {
         switcherRefs.body.style.backgroundImage = ' linear-gradient(0deg, rgb(101, 21, 139) 25%, rgb(17, 17, 26) 73%)';
         console.log(switcherRefs.filmHeadings[0].style);
+        switcherRefs.header.style.backgroundImage = 'linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/descktop-index.c45719dd.jpg)';
         for (let i = 0; i <= switcherRefs.filmHeadings.length; i += 1){
             switcherRefs.filmHeadings[i].style.color = '#fff';
         }
