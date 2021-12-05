@@ -1,19 +1,27 @@
 /* STYLES FOR CHECKBOX  */
 
 .switch-box {
-  display: flex;
-  min-height: 100vh;
+  position: absolute;
+  z-index: 546456;
+  top: 20px;
+  right: 0;
 }
 .switch {
   position: relative;
   display: flex;
 
-  width: 160px;
-  height: 80px;
+  @media screen and (max-width: 767px) {
+    width: 40px;
+    height: 20px;
+  }
+  @media screen and (min-width: 768px) {
+    width: 70px;
+    height: 35px;
+  }
+
   margin: auto;
   padding: 5px;
   text-align: center;
-  border-radius: 80px;
 }
 #range {
   margin: 0;
@@ -43,8 +51,15 @@
 
 /* STYLES FOR ICONS  */
 .light-theme {
-  width: 50px;
-  height: 50px;
+  @media screen and (max-width: 767px) {
+    width: 15px;
+    height: 15px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 30px;
+    height: 30px;
+  }
   border-radius: 50%;
   align-self: center;
   justify-content: flex-start;
@@ -54,11 +69,19 @@
   background-position: center;
   background-color: rgba(0, 0, 0, 0.5);
   background-repeat: no-repeat;
+  transition: opacity 1000ms linear;
 }
 
 .dark-theme {
-  width: 50px;
-  height: 50px;
+  @media screen and (max-width: 767px) {
+    width: 15px;
+    height: 15px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 30px;
+    height: 30px;
+  }
   border-radius: 50%;
   align-self: center;
   margin-left: auto;
@@ -68,4 +91,5 @@
   background-position: center;
   background-color: rgba(0, 0, 0, 0.5);
   background-repeat: no-repeat;
+  transition: opacity 1000ms linear;
 }
