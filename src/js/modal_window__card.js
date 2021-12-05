@@ -15,35 +15,35 @@ const modalButton = document.querySelector('modal-window-title');
 
   function handleModalCard() {
     if (refs.modalCard.classList.contains('is-hidden')) {
-      openModalCart();
+      openModalCard();
     } else {
-      closeModalCart();
+      closeModalCard();
     }
   }
   
 function handleModalCardClose(event) {
   if (!refs.modalCard.classList.contains('is-hidden')) {
       console.log(event.keyCode)
-    closeModalCart();
-    handleModalCardEsc();
-    } else {
-      openModalCart();
+    closeModalCard();
+     } else {
+      openModalCard();
     }
 }
   
 function handleModalCardEsc(event) {
   if (event.keyCode === 27) {
-    closeModalCart();
-  } else {
-    refs.closeModalCardBtn.removeEventListener();
-  }
+    closeModalCard();
+    document.removeEventListener('keydown', handleModalCardEsc);
+    
+  } document.addEventListener('keydown', handleModalCardEsc);
+  
 }
 
-function openModalCart() {
+function openModalCard() {
     console.log('Модалка с карточкой фильма открыта');
       refs.modalCard.classList.remove('is-hidden');
 }
-function closeModalCart() {
+function closeModalCard() {
   console.log('Модалка с карточкой фильма закрыта');
   refs.modalCard.classList.add('is-hidden');
 }
