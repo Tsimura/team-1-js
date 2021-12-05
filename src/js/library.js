@@ -10,10 +10,10 @@ let queueArray = []
 
 // myLibraryLink.addEventListener('click', showFilms)
 
-films.addEventListener('click', addFilmsToWathedInLocal);
-films.addEventListener('click', addFilmsToQueueInLocal);
-buttonModalAddToWatched.addEventListener('click', addFilmsToWathedInLocal)
-buttonModalAddToQueue.addEventListener('click', addFilmsToQueueInLocal)
+// films.addEventListener('click', addFilmsToWathedInLocal);
+// films.addEventListener('click', addFilmsToQueueInLocal);
+// buttonModalAddToWatched.addEventListener('click', addFilmsToWathedInLocal)
+// buttonModalAddToQueue.addEventListener('click', addFilmsToQueueInLocal)
 
 // Функция добавляет просмотренные фильмы в локальное хранилище
 

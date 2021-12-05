@@ -145,3 +145,13 @@ header {
     line-height: 16px;
   }
 }
+
+.header-library__list {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 65px;
+}
+
+.header-library__item {
+  margin-right: 15px;
+}
