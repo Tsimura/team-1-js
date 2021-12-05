@@ -92,4 +92,8 @@
   background-color: rgba(0, 0, 0, 0.5);
   background-repeat: no-repeat;
   transition: opacity 1000ms linear;
+
+  &__text-color {
+    color: #fff;
+  }
 }
