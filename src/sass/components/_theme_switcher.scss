@@ -25,10 +25,7 @@
   display: none;
 }
 #checkbox:checked ~ .checkbox-background {
-  background-color: #1e90ff;
-  background-image: url('.././image/theme-switcher/wings.webp');
-  background-size: contain;
-  background-position: right bottom;
+  background-image: linear-gradient(90deg, #e25c03, #ecf008);
 }
 .checkbox-background {
   position: absolute;
@@ -53,8 +50,10 @@
   justify-content: flex-start;
 
   background-image: url('.././image/theme-switcher/sun.webp');
+  background-size: 80%;
+  background-position: center;
+  background-color: #fff;
   background-repeat: no-repeat;
-  box-shadow: inset 0px 0px 15px -6px #f0e68c;
 }
 
 .dark-theme {
