@@ -1,3 +1,4 @@
 import './sass/main.scss';
 import "./js/trending_films";
-import './js/local-storage'
+import './js/local-storage';
+import './js/library';
