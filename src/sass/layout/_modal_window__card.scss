@@ -24,7 +24,7 @@
   flex-wrap: wrap;
   position: absolute;
 
-  height: 100%;
+  height: 100vp;
   // border: solid 1px black;
   background: white;
   padding: 48px 20px 41px 20px;
@@ -37,7 +37,7 @@
   transform: translate(-50%, -50%);
   // overflow-y: auto;
   @media screen and (max-width: 767px) {
-    max-width: 280px;
+    min-width: 280px;
   }
   @media screen and (min-width: 768px) {
     max-width: 618px;
@@ -66,48 +66,107 @@
 // text-align: center;
 // margin: auto;
 // }
+
+.film-title-modal-window {
+  font-family: Roboto;
+  font-style: 500;
+  text-transform: uppercase;
+  font-size: 20px;
+  line-height: 1.15;
+  text-align: left;
+  color: #000000;
+}
+
 .modal-window-signature {
   display: flex;
   flex-wrap: wrap;
 }
-.film-title-modal-window {
-  margin-bottom: 20px;
-}
 .window-characteristics {
+  margin-top: 20px;
   display: flex;
+  font-family: Roboto;
+  font-style: 500;
 }
 .modal-window-characteristics {
-  margin-bottom: 20px;
+  font-family: Roboto;
+  width: 110px;
+  color: #8c8c8c;
+  font-size: 12px;
+  line-height: 1.33;
+  text-align: left;
 }
-.modal-window-vote {
-  margin-bottom: 10px;
-}
-.modal-window-vote__span {
-  width: 36px;
-  background-color: #ff6b01;
-  border-radius: 5px;
-  padding: 1px 10px;
-}
+.modal-window-vote,
+.modal-winwow-original-title,
 .modal-window-popularity {
   margin-bottom: 10px;
 }
+
 .modal-window-characteristics-value {
-  margin-left: 40px;
+  margin-bottom: 20px;
+  font-family: Roboto;
+  color: #000000;
+  font-size: 12px;
+  line-height: 1.16;
+  text-align: left;
+}
+.modal-window-vote__span {
+  background-color: #ff6b01;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: Roboto;
+  color: white;
+  font-size: 12px;
+  line-height: 1.16;
+  text-align: left;
+}
+.modal-window-vote-value,
+.modal-window-popularity-value {
+  margin-bottom: 13px;
+}
+.modal-winwow-original-title-value {
+  text-transform: uppercase;
   margin-bottom: 10px;
 }
+.modal-window-about {
+  font-family: Roboto;
+  font-size: 12px;
+  line-height: 1.33;
+  text-align: left;
+  color: #000000;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.modal-window-description {
+  font-family: Roboto;
+  width: 240px;
+  height: auto;
+  font-size: 12px;
+  line-height: 1.66;
+  text-align: left;
+  color: #000000;
+  margin-bottom: 20px;
+}
 .btn-watched-modal-window {
-  width: 113px;
+  width: 112px;
   min-height: 44;
   background-color: #ff6b01;
   border-radius: 5px;
   border: none;
   text-transform: uppercase;
+  font-family: Roboto;
+  font-size: 12px;
+  line-height: 1.33;
 }
 .btn-queue-modal-window {
-  width: 113px;
+  width: 112px;
   min-height: 44;
   border-radius: 5px;
   border: solid 1px #000000;
   text-transform: uppercase;
+  padding: 14px 8px 12px 8px;
+  font-family: Roboto;
+  font-size: 12px;
+  line-height: 1.33;
   margin-left: auto;
 }
