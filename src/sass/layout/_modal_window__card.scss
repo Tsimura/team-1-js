@@ -6,27 +6,26 @@
   border-color: white;
 }
 
-.modal-window_card {
+.btn-modal-window_card {
   display: flex;
   justify-content: center;
   margin-top: 50px;
 }
-
+// Пересмотреть марджины
 .film-exemple-photo {
   display: block;
   @media screen and (max-width: 767px) {
     width: 240px;
     height: 357px;
-    margin-bottom: 30px;
   }
   @media screen and (min-width: 768px) {
     width: 264px;
     height: 373px;
-    margin-bottom: 30px;
   }
-  // @media screen and (min-width: 1444px) {
-  //   max-width: 882px;
-  // }
+  @media screen and (min-width: 1024px) {
+    width: 396px;
+    height: 478px;
+  }
 }
 
 .film-card-modal-window {
@@ -34,29 +33,27 @@
   position: absolute;
 
   height: 100vp;
-  // border: solid 1px black;
   background: white;
 
   border: transparent;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%);
   // overflow-y: auto;
   @media screen and (max-width: 767px) {
     flex-wrap: wrap;
     width: 280px;
     padding: 48px 20px 41px 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    top: 20px;
   }
   @media screen and (min-width: 768px) {
-    min-width: 618px;
+    width: 618px;
     padding: 42px 30px 40px 30px;
-    margin-top: 230px;
-    margin-bottom: 230px;
+    top: 230px;
   }
-  @media screen and (min-width: 1444px) {
-    max-width: 882px;
+  @media screen and (min-width: 1024px) {
+    width: 882px;
+    padding: 50px 30px 40px 30px;
+    top: 100px;
   }
 }
 
@@ -80,10 +77,16 @@
   font-family: Roboto;
   font-style: 500;
   text-transform: uppercase;
-  font-size: 20px;
-  line-height: 1.15;
   text-align: left;
   color: #000000;
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+    line-height: 1.15;
+  }
+  @media screen and (min-width: 1024px) {
+    font-size: 30px;
+    line-height: 1.17;
+  }
 }
 
 .modal-window-signature {
@@ -94,7 +97,7 @@
   @media screen and (min-width: 768px) {
     margin-left: 30px;
   }
-  @media screen and (min-width: 1444px) {
+  @media screen and (min-width: 1024px) {
     max-width: 882px;
   }
 }
@@ -158,16 +161,31 @@
 .modal-window-description {
   font-family: Roboto;
   width: 240px;
-  height: auto;
+  height: 240px;
   font-size: 12px;
   line-height: 1.66;
   text-align: left;
   color: #000000;
   margin-bottom: 20px;
+  overflow-y: auto;
+  @media screen and (max-width: 767px) {
+    width: 240px;
+    max-height: 240px;
+  }
+  @media screen and (min-width: 768px) {
+    width: 264px;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 396px;
+    // min-height: 160px;
+    max-height: 160px;
+  }
+}
+.btn-menu-module-card {
+  display: flex;
+  width: 100%;
 }
 .btn-watched-modal-window {
-  width: 112px;
-  min-height: 44px;
   background-color: #ff6b01;
   border-radius: 5px;
   border: none;
@@ -175,10 +193,26 @@
   font-family: Roboto;
   font-size: 12px;
   line-height: 1.33;
+  text-align: center;
+  @media screen and (max-width: 767px) {
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 113px;
+    height: 44px;
+  }
+  @media screen and (min-width: 768px) {
+    padding-left: 9px;
+    padding-right: 9px;
+    width: 125px;
+  }
+  @media screen and (min-width: 1024px) {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 136px;
+  }
 }
 .btn-queue-modal-window {
-  width: 112px;
-  min-height: 44px;
+  background-color: white;
   border-radius: 5px;
   border: solid 1px #000000;
   text-transform: uppercase;
@@ -186,5 +220,23 @@
   font-family: Roboto;
   font-size: 12px;
   line-height: 1.33;
-  margin-left: auto;
+  @media screen and (max-width: 767px) {
+    margin-left: auto;
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 113px;
+    height: 44px;
+  }
+  @media screen and (min-width: 768px) {
+    margin-left: auto;
+    padding-left: 9px;
+    padding-right: 9px;
+    width: 125px;
+  }
+  @media screen and (min-width: 1024px) {
+    margin-left: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 136px;
+  }
 }
