@@ -1,7 +1,4 @@
-const modalTittle = document.querySelector('modal_window__card');
-const modalButton = document.querySelector('modal-window-title');
-
-
+import { films } from "./trending_films";
 
   const refs = {
     openModalCardBtn: document.querySelector('[data-modal-card-open]'),
@@ -9,7 +6,7 @@ const modalButton = document.querySelector('modal-window-title');
     modalCard: document.querySelector('[data-modal-card]'),
   };
 
-  refs.openModalCardBtn.addEventListener('click', handleModalCard);
+  films.addEventListener('click', handleModalCard);
   refs.closeModalCardBtn.addEventListener('click', handleModalCardClose);
   document.addEventListener('keydown', handleModalCardEsc);
 
@@ -48,3 +45,5 @@ function closeModalCard() {
   refs.modalCard.classList.add('is-hidden');
 }
 
+
+import { articles } from "./trending_films";
