@@ -10,7 +10,30 @@
 //   border-width: 100%;
 //   border-top: 1px solid var(--color-footer);
 // }
+.footer__app {
+  fill: var(--color-footer);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1), fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    fill: var(--color-accent);
+  }
+}
+.footer__title-services {
+  margin-bottom: 10px;
+}
+.footer__title-description {
+  margin-bottom: 10px;
+}
+
+.app__container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-right: auto;
+  margin-left: auto;
+  width: 206px;
+}
+
 .footer__container {
+  margin-top: 20px;
   padding-top: 15px;
   border-top: 0.1px solid rgba(84, 84, 84, 0.2);
 }
@@ -48,4 +71,184 @@
   100% {
     transform: scale(1, 1);
   }
+}
+// =====================
+.box {
+  // display: flex;
+  // align-items: baseline;
+  @media screen and (min-width: 1200px) {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+  }
+}
+.location {
+  @media screen and (min-width: 768px) and (max-width: 1200px) {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 60px;
+  }
+  @media screen and (min-width: 1200px) {
+    display: flex;
+    align-items: baseline;
+    margin-right: 93px;
+    margin-bottom: 0px;
+  }
+}
+.footer-left {
+  @media screen and (max-width: 767px) {
+    margin-bottom: 60px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    margin-right: 70px;
+    margin-bottom: 0px;
+  }
+}
+
+.address-in-footer {
+  @media screen and (max-width: 1199px) {
+    text-align: center;
+  }
+}
+.footer-address-point {
+  display: block;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.71;
+
+  letter-spacing: 0.03em;
+
+  color: var(--color-footer);
+  margin-bottom: 9px;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    color: var(--color-accent);
+  }
+  @media screen and (max-width: 1199px) {
+    text-align: center;
+  }
+}
+
+.footer-tel {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.71;
+
+  letter-spacing: 0.03em;
+  color: var(--color-footer);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    color: var(--color-accent);
+  }
+}
+
+.footer-mail {
+  display: block;
+  margin-bottom: 9px;
+
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.71;
+
+  letter-spacing: 0.03em;
+  color: var(--color-footer);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    color: var(--color-accent);
+  }
+  @media screen and (max-width: 1199px) {
+    text-align: center;
+  }
+}
+
+.footer-right {
+  width: 206px;
+  height: 80px;
+  // margin-left: 70px;
+  @media screen and (max-width: 767px) {
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 60px;
+  }
+}
+.footer-invite {
+  font-weight: bold;
+  // font-size: 14px;
+  // line-height: 1.14;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+
+  margin-bottom: 10px;
+  @media screen and (max-width: 1199px) {
+    text-align: center;
+  }
+}
+// =======
+.footer-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-list-icon {
+  width: 20px;
+  height: 20px;
+
+  fill: var(--color-footer);
+}
+
+.footer-list-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+
+  // background-color: #e61a1a;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-accent);
+  }
+}
+
+.footer__section {
+  //   width: 1200px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  @media screen and (min-width: 480px) {
+    max-width: 480px;
+  }
+  @media screen and (min-width: 768px) {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    max-width: 1024px;
+  }
+  // @media screen and (min-width: 1200px) {
+  //   max-width: 1200px;
+  // }
+}
+.footer__logo-title {
+  margin-bottom: 10px;
+}
+.footer__logo:active,
+.footer__logo:hover,
+.footer__logo {
+  text-decoration: none;
+  color: var(--color-footer);
 }

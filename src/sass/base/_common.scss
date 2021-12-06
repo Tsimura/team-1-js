@@ -43,7 +43,8 @@ body {
   font-style: normal;
   font-weight: 500;
   color: var(--color-main);
+  transition: background-color 2000ms linear;
 }
-html {
-  //   scroll-behavior: smooth;
-}
+// html {
+//   //   scroll-behavior: smooth;
+// }
