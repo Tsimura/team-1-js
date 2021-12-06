@@ -1,3 +1,4 @@
+
 import { getFilms } from "./getFilms"
 import { makeGenres } from "./makeGenres"
 import Notiflix from 'notiflix';
@@ -6,6 +7,7 @@ export const films = document.querySelector(`#gallery`)
 const input = document.querySelector(`#search-form`)
 
 input.addEventListener(`submit`, onSearch)
+
 
 let searchForm = ` `
 
@@ -60,3 +62,4 @@ function searchFilms(searchForm) {
             return response.json()
         })
 }
+
