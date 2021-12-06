@@ -1,6 +1,7 @@
 import { getFilms } from "./getFilms"
 import { makeGenres } from "./makeGenres"
 import Notiflix from 'notiflix';
+import poster from "../image/posters/poster.jpg"
 
 export const films = document.querySelector(`#gallery`)
 const input = document.querySelector(`#search-form`)
@@ -24,7 +25,6 @@ function createFilmoteka(resp) {
 }
 
 export function articles({ poster_path, original_title, release_date, genre_ids }) {
-    const poster = `http://static.everypixel.com/ep-pixabay/0597/0608/0831/32386/5970608083132386502-mistake.png`
     return  `<div id="gallery" class="hp__gallery_el">
       ${poster_path ? `<img class="hp__gallery_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}"` : `<img class="hp__gallery_img" src="${poster}" alt="Poster is missing"`}>
       <h2 class="film_title">${original_title}</h2>
