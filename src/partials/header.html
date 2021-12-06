@@ -18,7 +18,7 @@
         <p class="logo__text">Filmoteka</p>
       </a>
       <ul class="list header__list">
-        <li class="header-item"><a href="./index.html">
+        <li class="header-item"><a href="./index.html" class="link">
             <button id="home" class="header-navigation-link" type="button">Home</button></a>
         </li>
         <li class="header-item">
@@ -26,12 +26,13 @@
         </li>
       </ul>
     </nav>
-    <form id="search-form" action="submit" class="searchForm" is-hidden>
+    <form id="search-form" action="submit" class="searchForm">
       <input type="text" class="searchForm__input" name="searchQuery" placeholder="Поиск фильмов" autocomplete="off" />
-      <button type="submit" class="searchForm__button">
-        <svg class="input__icon" width="12" height="12">
-          <use href="./image/sprite.svg#icon-search"></use>
-        </svg>
+      <svg class="input__icon fill-good" width="12" height="12">
+        <use href="./image/sprite.svg#icon-search"></use>
+      </svg>
+      <button type="submit" class="searchForm__button  ">
+
       </button>
     </form>
     <ul class="header-library__list is-hidden">
