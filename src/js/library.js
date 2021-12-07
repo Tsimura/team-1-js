@@ -1,11 +1,9 @@
 import storage from './local-storage';
+import card from '../templates/card-library'
 
-
-const films = document.querySelector(`#gallery`);
+const films = document.querySelector('#gallery');
 const buttonWatched = document.querySelector('.header-library__button--watched');
 const buttonQueue = document.querySelector('.header-library__button--queue');
-
-//
 
 let watchedArray = [];
 let queueArray = [];
@@ -13,92 +11,107 @@ let queueArray = [];
 buttonWatched.addEventListener('click', showFilmsWatched);
 buttonQueue.addEventListener('click', showFilmsQueue);
 
-
-// myLibraryLink.addEventListener('click', showFilms)
-
-// films.addEventListener('click', addFilmsToWathedInLocal);
-// films.addEventListener('click', addFilmsToQueueInLocal);
-// buttonModalAddToWatched.addEventListener('click', addFilmsToWathedInLocal)
-// buttonModalAddToQueue.addEventListener('click', addFilmsToQueueInLocal)
+films.addEventListener('click', addFilmsToWathedInLocal);
+films.addEventListener('click', addFilmsToQueueInLocal);
 
 // Функция добавляет просмотренные фильмы в локальное хранилище
 
 function addFilmsToWathedInLocal(e) {
-  if (e.target.className !== 'button_watched') {
+  if (!e.target.className.includes("button-watched-modal-window")) {
     return;
   }
   const idBtn = Number(e.target.id);
   const i = watchedArray.indexOf(idBtn);
-  if ((i = -1)) {
+  if (i === -1) {
+    watchedArray = storage.load('watchedArray') || [];
     watchedArray.push(idBtn);
-  } else {
+    e.target.innerHTML = `REMOVE FROM WATCHED`
+    e.target.classList.remove('button--active')
+
+  } 
+  else {
     watchedArray.splice(i, 1);
+    e.target.innerHTML = `ADD TO WATCHED`
+    e.target.classList.add('button--active')
   }
-  watchedArray = storage.load('watchedArray') || [];
-  // watchedArray.push(idBtn);
-
   return storage.save('watchedArray', watchedArray);
-}
 
-const localWatched = storage.load('watchedArray');
-
-function showFilmsWatched() {
-  films.innerHTML = ``;
-  for (let item of localWatched) {
-    fetchItem(item).then(film => {
-      renderFilms(film);
-    });
-    console.log(item);
-  }
 }
+let localWatched = storage.load('watchedArray');
+console.log(localWatched);
 
 // Функция добавляет в очередь фильмы в локальное хранилище
 
 function addFilmsToQueueInLocal(e) {
-  if (e.target.className !== 'button_queue') {
+  if (!e.target.className.includes("button-queue-modal-window")) {
     return;
   }
   const idBtn = Number(e.target.id);
-  queueArray = storage.load('queueArray') || [];
-  queueArray.push(idBtn);
+  const i = queueArray.indexOf(idBtn);
+
+  if (i === -1) {
+    queueArray = storage.load('queueArray') || [];
+    queueArray.push(idBtn);
+    e.target.innerHTML = `REMOVE FROM QUEUE`
+    e.target.classList.remove('button--active')
+
+
+  } 
+  else {
+    queueArray.splice(i, 1);
+    e.target.innerHTML = `ADD TO QUEUE`
+    e.target.classList.add('button--active')
+
+  }
   return storage.save('queueArray', queueArray);
 }
 
-const localQueue = storage.load('queueArray');
+let localQueue = storage.load('queueArray');
 console.log(localQueue);
+
+// Рисует карточки с просмотренными фильмами в библиотеке (вкладка "просмотренные")
+
+function showFilmsWatched() {
+  films.innerHTML = ``;
+  localWatched = storage.load('watchedArray')
+  if (!localWatched || (!localWatched[0] && !localWatched[1])) {
+    return `Упс еще ничего нет`
+  } 
+  for (let id of localWatched) {
+    fetchItem(id).then(film => {
+      renderFilms(film);
+    });
+    console.log(id);
+}}
+
+// Рисует карточки с просмотренными фильмами в библиотеке (вкладка "в очереди")
+
 
 function showFilmsQueue() {
   films.innerHTML = ``;
-  for (let item of localQueue) {
-    fetchItem(item).then(film => {
+  localQueue = storage.load('queueArray')
+
+  if (localQueue === undefined) {
+    console.log(`Упс еще ничего нет`);
+  } else {  for (let id of localQueue) {
+    fetchItem(id).then(film => {
       renderFilms(film);
     });
-    console.log(item);
+    console.log(id);
   }
-}
+}}
 
-function fetchItem(item) {
+// Запрос на бэк за айди фильмов
+
+function fetchItem(id) {
   return fetch(
-    `https://api.themoviedb.org/3/movie/${item}?api_key=221ed015def0321f18a85f3fc7b4d6fa`,
+    `https://api.themoviedb.org/3/movie/${id}?api_key=221ed015def0321f18a85f3fc7b4d6fa`,
   ).then(response => response.json());
 }
 
 // Функция рисует картотеку с фильмами
-function renderFilms(film) {
-  films.insertAdjacentHTML('beforeend', articles(film));
-}
 
-function articles({ poster_path, original_title, release_date, genre_ids }) {
-  const poster = `http://static.everypixel.com/ep-pixabay/0597/0608/0831/32386/5970608083132386502-mistake.png`;
-  return `<div id="gallery" class="hp__gallery_el">
-      <div class="hp__gallery_img-wrapper">
-      ${
-        poster_path
-          ? `<img class="hp__gallery_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}"`
-          : `<img class="hp__gallery_img" src="${poster}" alt=""`
-      }></div>
-      <h2 class="film_title">${original_title}</h2>
-      <p class="film_genre">${genre_ids} | <span>${release_date.substr(0, 4)}</span></p>
-    </div>`;
+function renderFilms(film) {
+  films.insertAdjacentHTML('beforeend', card(film));
 }
 
