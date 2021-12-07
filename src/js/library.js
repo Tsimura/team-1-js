@@ -71,14 +71,14 @@ console.log(localQueue);
 
 // Рисует карточки с просмотренными фильмами в библиотеке (вкладка "просмотренные")
 
-function showFilmsWatched() {
+export function showFilmsWatched() {
   films.innerHTML = ``;
   localWatched = storage.load('watchedArray')
   if (!localWatched || (!localWatched[0] && !localWatched[1])) {
     return `Упс еще ничего нет`
   } 
   for (let id of localWatched) {
-    fetchItem(id).then(film => {
+    fetchById(id).then(film => {
       renderFilms(film);
     });
     console.log(id);
@@ -94,7 +94,7 @@ function showFilmsQueue() {
   if (localQueue === undefined) {
     console.log(`Упс еще ничего нет`);
   } else {  for (let id of localQueue) {
-    fetchItem(id).then(film => {
+    fetchById(id).then(film => {
       renderFilms(film);
     });
     console.log(id);
@@ -103,7 +103,7 @@ function showFilmsQueue() {
 
 // Запрос на бэк за айди фильмов
 
-function fetchItem(id) {
+function fetchById(id) {
   return fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=221ed015def0321f18a85f3fc7b4d6fa`,
   ).then(response => response.json());
@@ -115,3 +115,13 @@ function renderFilms(film) {
   films.insertAdjacentHTML('beforeend', card(film));
 }
 
+// Функция проверяет есть ли такое ID в storage
+
+function idInStorage(id, list) {
+  let arrList = [];
+  let localListJson = storage.load(list);
+  if (localListJson) {
+    arrList = [...localListJson];
+  }
+  const listSet = new Set(arrList);
+  return listSet.has(id);}
