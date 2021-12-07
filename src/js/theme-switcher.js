@@ -9,54 +9,104 @@ const switcherRefs = {
     footerP: document.querySelectorAll('footer p'),
     footerLinks: document.querySelectorAll('footer a'),
     footerHeadings: document.querySelectorAll('footer h2'),
-    footerSVG: document.querySelectorAll('footer svg')
-
+    footerSVG: document.querySelectorAll('footer svg'),
+    gallery: document.querySelector('.hp__gallery_wrapper'),
     
 }
-console.log(switcherRefs.footerSVG)
-
+// const mobileWidthMatch = window.matchMedia("(min-width: 320px)");
+// const tabletWidthMatch = window.matchMedia("(min-width: 768px)");
+// const desktopWidthMatch = window.matchMedia("(min-width: 1024px)");
+let widthMatch = 0;
 switcherRefs.switcher.addEventListener('change', onSwitch);
-function onSwitch(evt) {
+
+
+
+  function onSwitch(evt) {
     
     evt.currentTarget.children[2].classList.toggle('is-hidden');
     evt.target.removeAttribute('checked');
     evt.currentTarget.children[1].classList.toggle('is-hidden');
  
     if (!switcherRefs.switcher.children[0].checked) {
+        
         switcherRefs.body.style.backgroundImage = ' linear-gradient(0deg, rgb(101, 21, 139) 25%, rgb(17, 17, 26) 73%)';
-        switcherRefs.header.style.backgroundImage = 'linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url(/descktop-index.c45719dd.jpg)';
         switcherRefs.footer.style.backgroundColor = '#000';
-        switcherRefs.footerLinks.forEach(a => {
-            return a.style.color='#fff';
-        })
-        switcherRefs.footerSVG.forEach(svg => {
-            return svg.style.fill='#fff';
-        })
-        changeTextColor(switcherRefs.footerP);
-        changeTextColor(switcherRefs.footerHeadings);
-        
-        
+        switcherRefs.gallery.classList.add('dark-theme__text-color');
+        changeTextColorByStyle(switcherRefs.footerLinks)
+        changeTextColorByClass(switcherRefs.footerP);
+        changeTextColorByClass(switcherRefs.footerHeadings);
+        changeSvgFill(switcherRefs.footerSVG);
+        changeBackGroundImage();
         console.log(window.screen.width)
-       
-        for (let i = 0; i <= switcherRefs.filmHeadings.length; i += 1){
-            switcherRefs.filmHeadings[i].style.color = '#fff'
-          
-        }
     
     } else{
-        switcherRefs.body.removeAttribute('style');
-        switcherRefs.header.removeAttribute('style');
-        switcherRefs.footer.removeAttribute('style');
+        switcherRefs.gallery.classList.remove('dark-theme__text-color');
+        removeAttributeStyle(switcherRefs.body);
+        removeAttributeStyle(switcherRefs.header);
+        removeAttributeStyle(switcherRefs.footer);
+        removeAttributeStyleFromArray(switcherRefs.footerLinks);
+        removeAttributeStyleFromArray(switcherRefs.footerSVG);
+        removeDarkThemeClass(switcherRefs.footerP);
+        removeDarkThemeClass(switcherRefs.footerHeadings);
         
-       for (let i = 0; i <= switcherRefs.filmHeadings.length; i += 1){
-            switcherRefs.filmHeadings[i].style.color = '#000'
-        }
+       
+ 
     }
 }
-
-function changeTextColor(arr) {
-    arr.forEach(el => {
+  function changeTextColorByClass(arr) {
+   return arr.forEach(el => {
            
             return el.classList.add('dark-theme__text-color');
      })
 }
+  function changeTextColorByStyle(elem) {
+    return elem.forEach(el => {
+        return el.style.color = '#fff';
+    })
+}
+  function changeSvgFill(svg) {
+    return svg.forEach(el => {
+        return el.style.fill = '#fff';
+    })
+}
+  function removeAttributeStyle(elem) {
+    return elem.removeAttribute('style');
+        
+}
+  function removeAttributeStyleFromArray(arr) {
+    return arr.forEach(el => {
+        return el.removeAttribute('style');
+    })
+}
+
+function removeDarkThemeClass(elem) {
+    return elem.forEach(el => {
+        return el.classList.remove('dark-theme__text-color');
+
+    })
+}
+
+function changeBackGroundImage() {
+    
+    // if (mobileWidthMatch.matches) {
+        
+    // } else if () {
+        
+    // } else {
+    //     switcherRefs.header.style.backgroundImage = 'linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url(/descktop-index.c45719dd.jpg)';
+    // }
+    // switch (widthMatch) {
+    //     case 'window.matchMedia("(min-width: 320px)")': 
+    //     switcherRefs.header.style.backgroundImage = 'linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9) ), url(.././image/header/header-index/mobile-index.jpg)';
+    //         break;
+    //     case 'window.matchMedia("(min-width: 768px)")': 
+    //     switcherRefs.header.style.backgroundImage = 'linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9) ), url(.././image/header/header-index/tablet-index.jpg)';
+    //         break;
+    //     case 'window.matchMedia("(min-width: 1024px)")': 
+    //     switcherRefs.header.style.backgroundImage = 'linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9) ), url(.././image/header/header-index/descktop-index.jpg)';
+    //         break;
+    //     default:
+    //             switcherRefs.header.style.backgroundImage = 'linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9) ), url(.././image/header/header-index/tablet-index.jpg)';
+    // }
+}
+

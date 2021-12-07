@@ -1,5 +1,6 @@
 import storage from './local-storage';
 
+
 const films = document.querySelector(`#gallery`);
 const buttonWatched = document.querySelector('.header-library__button--watched');
 const buttonQueue = document.querySelector('.header-library__button--queue');
@@ -11,6 +12,7 @@ let queueArray = [];
 
 buttonWatched.addEventListener('click', showFilmsWatched);
 buttonQueue.addEventListener('click', showFilmsQueue);
+
 
 // myLibraryLink.addEventListener('click', showFilms)
 
@@ -99,3 +101,4 @@ function articles({ poster_path, original_title, release_date, genre_ids }) {
       <p class="film_genre">${genre_ids} | <span>${release_date.substr(0, 4)}</span></p>
     </div>`;
 }
+

@@ -94,6 +94,10 @@
   transition: opacity 1000ms linear;
 
   &__text-color {
-    color: #fff;
+    color: #fff !important;
   }
+}
+
+.hp__gallery_wrapper.dark-theme__text-color h2 {
+  color: #fff !important;
 }
