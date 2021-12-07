@@ -6,3 +6,4 @@ import './js/header';
 import './js/youTube';
 import './js/toUp';
 import './js/modal_window_team';
+import './js/sortAPI';
