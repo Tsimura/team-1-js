@@ -36,4 +36,4 @@ const e={openModalBtn:document.querySelector("[data-modal-open]"),closeModalBtn:
 },{}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/trending_films"),require("./js/local-storage"),require("./js/library"),require("./js/header"),require("./js/youTube"),require("./js/toUp"),require("./js/modal_window_team");
 },{"./sass/main.scss":"clu1","./js/trending_films":"JnV4","./js/local-storage":"yGjV","./js/library":"BfNj","./js/header":"cGsR","./js/youTube":"gy8x","./js/toUp":"gKl3","./js/modal_window_team":"tLT9"}]},{},["Focm"], null)
-//# sourceMappingURL=/team-1-js/src.6b7fdd4f.js.map
+//# sourceMappingURL=/team-1-js/src.298a5311.js.map
