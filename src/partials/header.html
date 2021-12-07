@@ -1,6 +1,16 @@
 <header class="header">
   <div class="header-container">
+
     <nav class="navigation">
+      <div class="switch-box">
+        <label class="switch">
+          <input type="checkbox" id='checkbox' name="checkbox" checked>
+          <div class="light-theme"></div>
+          <div class="dark-theme is-hidden"></div>
+          <span class="checkbox-background">
+          </span>
+        </label>
+      </div>
       <a class="header__logo link" href="./">
         <svg class="logo__icon" width="24" height="24">
           <use href="./image/sprite.svg#icon-film"></use>
@@ -8,20 +18,21 @@
         <p class="logo__text">Filmoteka</p>
       </a>
       <ul class="list header__list">
-        <li class="header-item">
-          <button id="home" class="header-navigation-link" type="button">Home</button>
+        <li class="header-item"><a href="./index.html" class="link">
+            <button id="home" class="header-navigation-link" type="button">Home</button></a>
         </li>
         <li class="header-item">
           <button id="my-library" class="header-navigation-link" type="button">my library</button>
         </li>
       </ul>
     </nav>
-    <form id="search-form" action="submit" class="searchForm" is-hidden>
-      <input type="text" class="searchForm__input" name="searchQuery" placeholder="Поиск фильмов" />
-      <button type="submit" class="searchForm__button">
-        <svg class="logo__icon" width="12" height="12">
-          <use href="./image/sprite.svg#icon-search"></use>
-        </svg>
+    <form id="search-form" action="submit" class="searchForm">
+      <input type="text" class="searchForm__input" name="searchQuery" placeholder="Поиск фильмов" autocomplete="off" />
+      <svg class="input__icon fill-good" width="12" height="12">
+        <use href="./image/sprite.svg#icon-search"></use>
+      </svg>
+      <button type="submit" class="searchForm__button  ">
+
       </button>
     </form>
     <ul class="header-library__list is-hidden">

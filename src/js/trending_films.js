@@ -1,14 +1,16 @@
+
 import { getFilms } from "./getFilms"
 import { makeGenres } from "./makeGenres"
 import Notiflix from 'notiflix';
+import poster from "../image/posters/poster.jpg"
 
-const films = document.querySelector(`#gallery`)
+export const films = document.querySelector(`#gallery`)
 const input = document.querySelector(`#search-form`)
 
 input.addEventListener(`submit`, onSearch)
 
-let searchForm = ` `
 
+let searchForm = ` `
 
 getFilms().then(createFilmoteka).catch(error => console.log(error))
 
@@ -22,14 +24,11 @@ function createFilmoteka(resp) {
        return films.insertAdjacentHTML(`beforeend`, articles(data))    
     })
     }
-
 }
 
-function articles({ poster_path, original_title, release_date, genre_ids }) {
-    const poster = `http://static.everypixel.com/ep-pixabay/0597/0608/0831/32386/5970608083132386502-mistake.png`
+export function articles({ poster_path, original_title, release_date, genre_ids }) {
     return  `<div id="gallery" class="hp__gallery_el">
-      <div class="hp__gallery_img-wrapper">
-      ${poster_path ? `<img class="hp__gallery_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}"` : `<img class="hp__gallery_img" src="${poster}" alt=""`}></div>
+      ${poster_path ? `<img class="hp__gallery_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}"` : `<img class="hp__gallery_img" src="${poster}" alt="Poster is missing"`}>
       <h2 class="film_title">${original_title}</h2>
       <p class="film_genre">${makeGenres(genre_ids)} | <span>${release_date.substr(0, 4)}</span></p>
     </div>`
@@ -63,3 +62,4 @@ function searchFilms(searchForm) {
             return response.json()
         })
 }
+
