@@ -1,0 +1,21 @@
+<div id="gallery" class="hp__gallery_el">
+      <div class="hp__gallery_img-wrapper">
+          <img class="hp__gallery_img" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{original_title}}"
+      ></div>
+      <h2 class="film_title">{{original_title}}</h2>
+      <div>
+        <ul class="film_genre list">
+        {{#each genres}}
+                <li>{{name}}</li>
+            {{/each}} |
+    </ul>
+      <span class="film_genre">{{release_date}}</span>
+
+      </div>
+      <ul class="modal-list__buttons list">
+      <li>
+      <button id="{{id}}" class='button-watched-modal-window button--active button'>add to watched</button></li>
+      <li>
+      <button id="{{id}}" type='button' class='button-queue-modal-window button button--active'>add to queue</button></li>
+      </ul>
+    </div>
