@@ -5,7 +5,7 @@ const films = document.querySelector(`#gallery`);
 const options = {
   totalItems: 1000,
   itemsPerPage: 20,
-  visiblePages: 10,
+  visiblePages: 7,
   page: 1,
 };
 
