@@ -1,3 +1,5 @@
+import {showFilmsWatched} from './library'
+
 const myLibraryButton = document.querySelector('#my-library');
 const homeButton = document.querySelector('#home');
 const form = document.querySelector('#search-form');
@@ -9,6 +11,7 @@ const header = document.querySelector('header');
 console.log(buttonWatched);
 
 myLibraryButton.addEventListener('click', () => {
+  showFilmsWatched()
   header.classList.add('header-libary');
 
   form.classList.add('is-hidden');
