@@ -27,7 +27,7 @@ function createFilmoteka(resp) {
 }
 
 export function articles({ poster_path, original_title, release_date, genre_ids, id }) {
-    return  `<div id="gallery" class="hp__gallery_el">
+    return  `<a href="${poster_path}" id="gallery" class="hp__gallery_el">
       ${poster_path ? `<img class="hp__gallery_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}"` : `<img class="hp__gallery_img" src="${poster}" alt="Poster is missing"`}>
       <h2 class="film_title">${original_title}</h2>
       <p class="film_genre">${makeGenres(genre_ids)} | <span>${release_date.substr(0, 4)}</span></p>
@@ -37,7 +37,7 @@ export function articles({ poster_path, original_title, release_date, genre_ids,
       <li>
       <button id="${id}" type='button' class='button-queue-modal-window button button--active'>add to queue</button></li>
       </ul>
-    </div>`
+    </a>`
 }
     
 
