@@ -7,6 +7,7 @@
   right: 0;
 }
 .switch {
+  cursor: pointer;
   position: relative;
   display: flex;
 
@@ -144,4 +145,14 @@ body[data-theme='dark'] {
 }
 body[data-theme='dark'] .checkbox-background {
   background-image: linear-gradient(90deg, #d6d6f0, #191970);
+}
+body[data-theme='dark'] .film-card-modal-window {
+  background-image: linear-gradient(0deg, rgb(101, 21, 139) 25%, rgb(17, 17, 26) 73%);
+}
+
+body[data-theme='dark'] .close-modal-window-btn {
+  background-color: rgb(17, 17, 26);
+}
+body[data-theme='dark'] .icon-close-modal {
+  fill: var(--dark-theme-modal-button-fill);
 }
