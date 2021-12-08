@@ -48,6 +48,10 @@ header {
   background-repeat: no-repeat;
   background-size: cover;
 
+  & .filterButtonWrapper {
+    display: none;
+  }
+
   @media screen and (min-width: 768px) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(.././image/header/header-libary/tablet_header.jpg);
@@ -187,6 +191,9 @@ header {
     transform: scaleX(1);
   }
 }
+.current::after {
+  transform: scaleX(0);
+}
 
 .searchForm {
   position: relative;
@@ -224,6 +231,7 @@ header {
 
   color: white;
   &::placeholder {
+    font-family: var(--font-main);
     color: white;
     font-size: 14px;
     line-height: 16px;
@@ -254,5 +262,23 @@ header {
   margin-right: 15px;
 }
 // --------------===============START OF FILTER BUTTONS===============--------------
+.filterButtonWrapper {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .filterButtonWrapper {
+    display: flex;
+    margin: 0, auto;
+    justify-content: space-around;
+
+    & :nth-child(-n + 3) {
+      border-radius: 4px;
+      color: #ffffff;
+      background-color: var(--color-accent);
+      cursor: pointer;
+    }
+  }
+}
 
 // --------------===============END OF FILTER BUTTONS===============--------------

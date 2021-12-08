@@ -26,6 +26,9 @@ homeButton.addEventListener('click', () => {
   header.classList.remove('header-libary');
   form.classList.remove('is-hidden');
   listButton.classList.add('is-hidden');
+  // homeButton.classList.add('current');
+  // const isActive = homeButton.classList.contains('current');
+
   clearContainer();
   return getFilms()
     .then(createFilmoteka)
