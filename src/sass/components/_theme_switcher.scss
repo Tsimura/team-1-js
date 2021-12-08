@@ -94,10 +94,17 @@
   transition: opacity 1000ms linear;
 
   &__text-color {
-    color: #fff !important;
+    color: #fff;
   }
 }
 
 .hp__gallery_wrapper.dark-theme__text-color h2 {
-  color: #fff !important;
+  color: #fff;
+}
+
+.modal-window-signature.dark-theme__text-color h2,
+.modal-window-signature.dark-theme__text-color h3,
+.modal-window-signature.dark-theme__text-color p,
+.modal-window-signature.dark-theme__text-color span {
+  color: #fff;
 }

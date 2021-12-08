@@ -1,9 +1,8 @@
+import localStorage from "./local-storage";
+
 const switcherRefs = {
     switcher: document.querySelector('.switch'),
-    darkTheme: document.querySelector('dark-theme'),
-    lightTheme: document.querySelector('light-theme'),
     body: document.querySelector('body'),
-    filmHeadings: document.getElementsByClassName('film_title'),
     header: document.querySelector('.header'),
     footer: document.querySelector('footer'),
     footerP: document.querySelectorAll('footer p'),
@@ -11,13 +10,30 @@ const switcherRefs = {
     footerHeadings: document.querySelectorAll('footer h2'),
     footerSVG: document.querySelectorAll('footer svg'),
     gallery: document.querySelector('.hp__gallery_wrapper'),
+    modalForm: document.querySelector('.film-card-modal-window'),
+    modalBtn: document.querySelector('.close-modal-window-btn'),
+    modalSvg: document.querySelector('.icon-close-modal'),
+    modalSignature: document.querySelector('.modal-window-signature'),
+    modalCharacteristics: document.querySelectorAll('.modal-window-characteristics-value li'),
     
 }
-// const mobileWidthMatch = window.matchMedia("(min-width: 320px)");
-// const tabletWidthMatch = window.matchMedia("(min-width: 768px)");
-// const desktopWidthMatch = window.matchMedia("(min-width: 1024px)");
-let widthMatch = 0;
+
+const PAGE_THEME = 'page-theme';
+const savedPageTheme = localStorage.load(PAGE_THEME);
+const lightTheme = {
+    name: 'light-theme',
+    'switcherRefs.switcher.children[0].checked':true,
+}
+const darkTheme = {
+    name: 'dark-theme',
+    'switcherRefs.switcher.children[0].checked':false,
+}
+// switcherRefs.switcher.children[0].setAttribute('checked', 'checked');
+// getThemeFromLocalStorage();
+
 switcherRefs.switcher.addEventListener('change', onSwitch);
+
+
 
 
 
@@ -28,19 +44,44 @@ switcherRefs.switcher.addEventListener('change', onSwitch);
     evt.currentTarget.children[1].classList.toggle('is-hidden');
  
     if (!switcherRefs.switcher.children[0].checked) {
+        addDarkThemeStyles();
         
-        switcherRefs.body.style.backgroundImage = ' linear-gradient(0deg, rgb(101, 21, 139) 25%, rgb(17, 17, 26) 73%)';
+        // localStorage.save(PAGE_THEME, JSON.stringify(darkTheme));
+        
+        // getThemeFromLocalStorage()
+        console.log(localStorage.load(PAGE_THEME))
+    } else{
+        removeDarkThemeStyles();
+        // console.log('checked',switcherRefs.switcher.children[0].checked)
+        // localStorage.save(PAGE_THEME, JSON.stringify(lightTheme));
+       
+        // getThemeFromLocalStorage();
+        console.log(localStorage.load(PAGE_THEME))
+    }
+  }
+  
+
+
+function addDarkThemeStyles() {
+       switcherRefs.body.style.backgroundImage = ' linear-gradient(0deg, rgb(101, 21, 139) 25%, rgb(17, 17, 26) 73%)';
         switcherRefs.footer.style.backgroundColor = '#000';
         switcherRefs.gallery.classList.add('dark-theme__text-color');
+        switcherRefs.modalForm.style.backgroundImage = 'linear-gradient(0deg, rgb(101, 21, 139) 25%, rgb(17, 17, 26) 73%)';
+        switcherRefs.modalBtn.style.backgroundColor = 'rgb(17, 17, 26)';
+        switcherRefs.modalBtn.style.fill = '#ff6b01';
         changeTextColorByStyle(switcherRefs.footerLinks)
         changeTextColorByClass(switcherRefs.footerP);
         changeTextColorByClass(switcherRefs.footerHeadings);
         changeSvgFill(switcherRefs.footerSVG);
-        changeBackGroundImage();
-        console.log(window.screen.width)
-    
-    } else{
-        switcherRefs.gallery.classList.remove('dark-theme__text-color');
+        switcherRefs.modalSignature.classList.add('dark-theme__text-color');
+        changeTextColorByClass(switcherRefs.modalCharacteristics);
+}
+
+
+function removeDarkThemeStyles() {
+      switcherRefs.gallery.classList.remove('dark-theme__text-color');
+        switcherRefs.modalSignature.classList.remove('dark-theme__text-color');
+        
         removeAttributeStyle(switcherRefs.body);
         removeAttributeStyle(switcherRefs.header);
         removeAttributeStyle(switcherRefs.footer);
@@ -48,16 +89,28 @@ switcherRefs.switcher.addEventListener('change', onSwitch);
         removeAttributeStyleFromArray(switcherRefs.footerSVG);
         removeDarkThemeClass(switcherRefs.footerP);
         removeDarkThemeClass(switcherRefs.footerHeadings);
-        
-       
- 
-    }
+        removeAttributeStyle(switcherRefs.modalForm);
+        removeAttributeStyle(switcherRefs.modalBtn);
+        removeAttributeStyle(switcherRefs.modalSvg);
+        removeDarkThemeClass(switcherRefs.modalCharacteristics);
 }
-  function changeTextColorByClass(arr) {
-   return arr.forEach(el => {
+
+// function getThemeFromLocalStorage() {
+//     if (savedPageTheme === darkTheme) {
+//         switcherRefs.switcher.children[0].removeAttribute('checked');
+//     }
+    
+// }
+
+
+function changeTextColorByClass(arr) {
+    
+         return arr.forEach(el => {
            
             return el.classList.add('dark-theme__text-color');
      })
+    
+   
 }
   function changeTextColorByStyle(elem) {
     return elem.forEach(el => {
@@ -86,27 +139,4 @@ function removeDarkThemeClass(elem) {
     })
 }
 
-function changeBackGroundImage() {
-    
-    // if (mobileWidthMatch.matches) {
-        
-    // } else if () {
-        
-    // } else {
-    //     switcherRefs.header.style.backgroundImage = 'linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url(/descktop-index.c45719dd.jpg)';
-    // }
-    // switch (widthMatch) {
-    //     case 'window.matchMedia("(min-width: 320px)")': 
-    //     switcherRefs.header.style.backgroundImage = 'linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9) ), url(.././image/header/header-index/mobile-index.jpg)';
-    //         break;
-    //     case 'window.matchMedia("(min-width: 768px)")': 
-    //     switcherRefs.header.style.backgroundImage = 'linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9) ), url(.././image/header/header-index/tablet-index.jpg)';
-    //         break;
-    //     case 'window.matchMedia("(min-width: 1024px)")': 
-    //     switcherRefs.header.style.backgroundImage = 'linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9) ), url(.././image/header/header-index/descktop-index.jpg)';
-    //         break;
-    //     default:
-    //             switcherRefs.header.style.backgroundImage = 'linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9) ), url(.././image/header/header-index/tablet-index.jpg)';
-    // }
-}
 
