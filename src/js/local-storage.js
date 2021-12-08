@@ -23,9 +23,16 @@ const save = (key, value) => {
         console.error("Remowe state error: ", error.message);
     }
   }
-  
+const clear = () => {
+    try{
+      localStorage.clear();
+      } catch (error) {
+        console.error("Remowe state error: ", error.message);
+    }
+  }
   export default {
     save,
     load,
-    remowe,
+  remowe,
+    clear,
   };
