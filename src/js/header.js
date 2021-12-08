@@ -22,19 +22,28 @@ myLibraryButton.addEventListener('click', () => {
   form.classList.add('is-hidden');
   listButton.classList.remove('is-hidden');
   listButton.classList.add('list');
+
+  myLibraryButton.classList.add('current');
+
+  if (homeButton.classList.contains('current')) {
+    homeButton.classList.remove('current');
+  }
 });
 
 homeButton.addEventListener('click', () => {
   header.classList.remove('header-libary');
   form.classList.remove('is-hidden');
   listButton.classList.add('is-hidden');
-  // homeButton.classList.add('current');
-  // const isActive = homeButton.classList.contains('current');
+  homeButton.classList.add('current');
 
-  clearContainer();
-  return getFilms()
-    .then(createFilmoteka)
-    .catch(error => console.log(error));
+  if (myLibraryButton.classList.contains('current')) {
+    myLibraryButton.classList.remove('current');
+
+    clearContainer();
+    return getFilms(1)
+      .then(createFilmoteka)
+      .catch(error => console.log(error));
+  }
 });
 
 listButton.addEventListener('click', e => {
