@@ -100,4 +100,4 @@ module.exports=require("./lib/axios");
 },{"axios":"dZBD"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/trending_films"),require("./js/local-storage"),require("./js/library"),require("./js/header"),require("./js/youTube"),require("./js/toUp"),require("./js/modal_window_team"),require("./js/sortAPI");
 },{"./sass/main.scss":"clu1","./js/trending_films":"JnV4","./js/local-storage":"yGjV","./js/library":"BfNj","./js/header":"cGsR","./js/youTube":"gy8x","./js/toUp":"gKl3","./js/modal_window_team":"tLT9","./js/sortAPI":"ZtsW"}]},{},["Focm"], null)
-//# sourceMappingURL=/team-1-js/src.2a6e5794.js.map
+//# sourceMappingURL=/team-1-js/src.5927f26c.js.map
