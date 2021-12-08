@@ -40,7 +40,7 @@ homeButton.addEventListener('click', () => {
     myLibraryButton.classList.remove('current');
 
     clearContainer();
-    return getFilms()
+    return getFilms(1)
       .then(createFilmoteka)
       .catch(error => console.log(error));
   }
