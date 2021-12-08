@@ -1,49 +1,40 @@
 import { films } from "./trending_films";
+import { articles } from "./trending_films";
+// import { getFilms } from "./getFilms";
+// import { makeGenres } from "./makeGenres"
 
   const refs = {
-    openModalCardBtn: document.querySelector('[data-modal-card-open]'),
-    closeModalCardBtn: document.querySelector('[data-modal-card-close]'),
+   closeModalCardBtn: document.querySelector('[data-modal-card-close]'),
     modalCard: document.querySelector('[data-modal-card]'),
   };
 
-  films.addEventListener('click', handleModalCard);
+  films.addEventListener('click', handleModalCardOpen);
   refs.closeModalCardBtn.addEventListener('click', handleModalCardClose);
-  document.addEventListener('keydown', handleModalCardEsc);
 
-  function handleModalCard() {
+  function handleModalCardOpen() {
     if (refs.modalCard.classList.contains('is-hidden')) {
-      openModalCard();
-    } else {
-      closeModalCard();
-    }
-  }
-  
-function handleModalCardClose(event) {
+      document.addEventListener('keydown', handleModalCardEsc);
+      refs.modalCard.classList.remove('is-hidden');
+      console.log('Модалка с карточкой фильма открыта');
+      // getFilms().then(createModalCard)
+    
+  } return;
+}
+    
+function handleModalCardClose() {
   if (!refs.modalCard.classList.contains('is-hidden')) {
-      console.log(event.keyCode)
-    closeModalCard();
-     } else {
-      openModalCard();
-    }
+      refs.modalCard.classList.add('is-hidden');
+      console.log('Модалка с карточкой фильма закрыта кнопкой "Х"');
+      
+  }
+  return;
 }
   
 function handleModalCardEsc(event) {
   if (event.keyCode === 27) {
-    closeModalCard();
+    refs.modalCard.classList.add('is-hidden');
+    console.log('Модалка с карточкой фильма закрыта кнопкой "ESC"');
     document.removeEventListener('keydown', handleModalCardEsc);
-    
-  } document.addEventListener('keydown', handleModalCardEsc);
-  
+    // document.removeEventListener('mousedown', handleModalCardClickClose);
+  } return;
 }
-
-function openModalCard() {
-    console.log('Модалка с карточкой фильма открыта');
-      refs.modalCard.classList.remove('is-hidden');
-}
-function closeModalCard() {
-  console.log('Модалка с карточкой фильма закрыта');
-  refs.modalCard.classList.add('is-hidden');
-}
-
-
-import { articles } from "./trending_films";
