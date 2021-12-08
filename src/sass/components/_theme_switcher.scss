@@ -1,4 +1,4 @@
-/* STYLES FOR CHECKBOX  */
+// /* STYLES FOR CHECKBOX  */
 
 .switch-box {
   position: absolute;
@@ -32,9 +32,7 @@
 #checkbox {
   display: none;
 }
-#checkbox:checked ~ .checkbox-background {
-  background-image: linear-gradient(90deg, #e25c03, #ecf008);
-}
+
 .checkbox-background {
   position: absolute;
   z-index: -1;
@@ -43,13 +41,18 @@
   width: 100%;
   height: 100%;
 
-  background-image: linear-gradient(90deg, #d6d6f0, #191970);
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 80px;
 }
 
-/* STYLES FOR ICONS  */
+.dark-bg {
+  background-image: linear-gradient(90deg, #d6d6f0, #191970);
+}
+.light-bg {
+  background-image: linear-gradient(90deg, #e25c03, #ecf008);
+}
+// /* STYLES FOR ICONS  */
 .light-theme {
   @media screen and (max-width: 767px) {
     width: 15px;
@@ -92,19 +95,53 @@
   background-color: rgba(0, 0, 0, 0.5);
   background-repeat: no-repeat;
   transition: opacity 1000ms linear;
+}
 
-  &__text-color {
-    color: #fff;
+:root {
+  --font-main: 'Roboto', sans-serif;
+  --color-main: #000000;
+  --color-secondary: #8c8c8c;
+  --color-footer: #545454;
+  --color-back-pagination: #f7f7f7;
+  --color-accent: #ff6b08;
+  --color-accent-link: rgba(255, 107, 8, 0.7);
+  --white-color: #fff;
+  --dark-theme-modal-button-background: rgb(17, 17, 26);
+  --dark-theme-modal-button-fill: #ff6b01;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --text-color: var(--color-main);
+    --footer-background-color: var(--color-back-pagination);
+    --footer-text-color: var(--color-footer);
+    // --color-back-pagination: #f7f7f7;
   }
 }
 
-.hp__gallery_wrapper.dark-theme__text-color h2 {
-  color: #fff;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: var(--white-color);
+    --footer-background-color: var(--color-main);
+    --footer-text-color: var(--white-color);
+  }
 }
 
-.modal-window-signature.dark-theme__text-color h2,
-.modal-window-signature.dark-theme__text-color h3,
-.modal-window-signature.dark-theme__text-color p,
-.modal-window-signature.dark-theme__text-color span {
-  color: #fff;
+body[data-theme='light'] {
+  background-color: var(--white-color);
+  --text-color: var(--color-main);
+  --footer-background-color: var(--color-main);
+  --footer-text-color: var(--white-color);
+}
+body[data-theme='light'] .checkbox-background {
+  background-image: linear-gradient(90deg, #e25c03, #ecf008);
+}
+body[data-theme='dark'] {
+  background-image: linear-gradient(0deg, rgb(101, 21, 139) 25%, rgb(17, 17, 26) 73%);
+  --text-color: var(--white-color);
+  --footer-background-color: var(--color-main);
+  --footer-text-color: var(--white-color);
+}
+body[data-theme='dark'] .checkbox-background {
+  background-image: linear-gradient(90deg, #d6d6f0, #191970);
 }
