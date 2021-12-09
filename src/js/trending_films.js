@@ -20,7 +20,7 @@ export function createFilmoteka(resp) {
   console.log(resp);
   if (resp.results.length === 0) {
     Notiflix.Notify.failure('Search result not successful. Enter the correct movie name and ');
-    getFilms()
+    getFilms(page)
       .then(createFilmoteka)
       .catch(error => console.log(error));
   } else {
@@ -29,6 +29,7 @@ export function createFilmoteka(resp) {
     });
   }
 }
+
 
 export function articles({ poster_path, original_title, release_date, genre_ids, id }) {
   return `<div id="gallery" class="hp__gallery_el">
@@ -78,7 +79,7 @@ function onSearch(evt) {
   clearContainer();
   if (searchForm.length === 0) {
     Notiflix.Notify.failure('Search result not successful. Enter the correct movie name and ');
-    getFilms()
+    getFilms(page)
       .then(createFilmoteka)
       .catch(error => console.log(error));
     return;
