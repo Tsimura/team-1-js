@@ -14,7 +14,7 @@
 //             return response.json()
 //         })
 // }
-// getRuFilms().then(createVideo)
+// getRuFilms().then(createVideo).catch(error => console.log(error))
 
 
 // function createVideo(resp) {
