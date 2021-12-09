@@ -7,5 +7,5 @@ import './js/youTube';
 import './js/toUp';
 import './js/modal_window_team';
 import './js/sortAPI';
-import './js/pagination';
+// import './js/pagination';
 import './js/lazyLoad';
