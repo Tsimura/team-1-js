@@ -9,13 +9,12 @@ const input = document.querySelector(`#search-form`);
 input.addEventListener(`submit`, onSearch);
 
 let searchForm = ` `;
-let page = 1;
-export function createData(page) {
-  return getFilms(page)
-    .then(createFilmoteka)
-    .catch(error => console.log(error));
-}
-createData(page);
+// export function createData(page) {
+//   return getFilms(page)
+//     .then(createFilmoteka)
+//     .catch(error => console.log(error));
+// }
+// createData(page);
 export function createFilmoteka(resp) {
   console.log(resp);
   if (resp.results.length === 0) {

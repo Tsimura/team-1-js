@@ -3,8 +3,13 @@ import 'tui-pagination/dist/tui-pagination.css';
 import { getFilms } from './getFilms';
 import { createFilmoteka } from './trending_films';
 import { films } from './trending_films';
-import { createData } from './trending_films';
 
+export function createData(page) {
+  return getFilms(page)
+    .then(createFilmoteka)
+    .catch(error => console.log(error));
+}
+let page = 1;
 const options = {
   totalItems: 1000,
   visiblePages: 7,
@@ -13,7 +18,9 @@ const options = {
 
 const container = document.getElementById('pagination');
 const pagination = new Pagination(container, options);
-const page = pagination.getCurrentPage();
+page = pagination.getCurrentPage();
+
+createData(page);
 
 pagination.on('afterMove', ({ page }) => {
   reset();
