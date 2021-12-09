@@ -72,9 +72,7 @@ films.onclick = ({ poster_path, original_title, vote_average, vote_count, title,
 	basicLightbox
 		.create(
 			`<div class="module">
-      <section class="modal-window-section">
-
-		<div class="film-card-modal-window">
+    <div class="film-card-modal-window">
     <button class="close-modal-window-btn" data-modal-card-close>
 <svg class="icon-close-modal">
     <use class="icon-close-modal-svg" href="./image/modal-window-card/symbol-defs.svg#icon-close-black">
@@ -105,7 +103,6 @@ films.onclick = ({ poster_path, original_title, vote_average, vote_count, title,
 <button class="btn-queue-modal-window">add to queue</button>
 </div>
 </div>
-</section>
     </div>`)
 		.show();
 };
