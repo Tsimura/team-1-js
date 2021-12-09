@@ -2,7 +2,7 @@ import { getFilms } from './getFilms';
 import { makeGenres } from './makeGenres';
 import Notiflix from 'notiflix';
 import poster from '../image/posters/poster.jpg';
-import { lazyLoad } from './lazyload';
+import { lazyLoad } from './lazyLoad';
 
 export const films = document.querySelector(`#gallery`);
 const input = document.querySelector(`#search-form`);
@@ -10,7 +10,7 @@ const input = document.querySelector(`#search-form`);
 input.addEventListener(`submit`, onSearch);
 
 let searchForm = ` `;
-let page = 1
+let page = 1;
 export function createData(page) {
   return getFilms(page)
     .then(createFilmoteka)
@@ -29,19 +29,18 @@ export function createFilmoteka(resp) {
       return films.insertAdjacentHTML(`beforeend`, articles(data));
     });
   }
-   const img = document.querySelectorAll('#gallery img');
+  const img = document.querySelectorAll('#gallery img');
   lazyLoad(img);
 }
-
 
 export function articles({ poster_path, original_title, release_date, genre_ids, id }) {
   return `<div id="galleryModal" class="hp__gallery_el">
   <a href="#" id="openModal">
      ${
-        poster_path
-          ? `<img class="hp__gallery_img" src="" data-lazy="https://image.tmdb.org/t/p/w500${poster_path}" loading="lazy" alt="${original_title}"`
-          : `<img class="hp__gallery_img" src="${poster}" data-lazy="  alt="Poster is missing"`
-      }>
+       poster_path
+         ? `<img class="hp__gallery_img" src="" data-lazy="https://image.tmdb.org/t/p/w500${poster_path}" loading="lazy" alt="${original_title}"`
+         : `<img class="hp__gallery_img" src="${poster}" data-lazy="  alt="Poster is missing"`
+     }>
       <h2 class="film_title">${original_title}</h2>
       <p class="film_genre">${makeGenres(genre_ids)} | <span>${release_date.substr(0, 4)}</span></p>
       <ul class="modal-list__buttons list">
@@ -53,7 +52,6 @@ export function articles({ poster_path, original_title, release_date, genre_ids,
       </a>
     </div>`;
 }
-
 
 // закомітила функцію....................................................
 // function createFilmoteka(resp) {
@@ -112,7 +110,6 @@ function searchFilms(searchForm) {
     return response.json();
   });
 }
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
