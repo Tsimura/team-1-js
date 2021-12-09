@@ -3,14 +3,10 @@
           <img class="hp__gallery_img" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{original_title}}"
       ></div>
       <h2 class="film_title">{{original_title}}</h2>
-      <div>
-        <ul class="film_genre list">
-        {{#each genres}}
-                <li>{{name}}</li>
-            {{/each}} |
-    </ul>
-      <span class="film_genre">{{release_date}}</span>
-
+      <p class="film_genre list">
+            {{genres.0.name}}{{#if genres.1.name}}, {{genres.1.name}}{{/if}}{{#if genres.2.name}}, Other{{/if}} | <span>{{year}}</span>
+    </p>
+      
       </div>
       <ul class="modal-list__buttons list">
       <li>
