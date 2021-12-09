@@ -9,12 +9,13 @@ const input = document.querySelector(`#search-form`);
 input.addEventListener(`submit`, onSearch);
 
 let searchForm = ` `;
-// закомітила функцію....................................................
-// getFilms()
-//   .then(createFilmoteka)
-//   .catch(error => console.log(error));
-
-// взяла функцію function createFilmoteka з header.js та function articles..............................................
+let page = 1;
+export function createData(page) {
+  return getFilms(page)
+    .then(createFilmoteka)
+    .catch(error => console.log(error));
+}
+createData(page);
 export function createFilmoteka(resp) {
   console.log(resp);
   if (resp.results.length === 0) {
