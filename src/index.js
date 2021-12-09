@@ -9,3 +9,4 @@ import './js/modal_window_team';
 import './js/sortAPI';
 // import './js/pagination';
 import './js/lazyLoad';
+import './js/spinner';

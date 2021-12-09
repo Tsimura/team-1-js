@@ -98,18 +98,18 @@
   transition: opacity 1000ms linear;
 }
 
-:root {
-  --font-main: 'Roboto', sans-serif;
-  --color-main: #000000;
-  --color-secondary: #8c8c8c;
-  --color-footer: #545454;
-  --color-back-pagination: #f7f7f7;
-  --color-accent: #ff6b08;
-  --color-accent-link: rgba(255, 107, 8, 0.7);
-  --white-color: #fff;
-  --dark-theme-modal-button-background: rgb(17, 17, 26);
-  --dark-theme-modal-button-fill: #ff6b01;
-}
+// :root {
+//   --font-main: 'Roboto', sans-serif;
+//   --color-main: #000000;
+//   --color-secondary: #8c8c8c;
+//   --color-footer: #545454;
+//   --color-back-pagination: #f7f7f7;
+//   --color-accent: #ff6b08;
+//   --color-accent-link: rgba(255, 107, 8, 0.7);
+//   --white-color: #fff;
+//   --dark-theme-modal-button-background: rgb(17, 17, 26);
+//   --dark-theme-modal-button-fill: #ff6b01;
+// }
 
 @media (prefers-color-scheme: light) {
   :root {
