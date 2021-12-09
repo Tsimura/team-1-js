@@ -14,19 +14,22 @@ const container = document.getElementById('pagination');
 const pagination = new Pagination(container, options);
 const page = pagination.getCurrentPage();
 
-getFilms(page)
-  .then(createFilmoteka)
-  .catch(error => console.log(error));
+galleryPosters(page);
 
-pagination.on('afterMove', function ({ page }) {
+pagination.on('afterMove', ({ page }) => {
   reset();
+  galleryPosters(page);
+});
+
+function galleryPosters(page) {
   getFilms(page)
     .then(createFilmoteka)
     .catch(error => console.log(error));
-});
+}
 function reset() {
   return (films.innerHTML = ``);
 }
+
 // var pagination = new tui.Pagination('pagination', {
 //     totalItems: 500,
 //     template: {
