@@ -46,8 +46,8 @@ resetBtn.addEventListener('click', e => {
     genreBtn.value = '';
     filterYear.value = '';
     fetchTrending().then(data => {
+        clearGallery();
         trendingMarkup(data)
-        console.log(data);
     }).catch(error => console.log(error));
 
 })
