@@ -19,18 +19,19 @@ export function createData(page) {
 createData(page);
 export function createFilmoteka(resp) {
   console.log(resp);
-  if (resp.results.length === 0) {
+  const img = document.querySelectorAll('#gallery img');
+  lazyLoad(img);
+  if (resp.results.length !== 0) {
+    resp.results.map(data => {
+    return films.insertAdjacentHTML(`beforeend`, articles(data));
+    });
+  } else {
     Notiflix.Notify.failure('Search result not successful. Enter the correct movie name and ');
     getFilms(page)
       .then(createFilmoteka)
       .catch(error => console.log(error));
-  } else {
-    resp.results.map(data => {
-      return films.insertAdjacentHTML(`beforeend`, articles(data));
-    });
   }
-  const img = document.querySelectorAll('#gallery img');
-  lazyLoad(img);
+  
 }
 
 export function articles({ poster_path, original_title, release_date, genre_ids, id }) {
@@ -116,5 +117,8 @@ function searchFilms(searchForm) {
 // films.addEventListener('click', function (e) {
 //   e.preventDefault()
 //   const info = e.path[1]
-//   console.log(info)
+//   const poster = info.childNodes[1].src
+//   const name = info.childNodes[3].textContent
+//   const genre = info.childNodes[5].childNodes[0].textContent.slice(0, -2)
+//   const year = info.childNodes[5].childNodes[1].textContent
 //  });
