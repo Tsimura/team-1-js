@@ -33,7 +33,7 @@ export function createFilmoteka(resp) {
 
 export function articles({ poster_path, original_title, release_date, genre_ids, id }) {
   return `<div id="galleryModal" class="hp__gallery_el">
-  <a href="#" id="openModal">
+  <a href="#" id="openModal" class='card-links link'>
       ${
         poster_path
           ? `<img class="hp__gallery_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}"`
