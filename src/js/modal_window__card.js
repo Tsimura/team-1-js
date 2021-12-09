@@ -43,6 +43,60 @@ import * as basicLightbox from 'basiclightbox'
 // <button class="btn-queue-modal-window">add to queue</button>
 // </div>
 // </div>
+
+// </section>
+//     </div>`, options);
+
+
+// films.addEventListener('click', hendleFilmsClick);
+    
+// function hendleFilmsClick(event) {
+//   event.preventDefault();
+
+//   if (event.target.nodeName !== 'IMG') return;
+//   instance.element()
+//   console.log(instance.element())
+//   instance.show();
+// }
+// films.onclick = ({ poster_path, original_title, vote_average, vote_count, title, popularity, overview }) => {
+// 	basicLightbox
+// 		.create(
+// 			`<div class="module">
+//       <section class="modal-window-section">
+
+// 		<div class="film-card-modal-window">
+//     <button class="close-modal-window-btn" data-modal-card-close>
+// <svg class="icon-close-modal">
+//     <use class="icon-close-modal-svg" href="./image/modal-window-card/symbol-defs.svg#icon-close-black">
+//     </use>
+// </svg>
+//     </button>
+// <img class="film-exemple-photo" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="Фото фільму">
+//     <div class="modal-window-signature">
+//     <h2 class="film-title-modal-window">${title}</h2>
+//     <div class="window-characteristics">
+//     <ul class="modal-window-characteristics">
+//     <li class="modal-window-vote list">Vote&nbsp;/&nbsp;Votes</li>
+//     <li class="modal-window-popularity list">Popularity</li>
+//     <li class="modal-winwow-original-title list">Original Title</li>
+//     <li class="modal-window-gener list">Genre</li>
+//     </ul>
+//     <ul class="modal-window-characteristics-value">
+//     <li class="modal-window-vote-value list"><span class="modal-window-vote__span">${vote_average}</span>/&nbsp;&nbsp;${vote_count}</li>
+//     <li class="modal-window-popularity-value list">${popularity}</li>
+//     <li class="modal-winwow-original-title-value list">${original_title}</li>
+    
+// </ul>
+// </div>
+// <h3 class="modal-window-about">About</h3>
+// <p class="modal-window-description">${overview}</p>
+// <div class="btn-menu-module-card">
+// <button class="btn-watched-modal-window">add to Watched</button>
+// <button class="btn-queue-modal-window">add to queue</button>
+// </div>
+// </div>
+// </section>
+
 //     </div>`)
 // 		.show();
 // };

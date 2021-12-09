@@ -9,12 +9,13 @@ const input = document.querySelector(`#search-form`);
 input.addEventListener(`submit`, onSearch);
 
 let searchForm = ` `;
-// export function createData(page) {
-//   return getFilms(page)
-//     .then(createFilmoteka)
-//     .catch(error => console.log(error));
-// }
-// createData(page);
+let page = 1
+export function createData(page) {
+  return getFilms(page)
+    .then(createFilmoteka)
+    .catch(error => console.log(error));
+}
+createData(page);
 export function createFilmoteka(resp) {
   console.log(resp);
   if (resp.results.length === 0) {
@@ -31,7 +32,8 @@ export function createFilmoteka(resp) {
 
 
 export function articles({ poster_path, original_title, release_date, genre_ids, id }) {
-  return `<div id="gallery" class="hp__gallery_el">
+  return `<div id="galleryModal" class="hp__gallery_el">
+  <a href="#" id="openModal">
       ${
         poster_path
           ? `<img class="hp__gallery_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}"`
@@ -45,6 +47,7 @@ export function articles({ poster_path, original_title, release_date, genre_ids,
       <li>
       <button id="${id}" type='button' class='button-queue-modal-window button button--active'>add to queue</button></li>
       </ul>
+      </a>
     </div>`;
 }
 // закомітила функцію....................................................
@@ -104,3 +107,12 @@ function searchFilms(searchForm) {
     return response.json();
   });
 }
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// films.addEventListener('click', function (e) {
+//   e.preventDefault()
+//   const info = e.path[1]
+//   console.log(info)
+//  });
