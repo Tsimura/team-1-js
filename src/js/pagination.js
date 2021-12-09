@@ -3,6 +3,7 @@ import 'tui-pagination/dist/tui-pagination.css';
 import { getFilms } from './getFilms';
 import { createFilmoteka } from './trending_films';
 import { films } from './trending_films';
+import { createData } from './trending_films';
 
 const options = {
   totalItems: 1000,
@@ -14,18 +15,14 @@ const container = document.getElementById('pagination');
 const pagination = new Pagination(container, options);
 const page = pagination.getCurrentPage();
 
-galleryPosters(page);
-
 pagination.on('afterMove', ({ page }) => {
   reset();
-  galleryPosters(page);
+  createData(page);
+  // .getFilms(page)
+  // .then(createFilmoteka)
+  // .catch(error => console.log(error));
 });
 
-function galleryPosters(page) {
-  getFilms(page)
-    .then(createFilmoteka)
-    .catch(error => console.log(error));
-}
 function reset() {
   return (films.innerHTML = ``);
 }
