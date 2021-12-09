@@ -1,5 +1,10 @@
 import storage from './local-storage';
 import card from '../templates/card-library'
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
+const API_KEY = '221ed015def0321f18a85f3fc7b4d6fa';
+
 
 const films = document.querySelector('#gallery');
 const buttonWatched = document.querySelector('.header-library__button--watched');
@@ -7,6 +12,11 @@ const buttonQueue = document.querySelector('.header-library__button--queue');
 
 let watchedArray = [];
 let queueArray = [];
+let localQueue = storage.load('queueArray');
+console.log(localQueue);
+let localWatched = storage.load('watchedArray');
+console.log(localWatched);
+
 
 buttonWatched.addEventListener('click', showFilmsWatched);
 buttonQueue.addEventListener('click', showFilmsQueue);
@@ -37,8 +47,6 @@ function addFilmsToWathedInLocal(e) {
   return storage.save('watchedArray', watchedArray);
 
 }
-let localWatched = storage.load('watchedArray');
-console.log(localWatched);
 
 // Функция добавляет в очередь фильмы в локальное хранилище
 
@@ -66,9 +74,6 @@ function addFilmsToQueueInLocal(e) {
   return storage.save('queueArray', queueArray);
 }
 
-let localQueue = storage.load('queueArray');
-console.log(localQueue);
-
 // Рисует карточки с просмотренными фильмами в библиотеке (вкладка "просмотренные")
 
 export function showFilmsWatched() {
@@ -91,28 +96,37 @@ function showFilmsQueue() {
   films.innerHTML = ``;
   localQueue = storage.load('queueArray')
 
-  if (localQueue === undefined) {
+  if (!localWatched || (!localWatched[0] && !localWatched[1])) {
     console.log(`Упс еще ничего нет`);
   } else {  for (let id of localQueue) {
-    fetchById(id).then(film => {
-      renderFilms(film);
+   fetchById(id).then(result => {
+      renderFilms(result);
+      console.log(result);
+
     });
-    console.log(id);
   }
 }}
 
 // Запрос на бэк за айди фильмов
 
-function fetchById(id) {
-  return fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=221ed015def0321f18a85f3fc7b4d6fa`,
-  ).then(response => response.json());
+async function fetchById(id) {
+
+  try {
+    const {data} = await axios.get(`movie/${id}?api_key=${API_KEY}`) ;
+    const result = {
+      ...data,
+      year: data.release_date?data.release_date.substr(0, 4):''
+    };
+    return result
+  } catch (error) {
+    console.log(`ERROR`)
+  }
 }
 
 // Функция рисует картотеку с фильмами
 
-function renderFilms(film) {
-  films.insertAdjacentHTML('beforeend', card(film));
+function renderFilms(data) {
+  films.insertAdjacentHTML('beforeend', card(data));
 }
 
 // Функция проверяет есть ли такое ID в storage
