@@ -1,0 +1,45 @@
+.spinner {
+  position: relative;
+  width: 119px;
+  height: 119px;
+  margin: auto;
+
+  &__elem {
+    position: absolute;
+    width: 52px;
+    height: 52px;
+  }
+  &__first-box {
+    top: 5px;
+    left: 5px;
+    background-color: #000;
+    animation: first 1000ms infinite 1000ms;
+  }
+  &__second-box {
+    top: 5px;
+    right: 5px;
+    background-color: var(--color-accent);
+    animation: second 1000ms infinite 1000ms;
+  }
+  &__third-box {
+    bottom: 5px;
+    left: 5px;
+    background-color: var(--color-accent);
+    animation: third 1000ms infinite 1000ms;
+  }
+  &__fourth-box {
+    bottom: 5px;
+    right: 5px;
+    background-color: #000;
+    animation: fourth 1000ms infinite 1000ms;
+  }
+}
+
+@keyframes first {
+}
+@keyframes second {
+}
+@keyframes third {
+}
+@keyframes fourth {
+}
