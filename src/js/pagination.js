@@ -25,9 +25,13 @@ createData(page);
 pagination.on('afterMove', ({ page }) => {
   reset();
   createData(page);
+
   // getFilms(page)
   // .then(createFilmoteka)
   // .catch(error => console.log(error));
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
 });
 
 function reset() {
