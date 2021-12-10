@@ -34,40 +34,40 @@ const options = {
 //   return (films.innerHTML = ``);
 // }
 
-console.log(options.template);
-console.log(options.visiblePages);
-console.log(options);
-const {
-  template: { moreButton },
-} = options;
-console.log(options);
+// console.log(options.template);
+// console.log(options.visiblePages);
+// console.log(options);
+// const {
+//   template: { moreButton },
+// } = options;
+// console.log(options);
 // console.log(delete thisIsObject[moreButton]);
 // const key = 'moreButton';
 // delete thisIsObject[options];
-console.log(moreButton);
+// console.log(moreButton);
 
-console.log(options.template);
-console.log(options.visiblePages);
-console.log(options);
-function removeObjKey() {
-  if (window.innerWidth <= 480) {
-    const moreButtonEl = options.template;
-    console.log(moreButtonEl);
-  } else {
-    const moreButtonEl = options.template;
-    console.log(moreButtonEl);
-  }
-}
+// console.log(options.template);
+// console.log(options.visiblePages);
+// console.log(options);
+// function removeObjKey() {
+//   if (window.innerWidth <= 480) {
+//     const moreButtonEl = options.template;
+//     console.log(moreButtonEl);
+//   } else {
+//     const moreButtonEl = options.template;
+//     console.log(moreButtonEl);
+//   }
+// }
 
 function mediaPagination() {
   if (window.innerWidth <= 480) {
     options.visiblePages = 4;
-    console.log(options.template);
-    console.log(options.visiblePages);
+    // console.log(options.template);
+    // console.log(options.visiblePages);
   } else {
     options.visiblePages = 7;
-    console.log(options.template);
-    console.log(options.visiblePages);
+    // console.log(options.template);
+    // console.log(options.visiblePages);
   }
 }
 console.log(mediaPagination());
@@ -77,13 +77,19 @@ const pagination = new Pagination(container, options);
 page = pagination.getCurrentPage();
 createData(page);
 pagination.on('afterMove', ({ page }) => {
-  mediaPagination(visiblePages);
+  mediaPagination();
   reset();
   createData(page);
-  const moreBtn = document.querySelector('strong');
-  console.log(moreBtn);
+  //   // const moreBtn = document.querySelector('strong');
+  //   // console.log(moreBtn);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// pagination.on('afterMove', ({ page }) => {
+//   reset();
+//   createData(page);
+//   window.scrollTo({ top: 0, behavior: 'smooth' });
+// });
 
 // end new 10.12///////////////////////////////////////////
 // // 10.12///////////////////////////////////////////
