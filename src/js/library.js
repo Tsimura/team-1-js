@@ -1,10 +1,11 @@
 import storage from './local-storage';
 import card from '../templates/card-library'
 import axios from 'axios';
+import popcornImg from '../image/posters/popcorn.png'
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const API_KEY = '221ed015def0321f18a85f3fc7b4d6fa';
-
+const body = document.querySelector('body')
 
 const films = document.querySelector('#gallery');
 const buttonWatched = document.querySelector('.header-library__button--watched');
@@ -17,19 +18,19 @@ console.log(localQueue);
 let localWatched = storage.load('watchedArray');
 console.log(localWatched);
 
-
 buttonWatched.addEventListener('click', showFilmsWatched);
 buttonQueue.addEventListener('click', showFilmsQueue);
 
-films.addEventListener('click', addFilmsToWathedInLocal);
-films.addEventListener('click', addFilmsToQueueInLocal);
+body.addEventListener('click', addFilmsToWathedInLocal);
+body.addEventListener('click', addFilmsToQueueInLocal);
 
 // Функция добавляет просмотренные фильмы в локальное хранилище
 
 function addFilmsToWathedInLocal(e) {
-  if (!e.target.className.includes("button-watched-modal-window")) {
+  if (!e.target.className.includes("btn-watched-modal-window")) {
     return;
   }
+  console.dir(e.target)
   const idBtn = Number(e.target.id);
   const i = watchedArray.indexOf(idBtn);
   if (i === -1) {
@@ -51,7 +52,7 @@ function addFilmsToWathedInLocal(e) {
 // Функция добавляет в очередь фильмы в локальное хранилище
 
 function addFilmsToQueueInLocal(e) {
-  if (!e.target.className.includes("button-queue-modal-window")) {
+  if (!e.target.className.includes("btn-queue-modal-window")) {
     return;
   }
   const idBtn = Number(e.target.id);
@@ -80,7 +81,8 @@ export function showFilmsWatched() {
   films.innerHTML = ``;
   localWatched = storage.load('watchedArray')
   if (!localWatched || (!localWatched[0] && !localWatched[1])) {
-    return `Упс еще ничего нет`
+    films.innerHTML = `<p>Sorry, you haven't added anything to the watched ones yet.</p> <img class="img-for-library" src='${popcornImg}'>`;
+    return
   } 
   for (let id of localWatched) {
     fetchById(id).then(film => {
@@ -97,7 +99,9 @@ function showFilmsQueue() {
   localQueue = storage.load('queueArray')
 
   if (!localWatched || (!localWatched[0] && !localWatched[1])) {
-    console.log(`Упс еще ничего нет`);
+    films.innerHTML = `<p>Sorry, you haven't added anything to the watched ones yet.</p> <img class="img-for-library" src='${popcornImg}'>`;
+
+    return;
   } else {  for (let id of localQueue) {
    fetchById(id).then(result => {
       renderFilms(result);
@@ -131,11 +135,11 @@ function renderFilms(data) {
 
 // Функция проверяет есть ли такое ID в storage
 
-function idInStorage(id, list) {
-  let arrList = [];
-  let localListJson = storage.load(list);
+function idInStorage(id, localList) {
+  let localListArray = [];
+  let localListJson = storage.load(localList);
   if (localListJson) {
-    arrList = [...localListJson];
+    localListArray = [...localListJson];
   }
-  const listSet = new Set(arrList);
+  const listSet = new Set(localListArray);
   return listSet.has(id);}
