@@ -1,8 +1,27 @@
+// .tui-page-btn.tui-next-is-ellip.tui-last-child {
+//   z-index: 10;
+//   opacity: 0;
+//   visibility: hidden;
+//   pointer-events: none;
+// }
 .tui-pagination * {
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+.container-pagination {
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  @media screen and (min-width: 320px) {
+    margin-bottom: 40px;
+    max-width: 320px;
+  }
+  @media screen and (min-width: 768px) {
+    margin-bottom: 60px;
+    max-width: 658px;
+  }
 }
 
 .tui-ico-ellipsis,
