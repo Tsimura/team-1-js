@@ -7,7 +7,7 @@ import { getFilms } from './getFilms';
 import { makeGenres } from './makeGenres';
 import Notiflix from 'notiflix';
 import poster from '../image/posters/poster.jpg';
-import { lazyLoad } from './lazyload';
+import { lazyLoad } from './lazyLoad';
 const films = document.querySelector(`#gallery`);
 export function createData(page) {
   return getFilms(page)
