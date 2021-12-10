@@ -13,33 +13,75 @@
     top: 5px;
     left: 5px;
     background-color: #000;
-    animation: first 1000ms infinite 1000ms;
+    animation: first 2000ms infinite 1000ms;
   }
   &__second-box {
     top: 5px;
     right: 5px;
     background-color: var(--color-accent);
-    animation: second 1000ms infinite 1000ms;
+    animation: second 2000ms infinite 1000ms;
   }
   &__third-box {
     bottom: 5px;
     left: 5px;
     background-color: var(--color-accent);
-    animation: third 1000ms infinite 1000ms;
+    animation: third 2000ms infinite 1000ms;
   }
   &__fourth-box {
     bottom: 5px;
     right: 5px;
     background-color: #000;
-    animation: fourth 1000ms infinite 1000ms;
+    animation: fourth 2000ms infinite 1000ms;
   }
 }
 
 @keyframes first {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(50%, 50%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
 @keyframes second {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-50%, 50%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
 @keyframes third {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(50%, -50%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
 @keyframes fourth {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }
