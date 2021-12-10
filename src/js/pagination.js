@@ -4,10 +4,13 @@ import 'tui-pagination/dist/tui-pagination.css';
 import { createData } from './createFilmoteka';
 import { reset } from './createFilmoteka';
 let page = 1;
+const mediaQuery = window.matchMedia('(max-width: 768px)');
+
 const options = {
   totalItems: 1000,
-  visiblePages: 4,
+  visiblePages: '',
   centerAlign: true,
+
   // firstItemClassName: 'tui-first-child',
   // lastItemClassName: 'tui-last-child',
   template: {
@@ -21,23 +24,59 @@ const options = {
       '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
       '<span class="tui-ico-{{type}}">{{type}}</span>' +
       '</span>',
-    moreButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-      '<span class="tui-ico-ellip">...</span>' +
-      '</a>',
   },
 };
-// const {
-//   template: { moreButton },
-// } = options;
-// console.log(moreButton);
-// console.log(options.template);
-// console.log(options.visiblePages);
-const mediaQuery = window.matchMedia('(min-width: 768px)');
-if (mediaQuery.matches) {
-  options.visiblePages = 7;
-  console.log(options.visiblePages);
+const {
+  template: { moreButton },
+} = options;
+console.log(options);
+// console.log(delete thisIsObject[moreButton]);
+// const key = 'moreButton';
+// delete thisIsObject[options];
+console.log(moreButton);
+console.log(options.template);
+console.log(options.visiblePages);
+console.log(options);
+
+function mediaPagination() {
+  if (window.innerWidth <= 480) {
+    options.visiblePages = 4;
+    options.template = {
+      page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+      currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+      moveButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</a>',
+      disabledMoveButton:
+        '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</span>',
+    };
+    console.log(options.visiblePages);
+  } else {
+    options.visiblePages = 7;
+    options.template = {
+      page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+      currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+      moveButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</a>',
+      disabledMoveButton:
+        '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</span>',
+      moreButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+        '<span class="tui-ico-ellip">...</span>' +
+        '</a>',
+    };
+    console.log(options.visiblePages);
+  }
 }
+console.log(mediaPagination());
+
 const container = document.getElementById('pagination');
 const pagination = new Pagination(container, options);
 page = pagination.getCurrentPage();
@@ -45,6 +84,7 @@ createData(page);
 pagination.on('afterMove', ({ page }) => {
   reset();
   createData(page);
+  mediaPagination(visiblePages);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 

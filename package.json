@@ -28,6 +28,8 @@
   "dependencies": {
     "axios": "^0.24.0",
     "basiclightbox": "^5.0.4",
+    "match-media": "^0.2.0",
+    "matchmedia-polyfill": "^0.3.2",
     "notiflix": "^3.2.2",
     "simplelightbox": "^2.10.1",
     "tui-pagination": "^3.4.1",
