@@ -24,8 +24,19 @@ const options = {
       '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
       '<span class="tui-ico-{{type}}">{{type}}</span>' +
       '</span>',
+    moreButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+      '<span class="tui-ico-ellip">...</span>' +
+      '</a>',
   },
 };
+// function reset() {
+//   return (films.innerHTML = ``);
+// }
+
+console.log(options.template);
+console.log(options.visiblePages);
+console.log(options);
 const {
   template: { moreButton },
 } = options;
@@ -34,44 +45,28 @@ console.log(options);
 // const key = 'moreButton';
 // delete thisIsObject[options];
 console.log(moreButton);
+
 console.log(options.template);
 console.log(options.visiblePages);
 console.log(options);
+function removeObjKey() {
+  if (window.innerWidth <= 480) {
+    const moreButtonEl = options.template;
+    console.log(moreButtonEl);
+  } else {
+    const moreButtonEl = options.template;
+    console.log(moreButtonEl);
+  }
+}
 
 function mediaPagination() {
   if (window.innerWidth <= 480) {
     options.visiblePages = 4;
-    options.template = {
-      page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-      currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-      moveButton:
-        '<a href="#" class="tui-page-btn tui-{{type}}">' +
-        '<span class="tui-ico-{{type}}">{{type}}</span>' +
-        '</a>',
-      disabledMoveButton:
-        '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-        '<span class="tui-ico-{{type}}">{{type}}</span>' +
-        '</span>',
-    };
+    console.log(options.template);
     console.log(options.visiblePages);
   } else {
     options.visiblePages = 7;
-    options.template = {
-      page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-      currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-      moveButton:
-        '<a href="#" class="tui-page-btn tui-{{type}}">' +
-        '<span class="tui-ico-{{type}}">{{type}}</span>' +
-        '</a>',
-      disabledMoveButton:
-        '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-        '<span class="tui-ico-{{type}}">{{type}}</span>' +
-        '</span>',
-      moreButton:
-        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-        '<span class="tui-ico-ellip">...</span>' +
-        '</a>',
-    };
+    console.log(options.template);
     console.log(options.visiblePages);
   }
 }
@@ -82,9 +77,11 @@ const pagination = new Pagination(container, options);
 page = pagination.getCurrentPage();
 createData(page);
 pagination.on('afterMove', ({ page }) => {
+  mediaPagination(visiblePages);
   reset();
   createData(page);
-  mediaPagination(visiblePages);
+  const moreBtn = document.querySelector('strong');
+  console.log(moreBtn);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
