@@ -39,8 +39,8 @@ export function articles({ poster_path, original_title, release_date, genre_ids,
   <a href="#" id="openModal" class='card-links link'>
      ${
        poster_path
-         ? `<img class="hp__gallery_img" src="" data-lazy="https://image.tmdb.org/t/p/w500${poster_path}" loading="lazy" alt="${original_title}"`
-         : `<img class="hp__gallery_img" src="${poster}" data-lazy="  alt="Poster is missing"`
+         ? `<img class="hp__gallery_img" id="${id}". src="" data-lazy="https://image.tmdb.org/t/p/w500${poster_path}" loading="lazy" alt="${original_title}"`
+         : `<img class="hp__gallery_img" id="${id}". src="${poster}" data-lazy="  alt="Poster is missing"`
      }>
 
       <h2 class="film_title">${original_title}</h2>
