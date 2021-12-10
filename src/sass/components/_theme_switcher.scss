@@ -156,3 +156,8 @@ body[data-theme='dark'] .close-modal-window-btn {
 body[data-theme='dark'] .icon-close-modal {
   fill: var(--dark-theme-modal-button-fill);
 }
+body[data-theme='dark'] .tui-page-btn:hover,
+body[data-theme='dark'] .tui-page-btn:focus {
+  background-color: var(--color-accent);
+  border-radius: 5px;
+}
