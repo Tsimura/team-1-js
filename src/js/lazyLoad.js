@@ -1,6 +1,3 @@
-// import { getFilms } from './getFilms';
-// import { createFilmoteka } from './trending_films';
-// import { films } from './trending_films';
 export function lazyLoad(targets) {
   const options = {
     rootMargin: '100px',
