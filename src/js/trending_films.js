@@ -19,19 +19,18 @@ export function createData(page) {
 createData(page);
 export function createFilmoteka(resp) {
   console.log(resp);
-  const img = document.querySelectorAll('#gallery img');
-  lazyLoad(img);
-  if (resp.results.length !== 0) {
-    resp.results.map(data => {
-    return films.insertAdjacentHTML(`beforeend`, articles(data));
-    });
-  } else {
+  if (resp.results.length === 0) {
     Notiflix.Notify.failure('Search result not successful. Enter the correct movie name and ');
     getFilms(page)
       .then(createFilmoteka)
       .catch(error => console.log(error));
+  } else {
+    resp.results.map(data => {
+      return films.insertAdjacentHTML(beforeend, articles(data));
+    });
   }
-  
+  const img = document.querySelectorAll('#gallery img');
+  lazyLoad(img);
 }
 
 export function articles({ poster_path, original_title, release_date, genre_ids, id }) {
