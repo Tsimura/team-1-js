@@ -62,12 +62,12 @@ const options = {
 function mediaPagination() {
   if (window.innerWidth <= 480) {
     options.visiblePages = 4;
-    console.log(options.template);
-    console.log(options.visiblePages);
+    // console.log(options.template);
+    // console.log(options.visiblePages);
   } else {
     options.visiblePages = 7;
-    console.log(options.template);
-    console.log(options.visiblePages);
+    // console.log(options.template);
+    // console.log(options.visiblePages);
   }
 }
 console.log(mediaPagination());
