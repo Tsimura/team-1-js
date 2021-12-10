@@ -36,8 +36,8 @@ pagination.on('afterMove', ({ page }) => {
 function reset() {
   return (films.innerHTML = ``);
 }
-createData(page);
-export function createFilmoteka(resp) {
+// createData(page);
+function createFilmoteka(resp) {
   console.log(resp);
   if (resp.results.length === 0) {
     Notiflix.Notify.failure('Search result not successful. Enter the correct movie name and ');
