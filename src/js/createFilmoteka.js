@@ -9,11 +9,16 @@ import poster from '../image/posters/poster.jpg';
 import { lazyLoad } from './lazyLoad';
 import { makeGenres } from './makeGenres';
 import { getFilms } from './getFilms';
+import * as withLoader  from './spinner';
 const films = document.querySelector(`#gallery`);
 export function createData(page) {
-  return getFilms(page)
-    .then(createFilmoteka)
+  setTimeout(() => {
+     return getFilms(page)
+       .then(createFilmoteka)
+       .then(withLoader.removeLoader())
     .catch(error => console.log(error));
+  },2000)
+ 
 }
 
 export function createFilmoteka(resp) {
