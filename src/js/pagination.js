@@ -3,6 +3,8 @@ import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 import { createData } from './createFilmoteka';
 import { reset } from './createFilmoteka';
+import * as withLoader from './spinner';
+
 let page = 1;
 const mediaQuery = window.matchMedia('(max-width: 768px)');
 
@@ -77,6 +79,7 @@ const pagination = new Pagination(container, options);
 page = pagination.getCurrentPage();
 createData(page);
 pagination.on('afterMove', ({ page }) => {
+  withLoader.addLoader();
   mediaPagination();
   reset();
   createData(page);
