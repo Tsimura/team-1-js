@@ -4,6 +4,7 @@ import Notiflix from 'notiflix';
 import poster from '../image/posters/poster.jpg';
 import { lazyLoad } from './lazyLoad';
 import { searchFilms } from "./getFilms";
+import * as withLoader from './spinner'
 
 export const films = document.querySelector(`#gallery`);
 const input = document.querySelector(`#search-form`);
@@ -13,9 +14,12 @@ input.addEventListener(`submit`, onSearch);
 let searchForm = ` `;
 let page = 1;
 export function createData(page) {
-  return getFilms(page)
+  setTimeout(() => {
+      return getFilms(page)
     .then(createFilmoteka)
     .catch(error => console.log(error));
+  },2000)
+
 }
 createData(page);
 
@@ -53,16 +57,25 @@ function onSearch(evt) {
   console.log(searchForm)
   evt.preventDefault();
   clearContainer();
+  withLoader.addLoader();
   if (searchForm.length === 0) {
     Notiflix.Notify.failure('Search result not successful. Enter the correct movie name and ');
-    getFilms(page)
-      .then(createFilmoteka)
+    setTimeout(() => {
+      getFilms(page)
+        .then(createFilmoteka)
+        .then(withLoader.removeLoader())
       .catch(error => console.log(error));
       return;
+    },2000)
+    
   }
-  searchFilms(searchForm, page)
-    .then(createFilmoteka)
+  setTimeout(() => {
+     searchFilms(searchForm, page)
+       .then(createFilmoteka)
+       .then(withLoader.removeLoader)
     .catch(error => console.log(error));
+  },2000)
+ 
 }
 
 function clearContainer() {
