@@ -2,6 +2,7 @@ import axios from "axios";
 import { makeGenres } from './makeGenres';
 import createFilmoteka from './trending_films';
 import Notiflix from 'notiflix';
+import * as withSpinner from './spinner';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
@@ -54,15 +55,19 @@ resetBtn.addEventListener('click', e => {
 
 filtBtnWrap.addEventListener('change', e => {
     clearGallery();
+    withSpinner.addLoader();
     console.log(sortBy.value);
     console.log(genreBtn.value);
     console.log(filterYear.value);
-    sortAPI(filterYear.value, sortBy.value, genreBtn.value).then(data => {
+    setTimeout(() => {
+        sortAPI(filterYear.value, sortBy.value, genreBtn.value).then(data => {
         makeFilterMarkup(data);
-    }).catch(error => {
+    }).then(withSpinner.removeLoader).catch(error => {
         console.log(error);
-        fetchTrending().then(data => trendingMarkup(data));
-    });
+        fetchTrending().then(data => trendingMarkup(data)).then(withSpinner.removeLoader);
+    })
+    },2000)
+    
 
 })
 
