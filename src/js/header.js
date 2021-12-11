@@ -3,6 +3,7 @@ import { getFilms } from './getFilms';
 import { makeGenres } from './makeGenres';
 // додала импорт.....................................
 import { createFilmoteka } from './trending_films';
+import * as withLoader from './spinner'
 // ...........................................................................
 const films = document.querySelector(`#gallery`);
 const myLibraryButton = document.querySelector('#my-library');
@@ -40,9 +41,14 @@ homeButton.addEventListener('click', () => {
     myLibraryButton.classList.remove('current');
 
     clearContainer();
-    return getFilms(1)
-      .then(createFilmoteka)
+    withLoader.addLoader();
+    setTimeout(() => {
+      return getFilms(1)
+        .then(createFilmoteka)
+        .then(withLoader.removeLoader())
       .catch(error => console.log(error));
+    },2000)
+    
   }
 });
 
