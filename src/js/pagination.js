@@ -29,7 +29,7 @@ import { reset } from './createFilmoteka';
 
 import * as withLoader from './spinner';
 
-let page = 1;
+// let page = 1;
 const mediaQuery = window.matchMedia('(max-width: 768px)');
 
 // import { getFilms } from './getFilms';
