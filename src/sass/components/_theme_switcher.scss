@@ -116,7 +116,6 @@
     --text-color: var(--color-main);
     --footer-background-color: var(--color-back-pagination);
     --footer-text-color: var(--color-footer);
-    // --color-back-pagination: #f7f7f7;
   }
 }
 
@@ -131,8 +130,8 @@
 body[data-theme='light'] {
   background-color: var(--white-color);
   --text-color: var(--color-main);
-  --footer-background-color: var(--color-main);
-  --footer-text-color: var(--white-color);
+  --footer-background-color: var(--color-back-pagination);
+  --footer-text-color: var(--color-footer);
 }
 body[data-theme='light'] .checkbox-background {
   background-image: linear-gradient(90deg, #e25c03, #ecf008);
