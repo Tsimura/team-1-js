@@ -26,7 +26,14 @@ import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 import { createData } from './createFilmoteka';
 import { reset } from './createFilmoteka';
+
+import * as withLoader from './spinner';
+
+let page = 1;
+const mediaQuery = window.matchMedia('(max-width: 768px)');
+
 // import { getFilms } from './getFilms';
+
 
 const options = {
   totalItems: 1000,
@@ -56,6 +63,10 @@ const pagination = new Pagination(container, options);
 page = pagination.getCurrentPage();
 createData(page, totalPages);
 pagination.on('afterMove', ({ page }) => {
+
+  withLoader.addLoader();
+  mediaPagination();
+
   reset();
   createData(page);
   window.scrollTo({ top: 0, behavior: 'smooth' });

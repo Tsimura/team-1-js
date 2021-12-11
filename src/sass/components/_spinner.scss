@@ -1,47 +1,8 @@
-// .spinner-container {
-//   position: absolute;
-
-//   top: 50%;
-//   left: 50%;
-//   translate: (-50%, -50%);
-
-//   @media screen and (min-width: 320px) {
-//     padding: 20px;
-//     width: 320px;
-//   }
-//   @media screen and (min-width: 768px) {
-//     padding-top: 60px;
-//     padding-left: 76px;
-//     padding-bottom: 60px;
-//     padding-right: 76px;
-//     width: 768px;
-//   }
-//   @media screen and (min-width: 1024px) {
-//     padding-top: 60px;
-//     padding-left: 71px;
-//     padding-bottom: 60px;
-//     padding-right: 71px;
-//     width: 1024px;
-//   }
-// }
-
 .spinner {
-  position: absolute;
-  z-index: 654125;
-
+  position: relative;
   width: 119px;
   height: 119px;
-  margin: auto;
-  @media screen and (max-width: 767px) {
-    top: 25vh;
-    left: 25vh;
-    translate: (-25vh, -25vh);
-  }
-  @media screen and (min-width: 768px) {
-    top: 50vh;
-    left: 50vh;
-    translate: (-50vh, -50vh);
-  }
+  margin-top: 100px;
 
   &__elem {
     position: absolute;
@@ -71,6 +32,16 @@
     right: 5px;
     background-color: #000;
     animation: fourth 2000ms infinite 1000ms;
+  }
+
+  &::after {
+    content: 'Loading...';
+    position: absolute;
+    color: var(--text-color);
+    top: 100%;
+    left: 25%;
+    // animation: before 2000ms infinite 1000ms;
+    animation: scaleBefore 2000ms infinite 1000ms;
   }
 }
 
@@ -123,4 +94,37 @@
   100% {
     transform: translate(0, 0);
   }
+}
+
+@keyframes before {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, -100%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes scaleBefore {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scale(1.5, 1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.visible {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 2s linear;
+}
+.invisible {
+  display: none;
 }
