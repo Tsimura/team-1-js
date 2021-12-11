@@ -23,7 +23,7 @@ function handleModalCardOpen(event) {
   if (event.target.nodeName !== 'IMG') return;
   moviId = event.target.id;
   // console.log(moviId);
-  modalWindowAPI(moviId).then(markUpModal()).catch(error => console.log(error))
+  modalWindowAPI(moviId).then(markUpModal).catch(error => console.log(error))
   console.log('Модалка с карточкой фильма открыта');
   
   event.preventDefault()
@@ -51,8 +51,7 @@ async function modalWindowAPI(moviId) {
     }
 }
 
-function markUpModal() {
-  films.onclick = ({ poster_path, title, vote_average, vote_count, popularity, original_title, overview, id }) => {
+function markUpModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview, id }) {
     basicLightbox
       .create(
         `<div class="modal">
@@ -90,7 +89,7 @@ function markUpModal() {
     </div>
 </div>`).show();
   }
-}
+
 
 
 // const options = {
