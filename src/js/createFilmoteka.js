@@ -15,9 +15,25 @@ export function createData(page) {
     .then(createFilmoteka)
     .catch(error => console.log(error));
 }
+export function createtTotalPages(total_pages) {
+  return getFilms(total_pages)
+    .then(data => {
+      createFilmoteka(resp.total_pages);
+      console.log('dzftrhzrhzdtrh', resp.total_pages);
+      return data.hasNextPage;
+    })
+    .catch(error => console.log(error));
+}
 
 export function createFilmoteka(resp) {
   console.log(resp);
+  console.log(resp.total_pages);
+  console.log(resp.hasNextPage);
+  console.log(resp.page);
+  // console.log(data);
+  if (resp.total_pages < resp.page) {
+    Notiflix.Notify.failure('End search result');
+  }
   if (resp.results.length === 0) {
     Notiflix.Notify.failure('Search result not successful. Enter the correct movie name and ');
     createData(page);
