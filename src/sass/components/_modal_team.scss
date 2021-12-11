@@ -56,9 +56,17 @@
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-  max-width: 994px;
-  height: 100vh;
+  height: 80vh;
   margin: 0 auto;
+  @media screen and (min-width: 320px) {
+    max-width: 320px;
+  }
+  @media screen and (min-width: 768px) {
+    max-width: 658px;
+  }
+  @media screen and (min-width: 1024px) {
+    max-width: 1100px;
+  }
 }
 .container .card {
   position: relative;
@@ -78,23 +86,25 @@
   transition: 0.5s;
 }
 
-.container:hover .card:not(:hover) {
+.modal-window:hover .card:not(:hover) {
   filter: blur(5px);
-  transform: scale(0.8);
   opacity: 0.5;
+}
+.container:hover .card:hover {
+  transform: scale(1.2);
 }
 .container .card h2 {
   position: relative;
   padding: 30px 0;
   font-size: 18px;
   text-align: center;
-  color: #fff;
+  color: var(--color-main);
   z-index: 2;
 }
 .container .card .content p {
   font-size: 18px;
   // margin-bottom: 20px;
-  color: #03506f;
+  color: var(--color-accent);
   z-index: 5;
 }
 .container .card .img {
@@ -125,7 +135,8 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  fill: var(--footer-text-color);
+  // fill: var(--footer-text-color);
+  fill: var(--color-footer);
 
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
     fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -162,17 +173,17 @@
   z-index: 10;
   display: flex;
   justify-content: center;
-  @media screen and (min-width: 1024px) {
-    justify-content: space-between;
-  }
+  // @media screen and (min-width: 1024px) {
+  //   justify-content: space-between;
+  // }
 }
-.social-list-item {
-  @media screen and (max-width: 1024px) {
-    &:not(:last-child) {
-      margin-right: 10px;
-    }
-  }
-}
+// .social-list-item {
+//   @media screen and (max-width: 1024px) {
+//     &:not(:last-child) {
+//       margin-right: 50px;
+//     }
+//   }
+// }
 
 .social-list-icon {
   width: 20px;
