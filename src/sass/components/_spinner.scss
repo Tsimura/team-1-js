@@ -26,21 +26,16 @@
 // }
 
 .spinner {
-  position: absolute;
+  position: fixed;
   z-index: 654125;
 
   width: 119px;
   height: 119px;
-  margin: auto;
-  @media screen and (max-width: 767px) {
-    top: 25vh;
-    left: 25vh;
-    translate: (-25vh, -25vh);
-  }
-  @media screen and (min-width: 768px) {
-    top: 50vh;
-    left: 50vh;
-    translate: (-50vh, -50vh);
+  top: 50vh;
+  left: 40vw;
+  // transform: translate(-50vh, -50vw);
+  @media screen and (min-width: 900px) {
+    left: 45vw;
   }
 
   &__elem {
@@ -71,6 +66,16 @@
     right: 5px;
     background-color: #000;
     animation: fourth 2000ms infinite 1000ms;
+  }
+
+  &::before {
+    content: 'Loading...';
+    display: block;
+    color: var(--text-color);
+    margin-top: 100%;
+    margin-left: 25%;
+    // animation: before 2000ms infinite 1000ms;
+    animation: scaleBefore 2000ms infinite 1000ms;
   }
 }
 
@@ -122,5 +127,28 @@
   }
   100% {
     transform: translate(0, 0);
+  }
+}
+
+@keyframes before {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, -100%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes scaleBefore {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scale(1.5, 1.5);
+  }
+  100% {
+    transform: scale(1);
   }
 }
