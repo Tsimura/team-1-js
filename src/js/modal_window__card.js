@@ -23,7 +23,7 @@ function handleModalCardOpen(event) {
   if (event.target.nodeName !== 'IMG') return;
   moviId = event.target.id;
   // console.log(moviId);
-  modalWindowAPI(moviId).then(markUpModal()).catch(error => console.log(error))
+  modalWindowAPI(moviId).then(markUpModal).catch(error => console.log(error))
   console.log('Модалка с карточкой фильма открыта');
   
   event.preventDefault()
@@ -51,8 +51,17 @@ async function modalWindowAPI(moviId) {
     }
 }
 
-function markUpModal() {
-  films.onclick = ({ poster_path, title, vote_average, vote_count, popularity, original_title, overview, id }) => {
+
+// function makeGenres(numbers) {
+//   const genreName = genreId.filter(data => {
+//     for (let number of numbers) {
+//       if (data.id === number) {
+//         return data
+//       }
+//     }
+//   })
+// }
+function markUpModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview, id }) {
     basicLightbox
       .create(
         `<div class="modal">
@@ -73,11 +82,12 @@ function markUpModal() {
     <li class="modal-winwow-original-title list">Original Title</li>
     <li class="modal-window-gener list">Genre</li>
     </ul>
+
     <ul class="modal-window-characteristics-value">
     <li class="modal-window-vote-value list"><span class="modal-window-vote__span">${vote_average}</span>/&nbsp;&nbsp;${vote_count}</li>
     <li class="modal-window-popularity-value list">${popularity}</li>
     <li class="modal-winwow-original-title-value list">${original_title}</li>
-    
+    <li class="modal-window-gener-value list">{makeGenres(genre_ids)}</li>
 </ul>
 </div>
 <h3 class="modal-window-about">About</h3>
@@ -90,7 +100,7 @@ function markUpModal() {
     </div>
 </div>`).show();
   }
-}
+
 
 
 // const options = {
