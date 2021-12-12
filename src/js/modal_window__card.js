@@ -1,14 +1,12 @@
+
 import { films } from "./trending_films";
 
 import { getYouTube } from "./youTube"
 import { createFilmoteka } from "./trending_films";
-import { onSearch } from "./trending_films";
-import { articles } from "./trending_films";
-import { getFilms } from "./getFilms";
-import { makeGenres } from "./makeGenres"
-import { genreId } from "./makeGenres"
-import { genreNumbers } from "./makeGenres"
-
+// import { getFilms } from "./getFilms";
+// import { makeGenres } from "./makeGenres"
+// import { genreId } from "./makeGenres"
+import storage from './local-storage'
 
 
 import axios from "axios";
@@ -31,10 +29,8 @@ function handleModalCardOpen(event) {
   // console.log(moviId);
   modalWindowAPI(moviId).then(markUpModal).catch(error => console.log(error))
   // console.log('Модалка с карточкой фильма открыта');
-
   // getGanres(moviId).then(markUpModal).catch(error => console.log(error))
   // console.log(getGanres(moviId).then(markUpModal));
-
 
 
   // instance.show();
@@ -43,14 +39,11 @@ function handleModalCardOpen(event) {
 async function modalWindowAPI(moviId) {
     try {
         const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${moviId}?api_key=${KEY_API}&language=en-US`)
-
         
       // console.log(data);
       return data;
      
         
-
-
     } catch (error) {
         error => console.log(error);
     }
@@ -69,7 +62,6 @@ function getGanres(data) {
 
 // Функция Максима------------------------------------------------
 
-
 // function makeGenres(numbers) {
 //     const genreName = genreId.filter(data => {
 //         for (let number of numbers) {
@@ -87,7 +79,6 @@ function getGanres(data) {
 //         return genreNumbers.join(", ")
 //     }
 // }
-
 
 // const genreId = [
 // {"id": 28, "name": "Action" },
@@ -111,26 +102,6 @@ function getGanres(data) {
 // { "id": 37, "name": "Western" }]
 // ----------------------------------------------
   
-function markUpModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview, genre, id }) {
-
-async function getGanres(data) {
-  try {
-    const array = data.genres.flat(2)
-  
-    const arrayNames = []
-    for (const arr of array) {
-      arrayNames.push(arr.name)
-      console.log(arrayNames);
-      return arrayNames;
-    }
-  } catch (error) {
-        error => console.log(error);
-  }
-} 
-
-
-
-
 function markUpModal({ poster_path, title, release_date, vote_average, vote_count, popularity, original_title, overview, id, genre_ids }) {
   getYouTube(title, release_date).then(modal)
   function modal(data) { 
@@ -155,14 +126,11 @@ function markUpModal({ poster_path, title, release_date, vote_average, vote_coun
     <li class="modal-winwow-original-title list">Original Title</li>
     <li class="modal-window-gener list">Genre</li>
     </ul>
-
     <ul class="modal-window-characteristics-value">
     <li class="modal-window-vote-value list"><span class="modal-window-vote__span">${vote_average}</span>/&nbsp;&nbsp;${vote_count}</li>
     <li class="modal-window-popularity-value list">${popularity}</li>
     <li class="modal-winwow-original-title-value list">${original_title}</li>
-
-    <li class="modal-window-gener-value list">${getGanres(genre)}</li>
-
+    <li class="modal-window-gener-value list">{makeGenres(genre_ids)}</li>
 </ul>
 </div>
 <h3 class="modal-window-about">About</h3>
@@ -179,8 +147,7 @@ function markUpModal({ poster_path, title, release_date, vote_average, vote_coun
     </div>
 </div>`).show();
 } 
-  }
-
+}
 
 
 
@@ -235,7 +202,3 @@ function markUpModal({ poster_path, title, release_date, vote_average, vote_coun
 //         </div>
 //     </div>
 //  </div>`, options);
-
-
-
-
