@@ -25,21 +25,33 @@ function handleModalCardOpen(event) {
   // console.log(moviId);
   modalWindowAPI(moviId).then(markUpModal).catch(error => console.log(error))
   // console.log('Модалка с карточкой фильма открыта');
+<<<<<<< Updated upstream
   // getGanres(moviId).then(markUpModal).catch(error => console.log(error))
   // console.log(getGanres(moviId).then(markUpModal));
 
 
+=======
+  getGanres(moviId).then(markUpModal).catch(error => console.log(error))
+  console.log(getGanres().then(markUpModal));
+  
+  
+  event.preventDefault()
+>>>>>>> Stashed changes
   // instance.show();
   
 }
 async function modalWindowAPI(moviId) {
     try {
         const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${moviId}?api_key=${KEY_API}&language=en-US`)
+<<<<<<< Updated upstream
         
       // console.log(data);
       return data;
      
         
+=======
+        return data;
+>>>>>>> Stashed changes
     } catch (error) {
         error => console.log(error);
     }
@@ -58,6 +70,7 @@ function getGanres(data) {
 
 // Функция Максима------------------------------------------------
 
+<<<<<<< Updated upstream
 // function makeGenres(numbers) {
 //     const genreName = genreId.filter(data => {
 //         for (let number of numbers) {
@@ -99,6 +112,27 @@ function getGanres(data) {
 // ----------------------------------------------
   
 function markUpModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview, genre, id }) {
+=======
+async function getGanres(data) {
+  try {
+    const array = data.genres.flat(2)
+  
+    const arrayNames = []
+    for (const arr of array) {
+      arrayNames.push(arr.name)
+      console.log(arrayNames);
+      return arrayNames;
+    }
+  } catch (error) {
+        error => console.log(error);
+  }
+} 
+
+
+
+
+function markUpModal({ poster_path, title, vote_average, vote_count, popularity, original_title, ganres_name, overview, id }) {
+>>>>>>> Stashed changes
     basicLightbox
       .create(
         `<div class="modal">
@@ -124,7 +158,11 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
     <li class="modal-window-vote-value list"><span class="modal-window-vote__span">${vote_average}</span>/&nbsp;&nbsp;${vote_count}</li>
     <li class="modal-window-popularity-value list">${popularity}</li>
     <li class="modal-winwow-original-title-value list">${original_title}</li>
+<<<<<<< Updated upstream
     <li class="modal-window-gener-value list">${getGanres(genre)}</li>
+=======
+    <li class="modal-window-gener-value list">${getGanres(ganres_name)}</li>
+>>>>>>> Stashed changes
 </ul>
 </div>
 <h3 class="modal-window-about">About</h3>
