@@ -56,7 +56,7 @@ function getGanres(data) {
  }
 
 
-// Функция Максима-------------------------------------------------
+// Функция Максима------------------------------------------------
 
 // function makeGenres(numbers) {
 //     const genreName = genreId.filter(data => {
