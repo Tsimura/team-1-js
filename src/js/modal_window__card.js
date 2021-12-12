@@ -1,17 +1,16 @@
 import { films } from "./trending_films";
-import { createFilmoteka } from "./trending_films";
-import { onSearch } from "./trending_films";
-import { articles } from "./trending_films";
-import { getFilms } from "./getFilms";
-import { makeGenres } from "./makeGenres"
-import { genreId } from "./makeGenres"
-import { genreNumbers } from "./makeGenres"
+// import { getFilms } from "./getFilms";
+// import { makeGenres } from "./makeGenres"
+// import { genreId } from "./makeGenres"
+import storage from './local-storage'
+
 
 import axios from "axios";
-import Notiflix from 'notiflix';
-
+// import Notiflix from 'notiflix';
 import * as basicLightbox from 'basiclightbox'
 
+let localWatched = storage.load('watchedArray') || []
+let localQueue = storage.load('queueArray') || []
 let moviId = '';
 
 
@@ -20,48 +19,86 @@ const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
 films.addEventListener('click', handleModalCardOpen);
   
 function handleModalCardOpen(event) {
+    event.preventDefault()
   if (event.target.nodeName !== 'IMG') return;
   moviId = event.target.id;
   // console.log(moviId);
   modalWindowAPI(moviId).then(markUpModal).catch(error => console.log(error))
-  console.log('Модалка с карточкой фильма открыта');
-  
-  event.preventDefault()
+  // console.log('Модалка с карточкой фильма открыта');
+  // getGanres(moviId).then(markUpModal).catch(error => console.log(error))
+  // console.log(getGanres(moviId).then(markUpModal));
+
+
   // instance.show();
   
 }
 async function modalWindowAPI(moviId) {
     try {
         const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${moviId}?api_key=${KEY_API}&language=en-US`)
-      
-      console.log('data:', data);
-      console.log('data.poster_path:', data.poster_path);
-      console.log('data.title:', data.title);
-      console.log('data.vote_count:', data.vote_count);
-      console.log('data.popularity:', data.popularity);
-      console.log('data.original_title:', data.original_title);
-      console.log('data.overview:', data.overview);
-      console.log('data.id:', data.id);
-      
+        
+      // console.log(data);
       return data;
-          
+     
         
     } catch (error) {
         error => console.log(error);
     }
 }
 
+function getGanres(data) {
+    const array = data.genres.flat(2)
+    const arrayNames = []
+    for (const arr of array) {
+      arrayNames.push(arr.name)
+      console.log(arrayNames);
+      return arrayNames;
+    } 
+ }
+
+
+// Функция Максима-------------------------------------------------
 
 // function makeGenres(numbers) {
-//   const genreName = genreId.filter(data => {
-//     for (let number of numbers) {
-//       if (data.id === number) {
-//         return data
-//       }
+//     const genreName = genreId.filter(data => {
+//         for (let number of numbers) {
+//             if (data.id === number) {
+//                 return data
+//             }
+//         } 
+//     })
+//     const genreNumbers = genreName.map(data => data.name)
+//     if (genreNumbers.length >= 3) {
+//         const prune = genreNumbers.slice(0, 2)
+//         const newGenres = [...prune, `Other`]
+//         return newGenres.join(", ")
+//     } else {
+//         return genreNumbers.join(", ")
 //     }
-//   })
 // }
-function markUpModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview, id }) {
+
+// const genreId = [
+// {"id": 28, "name": "Action" },
+// {"id":12,"name":"Adventure"},
+// {"id":16,"name":"Animation"},
+// {"id":35,"name":"Comedy"},
+// {"id":80,"name":"Crime"},
+// {"id":99,"name":"Documentary"},
+// {"id":18,"name":"Drama"},
+// {"id":10751,"name":"Family"},
+// {"id":14,"name":"Fantasy"},
+// {"id":36,"name":"History"},
+// {"id":27,"name":"Horror"},
+// {"id":10402,"name":"Music"},
+// {"id":9648,"name":"Mystery"},
+// {"id":10749,"name":"Romance"},
+// {"id":878,"name":"Science Fiction"},
+// {"id":10770,"name":"TV Movie"},
+// {"id":53,"name":"Thriller"},
+// {"id":10752,"name":"War"},
+// { "id": 37, "name": "Western" }]
+// ----------------------------------------------
+  
+function markUpModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview, genre, id }) {
     basicLightbox
       .create(
         `<div class="modal">
@@ -87,19 +124,21 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
     <li class="modal-window-vote-value list"><span class="modal-window-vote__span">${vote_average}</span>/&nbsp;&nbsp;${vote_count}</li>
     <li class="modal-window-popularity-value list">${popularity}</li>
     <li class="modal-winwow-original-title-value list">${original_title}</li>
-    <li class="modal-window-gener-value list">{makeGenres(genre_ids)}</li>
+    <li class="modal-window-gener-value list">${getGanres(genre)}</li>
 </ul>
 </div>
 <h3 class="modal-window-about">About</h3>
 <p class="modal-window-description">${overview}</p>
 <div class="btn-menu-module-card">
-<button id="${id}" class="btn-watched-modal-window">add to Watched</button>
-<button id="${id}" class="btn-queue-modal-window">add to queue</button>
+<button id="${id}" class="btn-watched-modal-window">${localWatched.includes(id) ? `remove from watched` : `add to watched`}</button>
+<button id="${id}" class="btn-queue-modal-window">${localQueue.includes(id) ? `remove from queue` : `add to queue`}</button>
          </div>
         </div>
     </div>
 </div>`).show();
   }
+
+
 
 
 
@@ -154,28 +193,6 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
 //     </div>
 //  </div>`, options);
 
-
-
-// function handleKeydown({key}) {
-//   switch (key) {
-//    case 'Escape':
-//       instance.close();
-//       console.log('Модалка с карточкой фильма закрыта кнопкой "ESC"');
-//       window.removeEventListener('keydown', handleKeydown);
-//       break;
-    
-//     default:
-//       alert('Что-то пошло не так!');
-//   }
-// }
-
-
-// function setOriginalUrl(url) {
-//   instance.element().querySelector("moviId").src = url;
-//   console.log(url);
-//   return;
-// }
-//       console.log('Модалка с карточкой фильма закрыта кнопкой "Х"');
 
 
 
