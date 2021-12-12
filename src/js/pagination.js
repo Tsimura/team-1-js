@@ -9,6 +9,7 @@ export async function getFilms(page) {
     const { data } = await axios.get(`${BASE_URL}/trending/movie/week?${API_KEY}&page=${page}`);
 
     totalPages = data.total_pages;
+
     console.log('data', data);
     console.log('totalPages', totalPages);
     console.log(page > totalPages);
@@ -24,16 +25,17 @@ export async function getFilms(page) {
 // new 11.12///////////////////////////////////////////
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
-import { createData } from './createFilmoteka';
-import { reset } from './createFilmoteka';
+// import { createData } from './createFilmoteka';
+import { createData } from './trending_films';
+// import { reset } from './createFilmoteka';
+import { reset } from './trending_films';
 
 import * as withLoader from './spinner';
 
 // let page = 1;
-const mediaQuery = window.matchMedia('(max-width: 768px)');
+// const mediaQuery = window.matchMedia('(max-width: 768px)');
 
 // import { getFilms } from './getFilms';
-
 
 const options = {
   totalItems: 1000,
@@ -63,7 +65,6 @@ const pagination = new Pagination(container, options);
 page = pagination.getCurrentPage();
 createData(page, totalPages);
 pagination.on('afterMove', ({ page }) => {
-
   withLoader.addLoader();
   mediaPagination();
 
@@ -78,6 +79,10 @@ function mediaPagination() {
     options.visiblePages = 7;
   }
 }
+// function reset() {
+//   return (films.innerHTML = ``);
+// }
+
 // еще раз попробовать использовать этот код
 // / let widthMatch = window.onresize('(min-width = 480px)');
 // console.log(widthMatch);
