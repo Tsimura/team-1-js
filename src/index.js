@@ -8,6 +8,6 @@ import './js/toUp';
 import './js/modal_window_team';
 import './js/sortAPI';
 // import './js/pagination';
-import './js/lazyLoad';
+import './js/lazyload';
 import './js/spinner';
 // import './js/createFilmoteka';

@@ -2,7 +2,7 @@ import { getFilms } from './getFilms';
 import { makeGenres } from './makeGenres';
 import Notiflix from 'notiflix';
 import poster from '../image/posters/poster.jpg';
-import { lazyLoad } from './lazyLoad';
+import { lazyLoad } from './lazyload';
 import { searchFilms } from './getFilms';
 import * as withLoader from './spinner';
 
