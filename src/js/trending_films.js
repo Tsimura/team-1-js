@@ -23,6 +23,7 @@ export function createData(page) {
       .catch(error => console.log(error));
   }, 2000);
 }
+
 // ......................................................
 // закомітила код, вище  новий........................
 // export function createData(page) {
@@ -62,12 +63,6 @@ export function articles({ poster_path, original_title, release_date, genre_ids,
      }>
       <h2 class="film_title">${original_title}</h2>
       <p class="film_genre">${makeGenres(genre_ids)} | <span>${release_date.substr(0, 4)}</span></p>
-      <ul class="modal-list__buttons list">
-      <li>
-      <button id="${id}" class='button-watched-modal-window button--active button'>add to watched</button></li>
-      <li>
-      <button id="${id}" type='button' class='button-queue-modal-window button button--active'>add to queue</button></li>
-      </ul>
       </a>
     </div>`;
 }
@@ -76,7 +71,7 @@ function onSearch(evt) {
   searchForm = evt.currentTarget.elements.searchQuery.value;
   console.log(searchForm);
   evt.preventDefault();
-  clearContainer();
+  reset();
   withLoader.addLoader();
   if (searchForm.length === 0) {
     Notiflix.Notify.failure('Search result not successful. Enter the correct movie name and ');
@@ -96,9 +91,6 @@ function onSearch(evt) {
   }, 2000);
 }
 
-function clearContainer() {
-  return (films.innerHTML = ``);
-}
 export function reset() {
   return (films.innerHTML = ``);
 }
