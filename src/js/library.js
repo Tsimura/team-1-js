@@ -15,9 +15,7 @@ const buttonQueue = document.querySelector('.header-library__button--queue');
 let watchedArray = [];
 let queueArray = [];
 let localQueue = storage.load('queueArray');
-console.log(localQueue);
 let localWatched = storage.load('watchedArray');
-console.log(localWatched);
 
 buttonWatched.addEventListener('click', showFilmsWatched);
 buttonQueue.addEventListener('click', showFilmsQueue);
@@ -97,7 +95,7 @@ function showFilmsQueue() {
   films.innerHTML = ``;
   localQueue = storage.load('queueArray')
 
-  if (!localWatched || (!localWatched[0] && !localWatched[1])) {
+  if (!localQueue || (!localQueue[0] && !localQueue[1])) {
     films.style.cssText = `grid-template-columns: repeat(1, 1fr); widht: 100%; height: 100%; margin: 0 auto; justify-items: center;` 
     films.innerHTML = `<img class="img-for-library" src='${popcornImg}'>`;
     return Notiflix.Notify.info(`Oops, you haven't added anything to the queue ones yet.`)
