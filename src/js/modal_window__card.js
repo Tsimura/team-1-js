@@ -1,4 +1,5 @@
 import { films } from "./trending_films";
+import { getYouTube } from "./youTube"
 import { createFilmoteka } from "./trending_films";
 import { onSearch } from "./trending_films";
 import { articles } from "./trending_films";
@@ -61,8 +62,12 @@ async function modalWindowAPI(moviId) {
 //     }
 //   })
 // }
-function markUpModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview, id }) {
-    basicLightbox
+
+function markUpModal({ poster_path, title, release_date, vote_average, vote_count, popularity, original_title, overview, id, genre_ids }) {
+  getYouTube(title, release_date).then(modal)
+  function modal(data) { 
+    const videoOnYouTube = data.items[0].id.videoId
+  basicLightbox
       .create(
         `<div class="modal">
      <div class="film-card-modal-window">
@@ -97,8 +102,13 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
 <button id="${id}" class="btn-queue-modal-window">add to queue</button>
          </div>
         </div>
+        <div>
+         <iframe class="youtube" src="https://www.youtube.com/embed/${videoOnYouTube}"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
     </div>
 </div>`).show();
+} 
   }
 
 

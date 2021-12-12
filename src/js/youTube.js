@@ -1,10 +1,21 @@
 // AIzaSyDI4Ixc_tDB33sez9hADQIenRDniMJ2dik
-// const video = document.querySelector(`#youTube`)
-// const name = `spider-man`
-// const year = `2021`
-// const searching = `${name} ${year} oficial trailer`
+import axios from "axios";
 
-// function getRuFilms() {
+const API_KEY = `AIzaSyDI4Ixc_tDB33sez9hADQIenRDniMJ2dik`
+
+export async function getYouTube(title, release_date) {
+    const searching = `${title} ${release_date.substr(0, 4)} oficial trailer`
+    try {
+        const { data } = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${searching}&type=video&key=${API_KEY}`)
+        return data
+    } catch (error) { 
+        error => console.log(error)
+    } 
+}
+
+// export function getYouTube(title, release_date) {
+//     const searching = `${title} ${release_date.substr(0, 4)} oficial trailer`
+//     console.log(searching)
 //     const API_KEY = `AIzaSyDI4Ixc_tDB33sez9hADQIenRDniMJ2dik`
 //     return fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${searching}&type=video&key=${API_KEY}`)
 //         .then(response => {
@@ -14,13 +25,3 @@
 //             return response.json()
 //         })
 // }
-// getRuFilms().then(createVideo).catch(error => console.log(error))
-
-
-// function createVideo(resp) {
-//     resp.items.map((data) => {
-//         return video.innerHTML = `<iframe width="1000" height="500" src="https://www.youtube.com/embed/${data.id.videoId}"
-//          frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-//     })
-// }
-
