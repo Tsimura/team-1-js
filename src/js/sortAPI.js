@@ -4,7 +4,7 @@ import createFilmoteka from './trending_films';
 import Notiflix from 'notiflix';
 import * as withSpinner from './spinner';
 // ..........изменения для lazyload.....................................................
-import { lazyLoad } from './lazyload';
+import { lazyLoad } from './lazyLoad';
 // ...........................................................
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
