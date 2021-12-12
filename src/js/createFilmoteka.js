@@ -1,7 +1,7 @@
 // всі функції з цього файлу можна знайи у trending_films
 // / import Notiflix from 'notiflix';
 // import poster from '../image/posters/poster.jpg';
-// import { lazyLoad } from './lazyLoad';
+// import { lazyLoad } from './lazyload';
 // import { makeGenres } from './makeGenres';
 // import { getFilms } from './getFilms';
 
