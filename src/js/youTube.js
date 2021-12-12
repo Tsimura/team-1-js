@@ -1,7 +1,7 @@
 // AIzaSyDI4Ixc_tDB33sez9hADQIenRDniMJ2dik
 import axios from "axios";
 
-const API_KEY = `AIzaSyDI4Ixc_tDB33sez9hADQIenRDniMJ2dik`
+const API_KEY = `AIzaSyBWrdrofQIQMGM0ATxYf8H53VQiProilT4`
 
 export async function getYouTube(title, release_date) {
     const searching = `${title} ${release_date.substr(0, 4)} oficial trailer`
@@ -12,6 +12,8 @@ export async function getYouTube(title, release_date) {
         error => console.log(error)
     } 
 }
+
+
 
 // export function getYouTube(title, release_date) {
 //     const searching = `${title} ${release_date.substr(0, 4)} oficial trailer`
