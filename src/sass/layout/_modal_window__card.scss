@@ -56,13 +56,33 @@
   }
   @media screen and (min-width: 768px) {
     width: 618px;
+    height: 800px;
     padding: 42px 30px 40px 30px;
     top: 230px;
   }
   @media screen and (min-width: 1024px) {
     width: 882px;
+    height: 1100px;
     padding: 50px 30px 40px 30px;
     top: 100px;
+  }
+}
+
+.youtube {
+  margin-top: 30px;
+  width: 240px;
+  @media screen and (min-width: 768px) {
+    width: 600px;
+    height: 300px;
+    position: absolute;
+    top: 430px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  @media screen and (min-width: 1024px) {
+    width: 800px;
+    height: 500px;
+    top: 540px;
   }
 }
 

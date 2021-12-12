@@ -1,10 +1,15 @@
 import { showFilmsWatched } from './library';
 import { getFilms } from './getFilms';
 import { makeGenres } from './makeGenres';
+import { articles } from './trending_films';
 // додала импорт.....................................
 import { createFilmoteka } from './trending_films';
+import { searchFilms } from './getFilms';
+import * as withLoader from './spinner';
+import { reset } from './trending_films';
 // ...........................................................................
-const films = document.querySelector(`#gallery`);
+// const films = document.querySelector(`.hp__gallery_wrapper`);
+import { films } from './trending_films';
 const myLibraryButton = document.querySelector('#my-library');
 const homeButton = document.querySelector('#home');
 const form = document.querySelector('#search-form');
@@ -28,6 +33,7 @@ myLibraryButton.addEventListener('click', () => {
   if (homeButton.classList.contains('current')) {
     homeButton.classList.remove('current');
   }
+  ifcurrent();
 });
 
 homeButton.addEventListener('click', () => {
@@ -35,14 +41,22 @@ homeButton.addEventListener('click', () => {
   form.classList.remove('is-hidden');
   listButton.classList.add('is-hidden');
   homeButton.classList.add('current');
+  ifcurrent();
+  reset();
+  console.log(films.attributes);
+  films.removeAttribute('style');
 
   if (myLibraryButton.classList.contains('current')) {
     myLibraryButton.classList.remove('current');
 
-    clearContainer();
-    return getFilms(1)
-      .then(createFilmoteka)
-      .catch(error => console.log(error));
+    withLoader.addLoader();
+
+    setTimeout(() => {
+      return getFilms(1)
+        .then(createFilmoteka)
+        .then(withLoader.removeLoader())
+        .catch(error => console.log(error));
+    }, 2000);
   }
 });
 
@@ -59,41 +73,15 @@ listButton.addEventListener('click', e => {
   }
 });
 
-// =====================================================================================================
-// закомітила  function createFilmoteka(resp)..........................................
-// function createFilmoteka(resp) {
-//   console.log(resp);
-//   if (resp.results.length === 0) {
-//     Notiflix.Notify.failure('Search result not successful. Enter the correct movie name and ');
-//     getFilms()
-//       .then(createFilmoteka)
-//       .catch(error => console.log(error));
-//   } else {
-//     resp.results.map(data => {
-//       return films.insertAdjacentHTML(`beforeend`, articles(data));
-//     });
-//   }
+// function clearContainer() {
+//   return (films.innerHTML = ``);
 // }
-// ...........................................................................
-// закомітила  function articles..........................................
-// function articles({ poster_path, original_title, release_date, genre_ids, id }) {
-//   return `<div id="gallery" class="hp__gallery_el">
-//       ${
-//         poster_path
-//           ? `<img class="hp__gallery_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}"`
-//           : `<img class="hp__gallery_img" src="${poster}" alt="Poster is missing"`
-//       }>
-//       <h2 class="film_title">${original_title}</h2>
-//       <p class="film_genre">${makeGenres(genre_ids)} | <span>${release_date.substr(0, 4)}</span></p>
-//       <ul class="modal-list__buttons list">
-//       <li>
-//       <button id="${id}" class='button-watched-modal-window button--active button'>add to watched</button></li>
-//       <li>
-//       <button id="${id}" type='button' class='button-queue-modal-window button button--active'>add to queue</button></li>
-//       </ul>
-//     </div>`;
-// }
-// ...........................................................................
-function clearContainer() {
-  return (films.innerHTML = ``);
+
+function ifcurrent() {
+  if (homeButton.classList.contains('current')) {
+    listButton.classList.add('visually-hidden');
+  } else if (myLibraryButton.classList.contains('current')) {
+    listButton.classList.remove('visually-hidden');
+  }
+  return;
 }

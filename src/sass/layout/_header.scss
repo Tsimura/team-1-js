@@ -203,6 +203,9 @@ header {
   height: 20px;
   margin: 0 auto;
   position: relative;
+  @media screen and (min-width: 768px) {
+    margin-bottom: 30px;
+  }
 }
 
 .searchForm__button {
@@ -269,10 +272,12 @@ header {
 @media screen and (min-width: 768px) {
   .filterButtonWrapper {
     display: flex;
+
     margin: 0, auto;
     justify-content: space-around;
 
     & :nth-child(-n + 4) {
+      padding: 2px;
       border-radius: 4px;
       color: #ffffff;
       background-color: var(--color-accent);
@@ -282,3 +287,150 @@ header {
 }
 
 // --------------===============END OF FILTER BUTTONS===============--------------
+
+.filterButtonWrapper select {
+  position: relative;
+  overflow: hidden;
+  transition: 0.5s;
+  color: var(--color-accent);
+
+  &:hover {
+    background: var(--color-accent);
+    color: #050801;
+    box-shadow: 0 0 5px var(--color-accent), 0 0 25px var(--color-accent),
+      0 0 50px var(--color-accent), 0 0 200px var(--color-accent);
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+  }
+}
+
+.filterButtonWrapper button {
+  position: relative;
+  overflow: hidden;
+  transition: 0.5s;
+  color: var(--color-accent);
+
+  &:hover {
+    // position: absolute;
+    // display: block;
+    background: var(--color-accent);
+    color: #050801;
+    box-shadow: 0 0 5px var(--color-accent), 0 0 25px var(--color-accent),
+      0 0 50px var(--color-accent), 0 0 200px var(--color-accent);
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+  }
+}
+
+// a{
+//     position: relative;
+//     display: inline-block;
+//     padding: 25px 30px;
+//     margin: 40px 0;
+//     color: #03e9f4;
+//     text-decoration: none;
+//     text-transform: uppercase;
+//     transition: 0.5s;
+//     letter-spacing: 4px;
+//     overflow: hidden;
+//     margin-right: 50px;
+
+// }
+// a:hover {
+//   background: #03e9f4;
+//   color: #050801;
+//   box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4, 0 0 200px #03e9f4;
+//   -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+// }
+// select:nth-child(1) {
+//   filter: hue-rotate(270deg);
+// }
+// // a:nth-child(2) {
+// //   filter: hue-rotate(110deg);
+// // }
+// // .filterButtonWrapper span {
+// //   position: absolute;
+// //   display: block;
+// // }
+// .filterButtonWrapper select:nth-child(1) {
+//   &::after {
+//     content: '';
+//     position: absolute;
+//     display: block;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 2px;
+//     background-color: linear-gradient(90deg, transparent, #03e9f4);
+//     animation: animate1 1s linear infinite;
+//   }
+// }
+// @keyframes animate1 {
+//   0% {
+//     left: -100%;
+//   }
+//   50%,
+//   100% {
+//     left: 100%;
+//   }
+// }
+// // a span:nth-child(2) {
+// //   top: -100%;
+// //   right: 0;
+// //   width: 2px;
+// //   height: 100%;
+// //   background: linear-gradient(180deg, transparent, #03e9f4);
+// //   animation: animate2 1s linear infinite;
+// //   animation-delay: 0.25s;
+// // }
+// @keyframes animate2 {
+//   0% {
+//     top: -100%;
+//   }
+//   50%,
+//   100% {
+//     top: 100%;
+//   }
+// }
+// // a span:nth-child(3) {
+// //   bottom: 0;
+// //   right: 0;
+// //   width: 100%;
+// //   height: 2px;
+// //   background: linear-gradient(270deg, transparent, #03e9f4);
+// //   animation: animate3 1s linear infinite;
+// //   animation-delay: 0.5s;
+// // }
+// @keyframes animate3 {
+//   0% {
+//     right: -100%;
+//   }
+//   50%,
+//   100% {
+//     right: 100%;
+//   }
+// }
+
+// // a span:nth-child(4) {
+// //   bottom: -100%;
+// //   left: 0;
+// //   width: 2px;
+// //   height: 100%;
+// //   background: linear-gradient(360deg, transparent, #03e9f4);
+// //   animation: animate4 1s linear infinite;
+// //   animation-delay: 0.75s;
+// // }
+// @keyframes animate4 {
+//   0% {
+//     bottom: -100%;
+//   }
+//   50%,
+//   100% {
+//     bottom: 100%;
+//   }
+// }
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}

@@ -19,7 +19,7 @@
       </a>
       <ul class="list header__list">
         <li class="header-item">
-          <button id="home" class="header-navigation-link" type="button">Home</button>
+          <button id="home" class="header-navigation-link current" type="button">Home</button>
         </li>
         <li class="header-item">
           <button id="my-library" class="header-navigation-link" type="button">my library</button>
@@ -35,7 +35,7 @@
 
       </button>
     </form>
-    <ul class="header-library__list is-hidden">
+    <ul class="header-library__list is-hidden visually-hidden">
       <li class="header-library__item">
         <button type="button" class="header-library__button--watched button button--active">watched</button>
       </li>
@@ -47,6 +47,7 @@
     <!-- --------------!!!!!!===============START OF FILTER BUTTONS===============!!!!!!-------------- -->
 
     <div class="filterButtonWrapper">
+
       <select name="sortby" id="sortby">
         <option value="">Sort by</option>
         <option value="popularity.asc">Popularity asc</option>
