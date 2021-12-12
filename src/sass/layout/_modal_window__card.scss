@@ -47,29 +47,31 @@
   border: transparent;
   left: 50%;
   transform: translate(-50%);
-  // overflow-y: auto;
+  overflow-y: auto;
   @media screen and (max-width: 767px) {
     flex-wrap: wrap;
     width: 280px;
+    height: 550px;
     padding: 48px 20px 41px 20px;
     top: 20px;
   }
   @media screen and (min-width: 768px) {
     width: 618px;
-    height: 800px;
+    height: 500px;
     padding: 42px 30px 40px 30px;
     top: 230px;
   }
   @media screen and (min-width: 1024px) {
     width: 882px;
-    height: 1100px;
+    height: 800px;
     padding: 50px 30px 40px 30px;
     top: 100px;
   }
 }
 
 .youtube {
-  margin-top: 30px;
+  margin-top: 50px;
+  padding-bottom: 20px;
   width: 240px;
   @media screen and (min-width: 768px) {
     width: 600px;
@@ -82,7 +84,7 @@
   @media screen and (min-width: 1024px) {
     width: 800px;
     height: 500px;
-    top: 540px;
+    top: 440px;
   }
 }
 

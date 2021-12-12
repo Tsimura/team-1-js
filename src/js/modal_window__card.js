@@ -138,6 +138,10 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
 <button id="${id}" class="btn-queue-modal-window">${localQueue.includes(id) ? `remove from queue` : `add to queue`}</button>
          </div>
         </div>
+         <div>
+       <iframe class="youtube" src="https://www.youtube.com/embed/nuFgqJcrxB8" title="YouTube video player" 
+       frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
     </div>
 </div>`).show();
   }
