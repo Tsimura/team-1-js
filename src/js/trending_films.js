@@ -2,9 +2,9 @@ import { getFilms } from './getFilms';
 import { makeGenres } from './makeGenres';
 import Notiflix from 'notiflix';
 import poster from '../image/posters/poster.jpg';
-import { lazyLoad } from './lazyLoad';
-import { searchFilms } from "./getFilms";
-import * as withLoader from './spinner'
+import { lazyLoad } from './lazyload';
+import { searchFilms } from './getFilms';
+import * as withLoader from './spinner';
 
 export const films = document.querySelector(`#gallery`);
 const input = document.querySelector(`#search-form`);
@@ -13,21 +13,41 @@ input.addEventListener(`submit`, onSearch);
 
 let searchForm = ` `;
 let page = 1;
+let totalItems;
+// вставила код зі зміно ..................................
 export function createData(page) {
   setTimeout(() => {
-      return getFilms(page)
-    .then(createFilmoteka)
-    .catch(error => console.log(error));
-  },2000)
-
+    return getFilms(page)
+      .then(createFilmoteka)
+      .then(withLoader.removeLoader())
+      .catch(error => console.log(error));
+  }, 2000);
 }
-createData(page);
+// ......................................................
+// закомітила код, вище  новий........................
+// export function createData(page) {
+//   setTimeout(() => {
+//     return getFilms(page)
+//       .then(createFilmoteka)
+//       .catch(error => console.log(error));
+//   }, 2000);
+// }
+// ...................................................
+// createData(page);
 
 export function createFilmoteka(resp) {
   console.log(resp);
-    resp.results.map(data => {
+  // ..................................
+  console.log(resp.page);
+  console.log(resp.total_pages);
+  console.log(resp.total_results);
+  if (resp.total_pages === resp.page) {
+    Notiflix.Notify.failure(`We're sorry, but you've reached the end of search results.`);
+  }
+  // ..................................
+  resp.results.map(data => {
     return films.insertAdjacentHTML(`beforeend`, articles(data));
-    });
+  });
   const img = document.querySelectorAll('#gallery img');
   lazyLoad(img);
 }
@@ -54,7 +74,7 @@ export function articles({ poster_path, original_title, release_date, genre_ids,
 
 function onSearch(evt) {
   searchForm = evt.currentTarget.elements.searchQuery.value;
-  console.log(searchForm)
+  console.log(searchForm);
   evt.preventDefault();
   clearContainer();
   withLoader.addLoader();
@@ -64,23 +84,22 @@ function onSearch(evt) {
       getFilms(page)
         .then(createFilmoteka)
         .then(withLoader.removeLoader())
-      .catch(error => console.log(error));
+        .catch(error => console.log(error));
       return;
-    },2000)
-    
+    }, 2000);
   }
   setTimeout(() => {
-     searchFilms(searchForm, page)
-       .then(createFilmoteka)
-       .then(withLoader.removeLoader)
-    .catch(error => console.log(error));
-  },2000)
- 
+    searchFilms(searchForm, page)
+      .then(createFilmoteka)
+      .then(withLoader.removeLoader)
+      .catch(error => console.log(error));
+  }, 2000);
 }
 
 function clearContainer() {
   return (films.innerHTML = ``);
 }
-
-
+export function reset() {
+  return (films.innerHTML = ``);
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
