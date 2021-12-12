@@ -89,8 +89,8 @@ function makeFilterMarkup(data) {
         `<div id="gallery" class="hp__gallery_el">
       ${
         poster_path
-          ? `<img class="hp__gallery_img" src="" data-lazy="https://image.tmdb.org/t/p/w500${poster_path}" loading="lazy" alt="${original_title}"`
-          : `<img class="hp__gallery_img" src="" data-lazy="${poster}" loading="lazy" alt="Poster is missing"`
+          ? `<img class="hp__gallery_img" id="${id}" src="" data-lazy="https://image.tmdb.org/t/p/w500${poster_path}" loading="lazy" alt="${original_title}"`
+          : `<img class="hp__gallery_img" id="${id}" src="" data-lazy="${poster}" loading="lazy" alt="Poster is missing"`
       }>
       <h2 class="film_title">${original_title}</h2>
       <p class="film_genre">${makeGenres(genre_ids)} | <span>${release_date.substr(0, 4)}</span></p>
@@ -145,5 +145,7 @@ function trendingMarkup(data) {
       </div>`,
     )
     .join('');
-  gallery.insertAdjacentHTML('beforeend', trendingMarkup);
+    gallery.insertAdjacentHTML('beforeend', trendingMarkup);
+    const img = document.querySelectorAll('#gallery img');
+  lazyLoad(img);
 }
