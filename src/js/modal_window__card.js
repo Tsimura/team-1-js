@@ -100,7 +100,7 @@ function getGanres(data) {
 // {"id":53,"name":"Thriller"},
 // {"id":10752,"name":"War"},
 // { "id": 37, "name": "Western" }]
-// ---------------------------------------------
+
 
 function markUpModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview, genre, id }) {
     basicLightbox
