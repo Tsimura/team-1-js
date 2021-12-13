@@ -7,7 +7,7 @@ import { lazyLoad } from './lazyLoad';
 // import { fetchTrending } from './sortAPI';
 import * as withLoader from './spinner';
 const films = document.querySelector(`#gallery`);
-import { paginationTrend } from './pagination';
+// import { paginationTrend } from './pagination';
 import { buttonWatched } from './library';
 import { showFilmsWatched } from './library';
 
@@ -46,8 +46,11 @@ export function createData(page) {
   }, 2000);
 }
 createData(page);
-// ...............................................
+
+// пагинация ...............................................
 // paginationTrend();
+// ..........................................
+
 export function createFilmoteka({ data }) {
   console.log('data', data);
   console.log('data', data.results);

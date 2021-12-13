@@ -3,7 +3,7 @@ import card from '../templates/card-library';
 import axios from 'axios';
 import popcornImg from '../image/posters/popcorn.png';
 import Notiflix from 'notiflix';
-import { paginationWatched } from './pagination';
+// import { paginationWatched } from './pagination';
 import { lazyLoad } from './lazyLoad';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
@@ -96,8 +96,9 @@ export function showFilmsWatched(localWatched) {
       renderFilms(film);
     });
   }
-  // пагинация................................................
-  paginationWatched(localWatched);
+  // пагинация...........................
+  // paginationWatched(localWatched);
+  // ....................................
   const img = document.querySelectorAll('#gallery img');
   lazyLoad(img);
 }
