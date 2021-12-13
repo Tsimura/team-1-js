@@ -3,8 +3,8 @@
      {{#if poster_path}}
          <img class="hp__gallery_img" id="{{id}}" src="https://image.tmdb.org/t/p/w500{{poster_path}}" loading="lazy" alt="{{original_title}}"
       {{else}}
-         <img class="hp__gallery_img" id="{{id}}" src="{{poster}}" loading="lazy" alt="Poster is missing">
-    {{/if}}
+         <img class="hp__gallery_img" id="{{id}}" src="/poster.2cd0b695.jpg" loading="lazy" alt="Poster is missing"
+    {{/if}}>
       <h2 class="film_title">{{original_title}}</h2>
       <p class="film_genre list">{{genres.0.name}}{{#if genres.1.name}}, {{genres.1.name}}{{/if}}{{#if genres.2.name}}, Other{{/if}} | <span>{{year}}</span></p>      
   </a>
