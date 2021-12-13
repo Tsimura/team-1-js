@@ -10,4 +10,4 @@ import './js/sortAPI';
 // import './js/pagination';
 import './js/lazyLoad';
 import './js/spinner';
-// import './js/createFilmoteka';
+// import './js/create_filmoteka';

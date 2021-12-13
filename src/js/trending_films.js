@@ -13,7 +13,7 @@ input.addEventListener(`submit`, onSearch);
 
 let searchForm = ` `;
 let page = 1;
-let totalItems;
+// let totalItems;
 // вставила код зі зміно ..................................
 export function createData(page) {
   setTimeout(() => {
