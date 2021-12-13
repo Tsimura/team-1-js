@@ -1,24 +1,16 @@
-// import Pagination from 'tui-pagination';
-// import 'tui-pagination/dist/tui-pagination.css';
-// import axios from 'axios';
-// import { lazyLoad } from './lazyLoad';
-// import * as withLoader from './spinner';
-// const films = document.querySelector(`#gallery`);
-// // import { paginationTrend } from './pagination';
-
 import axios from 'axios';
 import { makeGenres } from './makeGenres';
-// import createFilmoteka from './trending_films';
 import Notiflix from 'notiflix';
-import * as withSpinner from './spinner';
 import { lazyLoad } from './lazyLoad';
-// import { fetchTrending } from './sortAPI';
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 import * as withLoader from './spinner';
+
 const films = document.querySelector(`#gallery`);
+
 let page = 1;
 let totalPages;
+
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
 async function getFilms(page) {
@@ -26,11 +18,11 @@ async function getFilms(page) {
     const { data } = await axios.get(`discover/movie?api_key=${KEY_API}&page=${page}&total_pages`);
     totalPages = data.total_pages;
     page = data.page;
-    console.log('data', data);
-    console.log('totalPages', totalPages);
-    console.log(page > totalPages);
-    // console.log('hasNextPage', hasNextPage);
-    console.log(page);
+    // console.log('data', data);
+    // console.log('totalPages', totalPages);
+    // console.log(page > totalPages);
+    // // console.log('hasNextPage', hasNextPage);
+    // console.log(page);
     return {
       data,
       // hasNextPage: page > totalPages,
@@ -51,14 +43,13 @@ export function createData(page) {
   }, 2000);
 }
 createData();
-// makeTrendMarkup();
 export function createFilmoteka({ data }) {
-  console.log('data', data);
-  console.log('data', data.results);
-  console.log('totalPages', totalPages);
-  console.log(page > totalPages);
+  // console.log('data', data);
+  // console.log('data', data.results);
+  // console.log('totalPages', totalPages);
+  // console.log(page > totalPages);
   // console.log('hasNextPage', hasNextPage);
-  console.log(page);
+  // console.log(page);
   const createFilmoteka = data.results
     .map(
       ({ poster_path, original_title, release_date, genre_ids, id }) =>
@@ -112,11 +103,9 @@ mediaPagination();
 const container = document.getElementById('pagination');
 const pagination = new Pagination(container, options);
 page = pagination.getCurrentPage();
-// createData(page, totalPages);
 pagination.on('afterMove', ({ page }) => {
   withLoader.addLoader();
   mediaPagination();
-
   reset();
   createData(page);
   window.scrollTo({ top: 0, behavior: 'smooth' });

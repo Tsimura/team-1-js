@@ -1,8 +1,6 @@
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
-// import { buttonWatched } from './library';
 import { films } from './library';
-// const films = document.querySelector('#gallery');
 import { reset } from './library';
 
 // // пагинация для Librery .........................
