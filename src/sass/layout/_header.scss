@@ -82,6 +82,8 @@ header {
 }
 
 .navigation {
+  display: flex;
+
   position: relative;
   padding: 48px 0px 41px 0px;
   display: flex;
@@ -123,12 +125,15 @@ header {
 }
 
 .header__logo {
-  display: block;
+  display: flex;
+  align-items: baseline;
+
   fill: black;
 }
 
 .logo__icon {
   fill: currentColor;
+  margin-right: 10px;
 }
 
 .logo__text {
