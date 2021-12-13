@@ -5,10 +5,12 @@ import Notiflix from 'notiflix';
 import * as withSpinner from './spinner';
 import { lazyLoad } from './lazyLoad';
 // import { fetchTrending } from './sortAPI';
-import Pagination from 'tui-pagination';
-import 'tui-pagination/dist/tui-pagination.css';
 import * as withLoader from './spinner';
 const films = document.querySelector(`#gallery`);
+import { paginationTrend } from './pagination';
+import { buttonWatched } from './library';
+import { showFilmsWatched } from './library';
+
 let page = 1;
 let totalPages;
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
@@ -43,8 +45,9 @@ export function createData(page) {
       .catch(error => console.log(error));
   }, 2000);
 }
-createData();
-// makeTrendMarkup();
+createData(page);
+// ...............................................
+// paginationTrend();
 export function createFilmoteka({ data }) {
   console.log('data', data);
   console.log('data', data.results);
@@ -76,6 +79,7 @@ export function createFilmoteka({ data }) {
 function reset() {
   return (films.innerHTML = '');
 }
+
 // const options = {
 //   totalItems: 1000,
 //   visiblePages: '',
@@ -97,7 +101,6 @@ function reset() {
 //       '</a>',
 //   },
 // };
-
 // mediaPagination();
 // const container = document.getElementById('pagination');
 // const pagination = new Pagination(container, options);
