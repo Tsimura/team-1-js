@@ -3,7 +3,9 @@ import card from '../templates/card-library';
 import axios from 'axios';
 import popcornImg from '../image/posters/popcorn.png';
 import Notiflix from 'notiflix';
-import { paginationWatched } from './pagination';
+// import { paginationWatched } from './pagination';
+import { lazyLoad } from './lazyLoad';
+
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const API_KEY = '221ed015def0321f18a85f3fc7b4d6fa';
 const body = document.querySelector('body');
@@ -80,7 +82,7 @@ export function showFilmsWatched(localWatched) {
   localWatched = storage.load('watchedArray');
   if (!localWatched || (!localWatched[0] && !localWatched[1])) {
     films.style.cssText = `grid-template-columns: repeat(1, 1fr); widht: 100%; height: 100%; margin: 0 auto; justify-items: center;`;
-    films.innerHTML = `<img class="img-for-library" src='${popcornImg}'>`;
+    films.innerHTML = `<img class="img-for-library" src='' data-lazy='${popcornImg}' loading="lazy">`;
     return Notiflix.Notify.info(`Oops, you haven't added anything to the watched ones yet.`, {
       position: 'center-top',
     });
@@ -94,7 +96,10 @@ export function showFilmsWatched(localWatched) {
       renderFilms(film);
     });
   }
-  paginationWatched(localWatched);
+  // пагинация
+  // paginationWatched(localWatched);
+  const img = document.querySelectorAll('#gallery img');
+  lazyLoad(img);
 }
 
 // Рисует карточки с просмотренными фильмами в библиотеке (вкладка "в очереди")
@@ -105,7 +110,7 @@ function showFilmsQueue() {
 
   if (!localQueue || (!localQueue[0] && !localQueue[1])) {
     films.style.cssText = `grid-template-columns: repeat(1, 1fr); widht: 100%; height: 100%; margin: 0 auto; justify-items: center;`;
-    films.innerHTML = `<img class="img-for-library" src='${popcornImg}'>`;
+    films.innerHTML = `<img class="img-for-library" src='' data-lazy='${popcornImg}' loading="lazy">`;
     return Notiflix.Notify.info(`Oops, you haven't added anything to the queue ones yet.`, {
       position: 'center-top',
     });
@@ -118,6 +123,8 @@ function showFilmsQueue() {
       renderFilms(result);
     });
   }
+  const img = document.querySelectorAll('#gallery img');
+  lazyLoad(img);
 }
 
 // Запрос на бэк за айди фильмов
