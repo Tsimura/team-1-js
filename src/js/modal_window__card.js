@@ -62,7 +62,7 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
     <li class="modal-window-vote-value list"><span class="modal-window-vote__span">${vote_average}</span>/&nbsp;&nbsp;${vote_count}</li>
     <li class="modal-window-popularity-value list">${popularity}</li>
     <li class="modal-winwow-original-title-value list">${original_title}</li>
-    <li class="modal-window-gener-value list">${arrayNames}</li>
+    <li class="modal-window-gener-value list">${arrayNames.join(', ')}</li>
 </ul>
 </div>
 <h3 class="modal-window-about">About</h3>
@@ -158,8 +158,8 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
       switch (key) {
         case 'Escape':
         instance.close();
-        console.log('Модалка с карточкой фильма закрыта кликом по кнопке "ESC"');
-
+          console.log('Модалка с карточкой фильма закрыта кликом по кнопке "ESC"');
+          window.removeEventListener('keydown', handleKeydown);
         break;
         default:
         alert('Что-то пошло не так!');
