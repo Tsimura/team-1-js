@@ -53,7 +53,7 @@ export function createFilmoteka(resp) {
   lazyLoad(img);
 }
 
-export function articles({ poster_path, original_title, release_date, genre_ids, id }) {
+export function articles({ poster_path, original_title, release_date, genre_ids, id, vote_average }) {
   return `<div id="galleryModal" class="hp__gallery_el">
   <a href="#" id="openModal" class='card-links link'>
      ${
@@ -61,7 +61,9 @@ export function articles({ poster_path, original_title, release_date, genre_ids,
          ? `<img class="hp__gallery_img" id="${id}" src="" data-lazy="https://image.tmdb.org/t/p/w500${poster_path}" loading="lazy" alt="${original_title}"`
          : `<img class="hp__gallery_img" id="${id}" src="" data-lazy="${poster}" loading="lazy" alt="Poster is missing"`
      }>
-      <h2 class="film_title">${original_title}</h2>
+      <div class="hp__title-genre_wrapper">
+      <h2 class="film_title">${original_title}</h2><span class="hp__vote_span">${vote_average}</span>
+      </div>
       <p class="film_genre">${makeGenres(genre_ids)} | <span>${release_date.substr(0, 4)}</span></p>
       </a>
     </div>`;
