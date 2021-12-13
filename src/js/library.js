@@ -3,7 +3,7 @@ import card from '../templates/card-library';
 import axios from 'axios';
 import popcornImg from '../image/posters/popcorn.png';
 import Notiflix from 'notiflix';
-
+import { paginationWatched } from './pagination';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const API_KEY = '221ed015def0321f18a85f3fc7b4d6fa';
 const body = document.querySelector('body');
@@ -75,7 +75,7 @@ function addFilmsToQueueInLocal(e) {
 
 // Рисует карточки с просмотренными фильмами в библиотеке (вкладка "просмотренные")
 
-export function showFilmsWatched() {
+export function showFilmsWatched(localWatched) {
   films.innerHTML = ``;
   localWatched = storage.load('watchedArray');
   if (!localWatched || (!localWatched[0] && !localWatched[1])) {
@@ -94,6 +94,7 @@ export function showFilmsWatched() {
       renderFilms(film);
     });
   }
+  paginationWatched(localWatched);
 }
 
 // Рисует карточки с просмотренными фильмами в библиотеке (вкладка "в очереди")
@@ -138,4 +139,7 @@ async function fetchById(id) {
 
 function renderFilms(data) {
   films.insertAdjacentHTML('beforeend', card(data));
+}
+export function reset() {
+  return (films.innerHTML = ``);
 }

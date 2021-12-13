@@ -1,3 +1,78 @@
+import Pagination from 'tui-pagination';
+import 'tui-pagination/dist/tui-pagination.css';
+import { buttonWatched } from './library';
+// import { films } from './library';
+// const films = document.querySelector('#gallery');
+import { reset } from './library';
+// paginationWatched(localWatched);
+// добавлена ф-ия для подсчета количества страниц Librery для пагинации.........................
+
+export function paginationWatched(localWatched) {
+  let page;
+  let visiblePages = 3;
+  console.log(localWatched);
+  console.log(localWatched.length);
+  if (localWatched.length <= 2) {
+    page = 1;
+  }
+  page = Math.floor(localWatched.length / 2);
+  console.log(page);
+  console.log(localWatched);
+  if (visiblePages > page) {
+    visiblePages = page;
+  }
+  const options = {
+    // page,
+    itemsPerPage: 2,
+    // centerAlign: true,
+    visiblePages,
+  };
+
+  // const container = document.getElementById('tui-pagination-container');
+  //   const container = document.getElementById('pagination');
+  const container = document.getElementById('tui-pagination-container');
+  const pagination = new Pagination(container, options);
+
+  pagination.getCurrentPage();
+  pagination.on('afterMove', page => {
+    // films.innerHTML = ``;
+    reset();
+    showFilmsWatched(localWatched);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// nj-nj gjikj yt nfr
+// let page;
+// export function paginationWatched(localWatched) {
+//   console.log(localWatched);
+//   console.log(localWatched.length);
+//   if (localWatched.length <= 2) {
+//     page = 1;
+//   }
+//   totalItems = localWatched.length;
+//   page = Math.floor(localWatched.length / 2);
+//   console.log(page);
+//   console.log(localWatched);
+//   const options = {
+//     totalItems,
+//     page,
+//     itemsPerPage: 2,
+//     centerAlign: true,
+//     visiblePages: 3,
+//   };
+//   // const container = document.getElementById('tui-pagination-container');
+//   //   const container = document.getElementById('pagination');
+//   const container = document.getElementById('tui-pagination-container');
+//   const pagination = new Pagination(container, options);
+
+//   page = pagination.getCurrentPage();
+//   pagination.on('afterMove', page => {
+//     // films.innerHTML = ``;
+//     showFilmsWatched(localWatched);
+//     window.scrollTo({ top: 0, behavior: 'smooth' });
+//   });
+// }
 // // код с файла ///////////////////////////////////////////
 // import axios from 'axios';
 // let page = 1;

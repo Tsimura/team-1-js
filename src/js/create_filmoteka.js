@@ -76,49 +76,49 @@ export function createFilmoteka({ data }) {
 function reset() {
   return (films.innerHTML = '');
 }
-const options = {
-  totalItems: 1000,
-  visiblePages: '',
-  centerAlign: true,
-  template: {
-    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-    currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-    moveButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
-      '</a>',
-    disabledMoveButton:
-      '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
-      '</span>',
-    moreButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-      '<span class="tui-ico-ellip">...</span>' +
-      '</a>',
-  },
-};
+// const options = {
+//   totalItems: 1000,
+//   visiblePages: '',
+//   centerAlign: true,
+//   template: {
+//     page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+//     currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+//     moveButton:
+//       '<a href="#" class="tui-page-btn tui-{{type}}">' +
+//       '<span class="tui-ico-{{type}}">{{type}}</span>' +
+//       '</a>',
+//     disabledMoveButton:
+//       '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+//       '<span class="tui-ico-{{type}}">{{type}}</span>' +
+//       '</span>',
+//     moreButton:
+//       '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+//       '<span class="tui-ico-ellip">...</span>' +
+//       '</a>',
+//   },
+// };
 
-mediaPagination();
-const container = document.getElementById('pagination');
-const pagination = new Pagination(container, options);
-page = pagination.getCurrentPage();
-// createData(page, totalPages);
-pagination.on('afterMove', ({ page }) => {
-  withLoader.addLoader();
-  mediaPagination();
+// mediaPagination();
+// const container = document.getElementById('pagination');
+// const pagination = new Pagination(container, options);
+// page = pagination.getCurrentPage();
+// // createData(page, totalPages);
+// pagination.on('afterMove', ({ page }) => {
+//   withLoader.addLoader();
+//   mediaPagination();
 
-  reset();
-  createData(page);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-function mediaPagination() {
-  if (window.innerWidth <= 480) {
-    options.visiblePages = 4;
-  } else {
-    options.visiblePages = 7;
-  }
-}
-
+//   reset();
+//   createData(page);
+//   window.scrollTo({ top: 0, behavior: 'smooth' });
+// });
+// function mediaPagination() {
+//   if (window.innerWidth <= 480) {
+//     options.visiblePages = 4;
+//   } else {
+//     options.visiblePages = 7;
+//   }
+// }
+// зайвий код з ідеями.....................
 // ......!!!!!!!!....................
 // trendAPI(page).then(data => render(data));
 // function render(data) {
