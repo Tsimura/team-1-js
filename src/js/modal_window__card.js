@@ -36,22 +36,24 @@ function handleModalCardOpen(event) {
   // instance.show();
   
 }
+
+
 async function modalWindowAPI(moviId) {
     try {
-        const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${moviId}?api_key=${KEY_API}&language=en-US`)
-        
-      // console.log(data);
+      const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${moviId}?api_key=${KEY_API}&language=en-US`);
+      // console.log(data )
+ 
       return data;
      
         
     } catch (error) {
         error => console.log(error);
-    }
+    }     
 }
 
 function getGanres(data) {
     const array = data.genres.flat(2)
-    const arrayNames = []
+  const arrayNames = [];
     for (const arr of array) {
       arrayNames.push(arr.name)
       console.log(arrayNames);
@@ -102,7 +104,14 @@ function getGanres(data) {
 // { "id": 37, "name": "Western" }]
 
 
-function markUpModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview, genre, id }) {
+function markUpModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview, genres, id }) {
+  
+  const genresArr = [...genres];
+  const arrayNames = [];
+  for (const genre of genresArr) {
+    arrayNames.push(genre.name);
+  }
+
     basicLightbox
       .create(
         `<div class="modal">
@@ -128,7 +137,7 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
     <li class="modal-window-vote-value list"><span class="modal-window-vote__span">${vote_average}</span>/&nbsp;&nbsp;${vote_count}</li>
     <li class="modal-window-popularity-value list">${popularity}</li>
     <li class="modal-winwow-original-title-value list">${original_title}</li>
-    <li class="modal-window-gener-value list">{getGanres(genre)}</li>
+    <li class="modal-window-gener-value list">${arrayNames}</li>
 </ul>
 </div>
 <h3 class="modal-window-about">About</h3>
