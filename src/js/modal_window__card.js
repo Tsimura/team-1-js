@@ -13,8 +13,6 @@ import axios from "axios";
 // import Notiflix from 'notiflix';
 import * as basicLightbox from 'basiclightbox'
 
-let localWatched = storage.load('watchedArray') || []
-let localQueue = storage.load('queueArray') || []
 let moviId = '';
 
 
@@ -103,6 +101,8 @@ function getGanres(data) {
 
 
 function markUpModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview, genre, id }) {
+  let localWatched = storage.load('watchedArray') || []
+  let localQueue = storage.load('queueArray') || []
     basicLightbox
       .create(
         `<div class="modal">
