@@ -1,21 +1,12 @@
-
 import { films } from "./trending_films";
-
-import { getYouTube } from "./youTube"
-import { createFilmoteka } from "./trending_films";
-// import { getFilms } from "./getFilms";
-// import { makeGenres } from "./makeGenres"
-// import { genreId } from "./makeGenres"
 import storage from './local-storage'
-
-
 import axios from "axios";
-// import Notiflix from 'notiflix';
 import * as basicLightbox from 'basiclightbox'
+// import './sass/main.scss';
+// import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 let moviId = '';
-
-
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
 
 films.addEventListener('click', handleModalCardOpen);
@@ -24,16 +15,9 @@ function handleModalCardOpen(event) {
     event.preventDefault()
   if (event.target.nodeName !== 'IMG') return;
   moviId = event.target.id;
-  // console.log(moviId);
   modalWindowAPI(moviId).then(markUpModal).catch(error => console.log(error))
-  // console.log('Модалка с карточкой фильма открыта');
-  // getGanres(moviId).then(markUpModal).catch(error => console.log(error))
-  // console.log(getGanres(moviId).then(markUpModal));
-
-
-  // instance.show();
-  
 }
+  
 async function modalWindowAPI(moviId) {
     try {
         const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${moviId}?api_key=${KEY_API}&language=en-US`)
@@ -58,47 +42,6 @@ function getGanres(data) {
  }
 
 
-// Функция Максима------------------------------------------------
-
-// function makeGenres(numbers) {
-//     const genreName = genreId.filter(data => {
-//         for (let number of numbers) {
-//             if (data.id === number) {
-//                 return data
-//             }
-//         }
-//     })
-//     const genreNumbers = genreName.map(data => data.name)
-//     if (genreNumbers.length >= 3) {
-//         const prune = genreNumbers.slice(0, 2)
-//         const newGenres = [...prune, `Other`]
-//         return newGenres.join(", ")
-//     } else {
-//         return genreNumbers.join(", ")
-//     }
-// }
-
-// const genreId = [
-// {"id": 28, "name": "Action" },
-// {"id":12,"name":"Adventure"},
-// {"id":16,"name":"Animation"},
-// {"id":35,"name":"Comedy"},
-// {"id":80,"name":"Crime"},
-// {"id":99,"name":"Documentary"},
-// {"id":18,"name":"Drama"},
-// {"id":10751,"name":"Family"},
-// {"id":14,"name":"Fantasy"},
-// {"id":36,"name":"History"},
-// {"id":27,"name":"Horror"},
-// {"id":10402,"name":"Music"},
-// {"id":9648,"name":"Mystery"},
-// {"id":10749,"name":"Romance"},
-// {"id":878,"name":"Science Fiction"},
-// {"id":10770,"name":"TV Movie"},
-// {"id":53,"name":"Thriller"},
-// {"id":10752,"name":"War"},
-// { "id": 37, "name": "Western" }]
-
 
 function markUpModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview, genre, id }) {
   let localWatched = storage.load('watchedArray') || []
@@ -107,13 +50,7 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
     .create(
       `<div class="modal">
      <div class="film-card-modal-window">
-     <button class="close-modal-window-btn" data-modal-card-close>
-<svg class="icon-close-modal">
-    <use class="icon-close-modal-svg" href="./image/modal-window-card/symbol-defs.svg#icon-close-black">
-    </use>
-</svg>
-    </button>
-<img class="film-exemple-photo" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="Фото фільму">
+     <img class="film-exemple-photo" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="Фото фільму">
     <div class="modal-window-signature">
     <h2 class="film-title-modal-window">${title}</h2>
     <div class="window-characteristics">
@@ -146,15 +83,17 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
 </div>`, {
       onShow: () => {
         window.addEventListener('keydown', handleKeydown);
+        console.log('Модалка с карточкой фильма открыта');
         
       },
       onClose: () => {
         window.removeEventListener('keydown', handleKeydown);
-        console.log('Модалка с карточкой фильма закрыта кликом вне области модалки');
+       
       },
     });
 
   instance.show()
+
   function handleKeydown({ key }) {
     switch (key) {
         case 'Escape':
@@ -167,4 +106,19 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
     }
 
   }
+
+  // new SimpleLightbox('.hp__gallery_el a', {
+  //   captionDelay: 250,
+  //   close: true,
+
+  //  });
+//   basicLightbox.option({
+//     'disableScrolling': false,
+
+// })
+  
+          
+        //  console.log('Модалка с карточкой фильма закрыта кликом вне области модалки');
+  //  console.log('Модалка с карточкой фильма закрыта кликом по кнопке "Х"');
+  
 }
