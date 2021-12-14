@@ -23,7 +23,6 @@ function onSwitch(evt) {
  
     if (switcherRefs.switcher.children[0].checked) {
         localStorage.remowe(PAGE_THEME)
-        localStorage.clear()
         switcherRefs.body.setAttribute('data-theme', 'dark');
         localStorage.save(PAGE_THEME, darkTheme)
       
@@ -31,7 +30,6 @@ function onSwitch(evt) {
         
     } else {
         localStorage.remowe(PAGE_THEME)
-        localStorage.clear()
         switcherRefs.body.setAttribute('data-theme', 'light');
         localStorage.save(PAGE_THEME, lightTheme)
       
