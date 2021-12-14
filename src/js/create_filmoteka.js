@@ -22,6 +22,11 @@ async function getFilms(page) {
     console.log(page > totalPages);
     // console.log('hasNextPage', hasNextPage);
     console.log(page);
+    if (page === totalPages) {
+      Notiflix.Notify.failure(`We're sorry, but you've reached the end of search results.`, {
+        timeout: 1000,
+      });
+    }
     return {
       data,
       // hasNextPage: page > totalPages,
