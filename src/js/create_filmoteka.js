@@ -17,12 +17,11 @@ async function getFilms(page) {
   try {
     const { data } = await axios.get(`discover/movie?api_key=${KEY_API}&page=${page}&total_pages`);
     totalPages = data.total_pages;
-    page = data.page;
-    // console.log('data', data);
-    // console.log('totalPages', totalPages);
-    // console.log(page > totalPages);
-    // // console.log('hasNextPage', hasNextPage);
-    // console.log(page);
+    console.log('data', data);
+    console.log('totalPages', totalPages);
+    console.log(page > totalPages);
+    // console.log('hasNextPage', hasNextPage);
+    console.log(page);
     return {
       data,
       // hasNextPage: page > totalPages,
@@ -34,25 +33,22 @@ async function getFilms(page) {
 export function createData(page) {
   setTimeout(() => {
     return getFilms(page)
-      .then(data => {
-        reset();
-        createFilmoteka(data);
+      .then(({ data }) => {
+        console.log(data.results);
+        createFilmoteka(data.results);
       })
       .then(withLoader.removeLoader())
       .catch(error => console.log(error));
   }, 2000);
 }
-createData();
-export function createFilmoteka({ data }) {
-  // console.log('data', data);
-  // console.log('data', data.results);
-  // console.log('totalPages', totalPages);
-  // console.log(page > totalPages);
-  // console.log('hasNextPage', hasNextPage);
-  // console.log(page);
-  const createFilmoteka = data.results
+createData(page);
+export function createFilmoteka(data) {
+  // reset();
+  console.log('data', data);
+  console.log('data', data);
+  const createFilmoteka = data
     .map(
-      ({ poster_path, original_title, release_date, genre_ids, id, vote_average }) =>
+      ({ poster_path, original_title, release_date, genre_ids, id }) =>
         `<div id="galleryModal" class="hp__gallery_el">
   <a href="#" id="openModal" class='card-links link'>
      ${
@@ -60,9 +56,7 @@ export function createFilmoteka({ data }) {
          ? `<img class="hp__gallery_img" id="${id}" src="" data-lazy="https://image.tmdb.org/t/p/w500${poster_path}" loading="lazy" alt="${original_title}"`
          : `<img class="hp__gallery_img" id="${id}" src="" data-lazy="${poster}" loading="lazy" alt="Poster is missing"`
      }>
-      <div class="hp__title-genre_wrapper">
-      <h2 class="film_title">${original_title}</h2><span class="hp__vote_span">${vote_average}</span>
-      </div>
+      <h2 class="film_title">${original_title}</h2>
       <p class="film_genre">${makeGenres(genre_ids)} | <span>${release_date.substr(0, 4)}</span></p>
       </a>
     </div>`,
