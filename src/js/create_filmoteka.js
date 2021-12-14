@@ -9,7 +9,7 @@ import * as withLoader from './spinner';
 const films = document.querySelector(`#gallery`);
 
 let page = 1;
-let totalPages;
+let totalPages = 0;
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
@@ -29,15 +29,18 @@ async function getFilms(page) {
     }
     return {
       data,
+      totalPages,
       // hasNextPage: page > totalPages,
     };
   } catch (error) {
     error => console.log(error);
   }
 }
-export function createData(page) {
+console.log('page', page);
+console.log('totalPages', totalPages);
+export function createData(page, totalPages) {
   setTimeout(() => {
-    return getFilms(page)
+    return getFilms(page, totalPages)
       .then(({ data }) => {
         console.log(data.results);
         createFilmoteka(data.results);
@@ -46,7 +49,7 @@ export function createData(page) {
       .catch(error => console.log(error));
   }, 2000);
 }
-createData(page);
+createData(page, totalPages);
 export function createFilmoteka(data) {
   // reset();
   console.log('data', data);
@@ -79,8 +82,13 @@ function reset() {
 // paginationTrend();
 // ..........................................
 
+let totalItems = 10000;
+if (totalPages > 1) {
+  return (totalItems = totalPages);
+}
+
 const options = {
-  totalItems: 1000,
+  totalItems,
   visiblePages: '',
   centerAlign: true,
   template: {
@@ -104,11 +112,12 @@ mediaPagination();
 const container = document.getElementById('pagination');
 const pagination = new Pagination(container, options);
 page = pagination.getCurrentPage();
-pagination.on('afterMove', ({ page }) => {
+pagination.on('afterMove', ({ page, totalPages }) => {
   withLoader.addLoader();
   mediaPagination();
+  console.log('totalItems', totalItems);
   reset();
-  createData(page);
+  createData(page, totalPages);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 function mediaPagination() {
