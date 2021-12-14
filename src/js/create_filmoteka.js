@@ -10,7 +10,6 @@ const films = document.querySelector(`#gallery`);
 
 let page = 1;
 let totalPages = 0;
-
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
 async function getFilms(page) {
@@ -36,6 +35,7 @@ async function getFilms(page) {
     error => console.log(error);
   }
 }
+
 console.log('page', page);
 console.log('totalPages', totalPages);
 export function createData(page, totalPages) {
@@ -49,7 +49,9 @@ export function createData(page, totalPages) {
       .catch(error => console.log(error));
   }, 2000);
 }
+
 createData(page, totalPages);
+
 export function createFilmoteka(data) {
   // reset();
   console.log('data', data);
@@ -75,12 +77,94 @@ export function createFilmoteka(data) {
   films.insertAdjacentHTML('beforeend', createFilmoteka);
   const img = document.querySelectorAll('#gallery img');
   lazyLoad(img);
-  paginationTrend();
+
+  // paginationTrend();
 }
 function reset() {
   return (films.innerHTML = '');
 }
+const itemsPerPage = 20;
 
+const options = {
+  totalItems: 10,
+  itemsPerPage,
+  visiblePages: 5,
+  page: 1,
+};
+
+const container = document.getElementById('pagination');
+const pagination = new Pagination(container, options);
+
+page = pagination.getCurrentPage();
+
+pagination.on('afterMove', ({ page }) =>
+  getFilms(page, totalPages).then(({ data }) => {
+    console.log(data.results);
+    createFilmoteka(data.results);
+  }),
+);
+
+//  window.scrollTo({
+//    top: document.documentElement.scrollHeight,
+//    behavior: 'smooth',
+//  });
+//   // paginationTrend();
+// }
+
+// пагинация ...............................................
+// paginationTrend();
+// ..........................................
+
+// pagination in the function
+// function paginationTrend() {
+//   const options = {
+//     totalItems: 1000,
+//     visiblePages: '',
+//     centerAlign: true,
+//     template: {
+//       page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+//       currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+//       moveButton:
+//         '<a href="#" class="tui-page-btn tui-{{type}}">' +
+//         '<span class="tui-ico-{{type}}">{{type}}</span>' +
+//         '</a>',
+//       disabledMoveButton:
+//         '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+//         '<span class="tui-ico-{{type}}">{{type}}</span>' +
+//         '</span>',
+//       moreButton:
+//         '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+//         '<span class="tui-ico-ellip">...</span>' +
+//         '</a>',
+//     },
+//   };
+//   mediaPagination();
+//   const container = document.getElementById('pagination');
+//   const pagination = new Pagination(container, options);
+//   page = pagination.getCurrentPage();
+//   // createData(page, totalPages);
+//   pagination.on('afterMove', ({ page }) => {
+//     withLoader.addLoader();
+//     mediaPagination();
+
+//     reset();
+//     createData(page);
+//     window.scrollTo({ top: 0, behavior: 'smooth' });
+//   });
+
+//   function mediaPagination() {
+//     if (window.innerWidth <= 480) {
+//       options.visiblePages = 4;
+//     } else {
+//       options.visiblePages = 7;
+//     }
+//   }
+//   // pagination.off('afterMove', ({ page }) => {
+//   //   createData(page);
+//   // });
+// }
+// ..............................................................
+// ...pagination out the function.............................
 // const options = {
 //   totalItems: 1000,
 //   visiblePages: '',
@@ -104,17 +188,21 @@ function reset() {
 // };
 // mediaPagination();
 // const container = document.getElementById('pagination');
-// // const pagination = new Pagination(container, options);
+// const pagination = new Pagination(container, options);
 // page = pagination.getCurrentPage();
-// // createData(page, totalPages);
-// pagination.on('afterMove', ({ page }) => {
-//   withLoader.addLoader();
-//   mediaPagination();
-
-//   reset();
+// function paginationAll() {
+//   pagination.on('afterMove', ({ page }) => {
+//     withLoader.addLoader();
+//     mediaPagination();
+//     reset();
+//     createData(page);
+//     window.scrollTo({ top: 0, behavior: 'smooth' });
+//   });
+// }
+// pagination.off('afterMove', ({ page }) => {
 //   createData(page);
-//   window.scrollTo({ top: 0, behavior: 'smooth' });
 // });
+
 // function mediaPagination() {
 //   if (window.innerWidth <= 480) {
 //     options.visiblePages = 4;
@@ -122,59 +210,25 @@ function reset() {
 //     options.visiblePages = 7;
 //   }
 // }
-
-// пагинация ...............................................
-// paginationTrend();
-// ..........................................
 console.dir(pagination);
-function paginationTrend() {
-  const options = {
-    totalItems: 1000,
-    visiblePages: '',
-    centerAlign: true,
-    template: {
-      page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-      currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-      moveButton:
-        '<a href="#" class="tui-page-btn tui-{{type}}">' +
-        '<span class="tui-ico-{{type}}">{{type}}</span>' +
-        '</a>',
-      disabledMoveButton:
-        '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-        '<span class="tui-ico-{{type}}">{{type}}</span>' +
-        '</span>',
-      moreButton:
-        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-        '<span class="tui-ico-ellip">...</span>' +
-        '</a>',
-    },
-  };
-  mediaPagination();
-  const container = document.getElementById('pagination');
-  const pagination = new Pagination(container, options);
-  page = pagination.getCurrentPage();
-  // createData(page, totalPages);
-  pagination.on('afterMove', ({ page }) => {
-    withLoader.addLoader();
-    mediaPagination();
-
-    reset();
-    createData(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  function mediaPagination() {
-    if (window.innerWidth <= 480) {
-      options.visiblePages = 4;
-    } else {
-      options.visiblePages = 7;
-    }
-  }
-  pagination.off('afterMove', ({ page }) => {
-    createData(page);
-  });
-}
-
+// .........................................................
+//    if (createFilmoteka) {
+//      pagination.on();
+//    }
+//    return pagination.off('afterMove', ({ page }) => {
+//      createData(page);
+//    });
+//  }
+// if (createFilmoteka) {
+//   pagination.on('afterMove', ({ page }) => {
+//     withLoader.addLoader();
+//     mediaPagination();
+//     reset();
+//     createData(page);
+//     window.scrollTo({ top: 0, behavior: 'smooth' });
+//   });
+// }
+// ...pagination of Dikiy Sergey..................................
 // const pagination = new Pagination('#pagination', {
 //   totalItems: 0,
 //   itemsPerPage: 20,

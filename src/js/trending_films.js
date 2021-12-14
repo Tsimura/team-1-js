@@ -51,9 +51,17 @@ export function createFilmoteka(resp) {
   });
   const img = document.querySelectorAll('#gallery img');
   lazyLoad(img);
+  paginationSearch.on();
 }
 
-export function articles({ poster_path, original_title, release_date, genre_ids, id, vote_average }) {
+export function articles({
+  poster_path,
+  original_title,
+  release_date,
+  genre_ids,
+  id,
+  vote_average,
+}) {
   return `<div id="galleryModal" class="hp__gallery_el">
   <a href="#" id="openModal" class='card-links link'>
      ${
@@ -97,3 +105,33 @@ export function reset() {
   return (films.innerHTML = ``);
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// const options = {
+//   totalItems: 1000,
+//   visiblePages: '',
+//   centerAlign: true,
+//   template: {
+//     page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+//     currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+//     moveButton:
+//       '<a href="#" class="tui-page-btn tui-{{type}}">' +
+//       '<span class="tui-ico-{{type}}">{{type}}</span>' +
+//       '</a>',
+//     disabledMoveButton:
+//       '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+//       '<span class="tui-ico-{{type}}">{{type}}</span>' +
+//       '</span>',
+//     moreButton:
+//       '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+//       '<span class="tui-ico-ellip">...</span>' +
+//       '</a>',
+//   },
+// };
+
+// const container = document.getElementById('pagination');
+// const paginationSearch = new Pagination(container, options);
+// page = paginationSearch.getCurrentPage();
+// paginationSearch.on('afterMove', ({ page }) => {
+//   reset();
+//   createData(page);
+//   window.scrollTo({ top: 0, behavior: 'smooth' });
+// });
