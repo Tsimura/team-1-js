@@ -54,7 +54,7 @@ export function createFilmoteka(resp) {
 }
 
 export function articles({ poster_path, original_title, release_date, genre_ids, id, vote_average }) {
-  return `<div id="galleryModal" class="hp__gallery_el">
+  return `<li id="galleryModal" class="hp__gallery_el">
   <a href="#" id="openModal" class='card-links link'>
      ${
        poster_path
@@ -66,7 +66,7 @@ export function articles({ poster_path, original_title, release_date, genre_ids,
       </div>
       <p class="film_genre">${makeGenres(genre_ids)} | <span>${release_date.substr(0, 4)}</span></p>
       </a>
-    </div>`;
+    </li>`;
 }
 
 function onSearch(evt) {
