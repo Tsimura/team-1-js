@@ -7,18 +7,39 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 let moviId = '';
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
 
-// const closeBtn = document.querySelector('.btn_close_modal')
+
 const newFilms = document.querySelector(`#gallery`);
+const closeBtn = document.querySelector('.close-modal-window-btn')
+console.log(closeBtn)
 
 newFilms.addEventListener('click', handleModalCardOpen);
-  
+// closeBtn.addEventListener('click', handleCloseModalCardBtn);
+
+
+
 function handleModalCardOpen(event) {
-    event.preventDefault()
+  event.preventDefault()
   if (event.target.nodeName !== 'IMG') return;
   moviId = event.target.id;
   modalWindowAPI(moviId).then(markUpModal).catch(error => console.log(error))
+  // const closeBtn = document.querySelector('.close-modal-window-btn')
+  // console.log(closeBtn);
   // closeBtn.addEventListener('click', handleCloseModalCardBtn)
+  //   closeBtn.addEventListener('click', handleModalCardCloseBtn);
+  //   function handleModalCardCloseBtn(event) {
+  //   console.log(event.target)
+  // }
 }
+
+
+  // function handleCloseModalCardBtn(event) {
+  //   event.preventDefault()
+  //   // instance.close()
+  //   // closeBtn.classList.remove('is-hidden');
+  //   console.log(event.target)
+  //   instance.close()
+  // }
+
   
 async function modalWindowAPI(moviId) {
     try {
@@ -40,13 +61,7 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
   const instance = basicLightbox
     .create(
       `<div class="modal">
-     <div class="film-card-modal-window">
-     <button class="close-modal-window-btn">х
-     <svg class="icon-close-modal">
-            <use class="icon-close-modal-svg" href="./image/modal-window-card/symbol-defs.svg#icon-close-black">
-            </use>
-        </svg>
-     </button>
+     <div class="film-card-modal-window" data-btn-close-mod>
      <img class="film-exemple-photo" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="Фото фільму">
     <div class="modal-window-signature">
     <h2 class="film-title-modal-window">${title}</h2>
@@ -80,17 +95,29 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
 </div>`, {
       onShow: () => {
         window.addEventListener('keydown', handleKeydown);
-        console.log('Модалка с карточкой фильма открыта');
-        
-      },
+    console.log('Модалка с карточкой фильма открыта');
+    closeBtn.classList.remove('is-hidden');
+    // closeBtn.addEventListener('click', handleCloseModalCardBtn);
+    closeBtn.addEventListener('click', handleCloseModalCardBtn);
+     },
       onClose: () => {
         window.removeEventListener('keydown', handleKeydown);
-       console.log('Модалка с карточкой фильма закрыта кликом вне области модалки')
-      },
+        console.log('Модалка с карточкой фильма закрыта кликом вне области модалки')
+        closeBtn.classList.add('is-hidden');
+        closeBtn.removeEventListener('click', handleCloseModalCardBtn);
+       },
     });
 
   instance.show()
 
+  function handleCloseModalCardBtn(event) {
+    event.preventDefault()
+    instance.close()
+    console.log('Модалка с карточкой фильма закрыта кликом по кнопке "Х"')
+  }
+
+
+  
 // function markUpModal({ poster_path, title, release_date, vote_average, vote_count, popularity, original_title, overview, id, genre_ids }) {
 //   getYouTube(title, release_date).then(modal)
 //   function modal(data) { 
