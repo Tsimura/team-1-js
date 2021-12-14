@@ -82,11 +82,6 @@ function reset() {
 // paginationTrend();
 // ..........................................
 
-let totalItems = 10000;
-if (totalPages > 1) {
-  return (totalItems = totalPages);
-}
-
 const options = {
   totalItems,
   visiblePages: '',
@@ -113,6 +108,10 @@ const container = document.getElementById('pagination');
 const pagination = new Pagination(container, options);
 page = pagination.getCurrentPage();
 pagination.on('afterMove', ({ page, totalPages }) => {
+  // let totalItems = 10000;
+  // if (totalPages > 1) {
+  //   return (totalItems = totalPages);
+  // }
   withLoader.addLoader();
   mediaPagination();
   console.log('totalItems', totalItems);
