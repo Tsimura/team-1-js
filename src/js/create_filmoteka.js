@@ -73,59 +73,134 @@ export function createFilmoteka(data) {
   films.insertAdjacentHTML('beforeend', createFilmoteka);
   const img = document.querySelectorAll('#gallery img');
   lazyLoad(img);
+  paginationTrend();
 }
 function reset() {
   return (films.innerHTML = '');
 }
 
+// const options = {
+//   totalItems: 1000,
+//   visiblePages: '',
+//   centerAlign: true,
+//   template: {
+//     page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+//     currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+//     moveButton:
+//       '<a href="#" class="tui-page-btn tui-{{type}}">' +
+//       '<span class="tui-ico-{{type}}">{{type}}</span>' +
+//       '</a>',
+//     disabledMoveButton:
+//       '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+//       '<span class="tui-ico-{{type}}">{{type}}</span>' +
+//       '</span>',
+//     moreButton:
+//       '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+//       '<span class="tui-ico-ellip">...</span>' +
+//       '</a>',
+//   },
+// };
+// mediaPagination();
+// const container = document.getElementById('pagination');
+// // const pagination = new Pagination(container, options);
+// page = pagination.getCurrentPage();
+// // createData(page, totalPages);
+// pagination.on('afterMove', ({ page }) => {
+//   withLoader.addLoader();
+//   mediaPagination();
+
+//   reset();
+//   createData(page);
+//   window.scrollTo({ top: 0, behavior: 'smooth' });
+// });
+// function mediaPagination() {
+//   if (window.innerWidth <= 480) {
+//     options.visiblePages = 4;
+//   } else {
+//     options.visiblePages = 7;
+//   }
+// }
+
 // пагинация ...............................................
 // paginationTrend();
 // ..........................................
-
-const options = {
-  totalItems,
-  visiblePages: '',
-  centerAlign: true,
-  template: {
-    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-    currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-    moveButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
-      '</a>',
-    disabledMoveButton:
-      '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
-      '</span>',
-    moreButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-      '<span class="tui-ico-ellip">...</span>' +
-      '</a>',
-  },
-};
-mediaPagination();
-const container = document.getElementById('pagination');
-const pagination = new Pagination(container, options);
-page = pagination.getCurrentPage();
-pagination.on('afterMove', ({ page, totalPages }) => {
-  // let totalItems = 10000;
-  // if (totalPages > 1) {
-  //   return (totalItems = totalPages);
-  // }
-  withLoader.addLoader();
+console.dir(pagination);
+function paginationTrend() {
+  const options = {
+    totalItems: 1000,
+    visiblePages: '',
+    centerAlign: true,
+    template: {
+      page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+      currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+      moveButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</a>',
+      disabledMoveButton:
+        '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</span>',
+      moreButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+        '<span class="tui-ico-ellip">...</span>' +
+        '</a>',
+    },
+  };
   mediaPagination();
-  console.log('totalItems', totalItems);
-  reset();
-  createData(page, totalPages);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-function mediaPagination() {
-  if (window.innerWidth <= 480) {
-    options.visiblePages = 4;
-  } else {
-    options.visiblePages = 7;
+  const container = document.getElementById('pagination');
+  const pagination = new Pagination(container, options);
+  page = pagination.getCurrentPage();
+  // createData(page, totalPages);
+  pagination.on('afterMove', ({ page }) => {
+    withLoader.addLoader();
+    mediaPagination();
+
+    reset();
+    createData(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  function mediaPagination() {
+    if (window.innerWidth <= 480) {
+      options.visiblePages = 4;
+    } else {
+      options.visiblePages = 7;
+    }
   }
+  pagination.off('afterMove', ({ page }) => {
+    createData(page);
+  });
 }
+
+// const pagination = new Pagination('#pagination', {
+//   totalItems: 0,
+//   itemsPerPage: 20,
+//   visiblePages: 5,
+//   page: 1,
+// });
+
+// pagination.getCurrentPage();
+// createData(page);
+// // getFilms(page)
+// //   .then(({ data }) => {
+// //     console.log(data);
+// //     pagination.reset(data.total);
+// //     createFilmoteka(data.results);
+// //   })
+// //   .then(withLoader.removeLoader())
+// //   .catch(error => console.log(error));
+
+// pagination.on('afterMove', event => {
+//   console.log(event);
+//   const currentPage = event.page;
+//   withLoader.addLoader();
+//   reset();
+//   createData(currentPage);
+
+//   // fetchImages(currentPage).then(data => renderImages(data.images));
+// });
+
 // зайвий код з ідеями.....................
 // ......!!!!!!!!....................
 // trendAPI(page).then(data => render(data));
