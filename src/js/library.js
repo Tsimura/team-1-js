@@ -14,6 +14,7 @@ const body = document.querySelector('body');
 const films = document.querySelector('#gallery');
 const buttonWatched = document.querySelector('.header-library__button--watched');
 const buttonQueue = document.querySelector('.header-library__button--queue');
+const pagination = document.querySelector('.section-pagination')
 
 let watchedArray = [];
 let queueArray = [];
@@ -25,6 +26,8 @@ buttonQueue.addEventListener('click', showFilmsQueue);
 
 body.addEventListener('click', addFilmsToWathedInLocal);
 body.addEventListener('click', addFilmsToQueueInLocal);
+
+
 
 // Функция добавляет просмотренные фильмы в локальное хранилище
 
@@ -80,6 +83,7 @@ function addFilmsToQueueInLocal(e) {
 
 export function showFilmsWatched(localWatched) {
   reset();
+  pagination.classList.add('is-hidden')
   localWatched = storage.load('watchedArray');
   films.removeAttribute('style');
 
@@ -110,6 +114,7 @@ export function showFilmsWatched(localWatched) {
 
 function showFilmsQueue() {
   reset();
+  pagination.classList.add('is-hidden')
   films.removeAttribute('style');
   localQueue = storage.load('queueArray');
 
