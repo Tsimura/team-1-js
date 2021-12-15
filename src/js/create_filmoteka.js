@@ -22,7 +22,9 @@ async function getFilms(page) {
     console.log(page > totalPages);
     // console.log('hasNextPage', hasNextPage);
     console.log(page);
-
+    // if (page === 1) {
+    //   console.log(поставить);
+    // }
     if (page === totalPages) {
       Notiflix.Notify.info(`We're sorry, but you've reached the end of search results.`, {
         timeout: 1000,
@@ -62,7 +64,7 @@ export function createFilmoteka(data) {
   const createFilmoteka = data
     .map(
       ({ poster_path, original_title, release_date, genre_ids, id, vote_average }) =>
-        `<li id="galleryModal" class="hp__gallery_el list">
+        `<li id="galleryModal" class="hp__gallery_el">
   <a href="#" id="openModal" class='card-links link'>
      ${
        poster_path
@@ -112,28 +114,25 @@ const container = document.getElementById('pagination');
 const paginationTrend = new Pagination(container, options);
 page = paginationTrend.getCurrentPage();
 
-paginationTrend.on(
-  'afterMove',
-  createData(({ page, totalPages }) => {
-    console.log(page);
-    mediaPagination();
-    reset();
-    createData(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    withLoader.addLoader();
-    paginationBtn.classList.add('visually-hidden');
-    setTimeout(() => {
-      return getFilms(page, totalPages)
-        .then(({ data }) => {
-          console.log(data.results);
-          createFilmoteka(data.results);
-        })
-        .then(withLoader.removeLoader())
-        .then(paginationBtn.classList.remove('visually-hidden'))
-        .catch(error => console.log(error));
-    }, 2000);
-  }),
-);
+paginationTrend.on('afterMove', ({ page, totalPages }) => {
+  console.log(page);
+  mediaPagination();
+  reset();
+  createData(page);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  withLoader.addLoader();
+  paginationBtn.classList.add('visually-hidden');
+  setTimeout(() => {
+    return getFilms(page, totalPages)
+      .then(({ data }) => {
+        console.log(data.results);
+        createFilmoteka(data.results);
+      })
+      .then(withLoader.removeLoader())
+      .then(paginationBtn.classList.remove('visually-hidden'))
+      .catch(error => console.log(error));
+  }, 2000);
+});
 // paginationTrend.off(container, ({ page }) => {
 //   createData(page);
 // });
