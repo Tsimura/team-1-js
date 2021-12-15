@@ -64,9 +64,9 @@ resetBtn.addEventListener('click', e => {
 filtBtnWrap.addEventListener('change', e => {
   clearGallery();
   withSpinner.addLoader();
-  console.log(sortBy.value);
-  console.log(genreBtn.value);
-  console.log(filterYear.value);
+  // console.log(sortBy.value);
+  // console.log(genreBtn.value);
+  // console.log(filterYear.value);
   setTimeout(() => {
     sortAPI(filterYear.value, sortBy.value, genreBtn.value)
       .then(data => {
@@ -83,17 +83,17 @@ filtBtnWrap.addEventListener('change', e => {
 });
 // ...........новый файл.изменения для lazyload.....................................................
 function makeFilterMarkup(data) {
-  console.log(data);
+  // console.log(data);
   const filterMarkup = data.results
     .map(
-      ({ poster_path, original_title, release_date, genre_ids, id, vote_average}) =>
+      ({ poster_path, original_title, release_date, genre_ids, id, vote_average }) =>
         `<div id="gallery" class="hp__gallery_el">
       <a href="#" id="openModal" class='card-links link'>
         ${
-        poster_path
-          ? `<img class="hp__gallery_img" id="${id}" src="" data-lazy="https://image.tmdb.org/t/p/w500${poster_path}" loading="lazy" alt="${original_title}"`
-          : `<img class="hp__gallery_img" id="${id}" src="" data-lazy="${poster}" loading="lazy" alt="Poster is missing"`
-      }>
+          poster_path
+            ? `<img class="hp__gallery_img" id="${id}" src="" data-lazy="https://image.tmdb.org/t/p/w500${poster_path}" loading="lazy" alt="${original_title}"`
+            : `<img class="hp__gallery_img" id="${id}" src="" data-lazy="${poster}" loading="lazy" alt="Poster is missing"`
+        }>
       <div class="hp__title-genre_wrapper">
       <h2 class="film_title">${original_title}</h2><span class="hp__vote_span">${vote_average}</span>
       </div>
@@ -140,10 +140,10 @@ function trendingMarkup(data) {
         `<div id="gallery" class="hp__gallery_el">
       <a href="#" id="openModal" class='card-links link'>
         ${
-        poster_path
-          ? `<img class="hp__gallery_img" id="${id}" src="" data-lazy="https://image.tmdb.org/t/p/w500${poster_path}" loading="lazy" alt="${original_title}"`
-          : `<img class="hp__gallery_img" id="${id}" src=""  data-lazy="${poster}" loading="lazy" alt="Poster is missing"`
-      }>
+          poster_path
+            ? `<img class="hp__gallery_img" id="${id}" src="" data-lazy="https://image.tmdb.org/t/p/w500${poster_path}" loading="lazy" alt="${original_title}"`
+            : `<img class="hp__gallery_img" id="${id}" src=""  data-lazy="${poster}" loading="lazy" alt="Poster is missing"`
+        }>
       <div class="hp__title-genre_wrapper">
       <h2 class="film_title">${original_title}</h2><span class="hp__vote_span">${vote_average}</span>
       </div>
@@ -152,7 +152,7 @@ function trendingMarkup(data) {
       </div>`,
     )
     .join('');
-    gallery.insertAdjacentHTML('beforeend', trendingMarkup);
-    const img = document.querySelectorAll('#gallery img');
+  gallery.insertAdjacentHTML('beforeend', trendingMarkup);
+  const img = document.querySelectorAll('#gallery img');
   lazyLoad(img);
 }
