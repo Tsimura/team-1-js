@@ -5,6 +5,7 @@ import popcornImg from '../image/posters/popcorn.png';
 import Notiflix from 'notiflix';
 // import { paginationWatched } from './pagination';
 import { lazyLoad } from './lazyLoad';
+import { Pagination } from 'tui-pagination';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const API_KEY = '221ed015def0321f18a85f3fc7b4d6fa';
@@ -28,7 +29,7 @@ body.addEventListener('click', addFilmsToQueueInLocal);
 // Функция добавляет просмотренные фильмы в локальное хранилище
 
 function addFilmsToWathedInLocal(e) {
-  if (!e.target.className.includes('btn-watched-modal-window')) {
+  if (!e.target.classList.contains('btn-watched-modal-window')) {
     return;
   }
   watchedArray = storage.load('watchedArray') || [];
@@ -54,7 +55,7 @@ function addFilmsToWathedInLocal(e) {
 // Функция добавляет в очередь фильмы в локальное хранилище
 
 function addFilmsToQueueInLocal(e) {
-  if (!e.target.className.includes('btn-queue-modal-window')) {
+  if (!e.target.classList.contains('btn-queue-modal-window')) {
     return;
   }
   queueArray = storage.load('queueArray') || [];
@@ -78,7 +79,7 @@ function addFilmsToQueueInLocal(e) {
 // Рисует карточки с просмотренными фильмами в библиотеке (вкладка "просмотренные")
 
 export function showFilmsWatched(localWatched) {
-  reset()
+  reset();
   localWatched = storage.load('watchedArray');
   films.removeAttribute('style');
 
@@ -108,7 +109,7 @@ export function showFilmsWatched(localWatched) {
 // Рисует карточки с просмотренными фильмами в библиотеке (вкладка "в очереди")
 
 function showFilmsQueue() {
-  reset()
+  reset();
   films.removeAttribute('style');
   localQueue = storage.load('queueArray');
 
