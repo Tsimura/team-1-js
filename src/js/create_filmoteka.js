@@ -1,18 +1,16 @@
-// точно рабоий код...................
-
 import axios from 'axios';
 import { makeGenres } from './makeGenres';
 import Notiflix from 'notiflix';
 import { lazyLoad } from './lazyLoad';
 import Pagination from 'tui-pagination';
-import 'tui-pagination/dist/tui-pagination.min.css';
+import 'tui-pagination/dist/tui-pagination.css';
 import * as withLoader from './spinner';
 
 const films = document.querySelector(`#gallery`);
 
 let page = 1;
 let totalPages = 0;
-
+const paginationBtn = document.querySelector('#pagination');
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
 async function getFilms(page) {
@@ -24,8 +22,9 @@ async function getFilms(page) {
     console.log(page > totalPages);
     // console.log('hasNextPage', hasNextPage);
     console.log(page);
+
     if (page === totalPages) {
-      Notiflix.Notify.failure(`We're sorry, but you've reached the end of search results.`, {
+      Notiflix.Notify.info(`We're sorry, but you've reached the end of search results.`, {
         timeout: 1000,
       });
     }
@@ -41,6 +40,9 @@ async function getFilms(page) {
 console.log('page', page);
 console.log('totalPages', totalPages);
 export function createData(page, totalPages) {
+  withLoader.addLoader();
+  console.log('снять');
+  paginationBtn.classList.add('visually-hidden');
   setTimeout(() => {
     return getFilms(page, totalPages)
       .then(({ data }) => {
@@ -48,6 +50,7 @@ export function createData(page, totalPages) {
         createFilmoteka(data.results);
       })
       .then(withLoader.removeLoader())
+      .then(paginationBtn.classList.remove('visually-hidden'))
       .catch(error => console.log(error));
   }, 2000);
 }
@@ -77,68 +80,67 @@ export function createFilmoteka(data) {
   films.insertAdjacentHTML('beforeend', createFilmoteka);
   const img = document.querySelectorAll('#gallery img');
   lazyLoad(img);
-  // пагинация........ CALL PAGINATION...............................................
   paginationTrend();
-  // ................................................
 }
-// ......f() PAGINATION..............................
-function paginationTrend(page) {
-  const options = {
-    totalItems: 1000,
-    visiblePages: '',
-    centerAlign: true,
-    template: {
-      page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-      currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-      moveButton:
-        '<a href="#" class="tui-page-btn tui-{{type}}">' +
-        '<span class="tui-ico-{{type}}">{{type}}</span>' +
-        '</a>',
-      disabledMoveButton:
-        '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-        '<span class="tui-ico-{{type}}">{{type}}</span>' +
-        '</span>',
-      moreButton:
-        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-        '<span class="tui-ico-ellip">...</span>' +
-        '</a>',
-    },
-  };
-  mediaPagination();
-  const container = document.getElementById('pagination');
-  // ...INICIAL......................................................
-  const paginationTrend = new Pagination(container, options);
-  // .............................................................
+function reset() {
+  return (films.innerHTML = '');
+}
 
-  // ...PAGINATION ON..............................................
-  paginationTrend.on('afterMove', ({ page }) => {
-    withLoader.addLoader();
+const options = {
+  totalItems: 1000,
+  visiblePages: '',
+  centerAlign: true,
+  template: {
+    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+    currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+    moveButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '</a>',
+    disabledMoveButton:
+      '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '</span>',
+    moreButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+      '<span class="tui-ico-ellip">...</span>' +
+      '</a>',
+  },
+};
+mediaPagination();
+const container = document.getElementById('pagination');
+const paginationTrend = new Pagination(container, options);
+page = paginationTrend.getCurrentPage();
+
+paginationTrend.on(
+  'afterMove',
+  createData(({ page, totalPages }) => {
+    console.log(page);
     mediaPagination();
-
     reset();
     createData(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-  // ..............................................................
-  // ............f() for media.................
-  function mediaPagination() {
-    if (window.innerWidth <= 480) {
-      options.visiblePages = 4;
-    } else {
-      options.visiblePages = 7;
-    }
+    withLoader.addLoader();
+    paginationBtn.classList.add('visually-hidden');
+    setTimeout(() => {
+      return getFilms(page, totalPages)
+        .then(({ data }) => {
+          console.log(data.results);
+          createFilmoteka(data.results);
+        })
+        .then(withLoader.removeLoader())
+        .then(paginationBtn.classList.remove('visually-hidden'))
+        .catch(error => console.log(error));
+    }, 2000);
+  }),
+);
+// paginationTrend.off(container, ({ page }) => {
+//   createData(page);
+// });
+function mediaPagination() {
+  if (window.innerWidth <= 480) {
+    options.visiblePages = 4;
+  } else {
+    options.visiblePages = 7;
   }
-  // // ...PAGINATION OFF.....можно использовать эту .......................................
-  // paginationTrend.off(container, ({ page }) => {
-  //   return createData(page);
-  // });
-  // //  ......  или эту. ......................
-  // paginationTrend.off(container, createData(page));
-  // // .............................................................
-}
-// .END PAGINATION..........................................
-
-//.......... RESET........................................................
-function reset() {
-  return (films.innerHTML = '');
 }
