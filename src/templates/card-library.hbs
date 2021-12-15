@@ -1,36 +1,14 @@
-<li id='galleryModal' class='hp__gallery_el list'>
-  <a href='#' id='openModal' class='card-links link'>
-    {{#if poster_path}}
-      <img
-        class='hp__gallery_img'
-        id='{{id}}'
-        src='https://image.tmdb.org/t/p/w500{{poster_path}}'
-        loading='lazy'
-        alt='{{original_title}}'
-      />
-    {{else}}
-      <img
-        class='hp__gallery_img'
-        id='{{id}}'
-        src='https://upload.wikimedia.org/wikipedia/commons/a/a1/Out_Of_Poster.jpg'
-        loading='lazy'
-        alt='Poster is missing'
-      />
-    {{/if}}
-    <div class='hp__title-genre_wrapper'>
-      <h2 class='film_title'>{{original_title}}</h2><span
-        class='hp__vote_span'
-      >{{vote_average}}</span>
-    </div>
-    <p class='film_genre list'>{{genres.0.name}}{{#if genres.1.name}}, {{genres.1.name}}{{/if}}{{#if
-        genres.2.name
-      }}, Other{{/if}}
-      |
-      {{#if year}}
-      <span>{{year}}</span>
+<div id="galleryModal" class="hp__gallery_el">
+  <a href="#" id="openModal" class="card-links link">
+     {{#if poster_path}}
+         <img class="hp__gallery_img" id="{{id}}" src="https://image.tmdb.org/t/p/w500{{poster_path}}" loading="lazy" alt="{{original_title}}"
       {{else}}
-      <span>N/A</span>
-      {{/if}}
-      </p>
+         <img class="hp__gallery_img" id="{{id}}" src="/poster.2cd0b695.jpg" loading="lazy" alt="Poster is missing"
+    {{/if}}>
+      <h2 class="film_title">{{original_title}}</h2>
+      <p class="film_genre list">{{genres.0.name}}{{#if genres.1.name}}, {{genres.1.name}}{{/if}}{{#if genres.2.name}}, Other{{/if}} | <span>{{year}}</span></p>      
   </a>
-</li>
+</div>
+
+
+

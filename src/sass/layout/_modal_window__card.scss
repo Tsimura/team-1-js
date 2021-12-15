@@ -1,8 +1,3 @@
-.noScroll {
-  max-height: 100vh;
-  overflow: hidden;
-}
-
 .module {
   width: 882px;
   background: white;
@@ -11,7 +6,6 @@
 
 .basicLightbox {
   display: block;
-  z-index: 10;
 }
 
 // modal window for cards
@@ -98,21 +92,18 @@
 }
 
 .close-modal-window-btn {
-  // position: absolute;
-  position: fixed;
+  position: absolute;
   right: 10px;
   top: 10px;
-  background-color: rgb(255, 255, 255, 0);
+  background-color: rgb(255, 255, 255);
   width: 30px;
   height: 30px;
   padding: 0;
   border: none;
-  z-index: 20;
 }
 .icon-close-modal {
   cursor: pointer;
-  // color: black;
-  fill: white;
+  color: black;
   width: 30px;
   height: 30px;
 }

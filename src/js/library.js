@@ -78,13 +78,11 @@ function addFilmsToQueueInLocal(e) {
 // Рисует карточки с просмотренными фильмами в библиотеке (вкладка "просмотренные")
 
 export function showFilmsWatched(localWatched) {
-  reset()
+  films.innerHTML = ``;
   localWatched = storage.load('watchedArray');
-  films.removeAttribute('style');
-
   if (!localWatched || (!localWatched[0] && !localWatched[1])) {
     films.style.cssText = `grid-template-columns: repeat(1, 1fr); widht: 100%; height: 100%; margin: 0 auto; justify-items: center;`;
-    films.innerHTML = `<img class="img-for-library" src='${popcornImg}'  loading="lazy">`;
+    films.innerHTML = `<img class="img-for-library" src='' data-lazy='${popcornImg}' loading="lazy">`;
     return Notiflix.Notify.info(`Oops, you haven't added anything to the watched ones yet.`, {
       position: 'center-top',
     });
@@ -108,13 +106,12 @@ export function showFilmsWatched(localWatched) {
 // Рисует карточки с просмотренными фильмами в библиотеке (вкладка "в очереди")
 
 function showFilmsQueue() {
-  reset()
-  films.removeAttribute('style');
+  films.innerHTML = ``;
   localQueue = storage.load('queueArray');
 
   if (!localQueue || (!localQueue[0] && !localQueue[1])) {
     films.style.cssText = `grid-template-columns: repeat(1, 1fr); widht: 100%; height: 100%; margin: 0 auto; justify-items: center;`;
-    films.innerHTML = `<img class="img-for-library" src='${popcornImg}' loading="lazy">`;
+    films.innerHTML = `<img class="img-for-library" src='' data-lazy='${popcornImg}' loading="lazy">`;
     return Notiflix.Notify.info(`Oops, you haven't added anything to the queue ones yet.`, {
       position: 'center-top',
     });

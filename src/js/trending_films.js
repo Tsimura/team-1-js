@@ -62,7 +62,7 @@ export function articles({
   id,
   vote_average,
 }) {
-  return `<li id="galleryModal" class="hp__gallery_el">
+  return `<div id="galleryModal" class="hp__gallery_el">
   <a href="#" id="openModal" class='card-links link'>
      ${
        poster_path
@@ -74,7 +74,7 @@ export function articles({
       </div>
       <p class="film_genre">${makeGenres(genre_ids)} | <span>${release_date.substr(0, 4)}</span></p>
       </a>
-    </li>`;
+    </div>`;
 }
 
 function onSearch(evt) {
