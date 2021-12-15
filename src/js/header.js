@@ -17,6 +17,7 @@ const listButton = document.querySelector('.header-library__list');
 const buttonWatched = document.querySelector('.header-library__button--watched');
 const buttonQueue = document.querySelector('.header-library__button--queue');
 const header = document.querySelector('header');
+const paginationBtn = document.querySelector('#pagination');
 
 console.log(buttonWatched);
 
@@ -80,8 +81,10 @@ listButton.addEventListener('click', e => {
 function ifcurrent() {
   if (homeButton.classList.contains('current')) {
     listButton.classList.add('visually-hidden');
+    paginationBtn.classList.remove('visually-hidden');
   } else if (myLibraryButton.classList.contains('current')) {
     listButton.classList.remove('visually-hidden');
+    pagination.classList.add('visually-hidden');
   }
   return;
 }
