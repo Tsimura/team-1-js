@@ -22,9 +22,7 @@ async function getFilms(page) {
     console.log(page > totalPages);
     // console.log('hasNextPage', hasNextPage);
     console.log(page);
-    // if (page === 1) {
-    //   console.log(поставить);
-    // }
+
     if (page === totalPages) {
       Notiflix.Notify.info(`We're sorry, but you've reached the end of search results.`, {
         timeout: 1000,
@@ -114,25 +112,28 @@ const container = document.getElementById('pagination');
 const paginationTrend = new Pagination(container, options);
 page = paginationTrend.getCurrentPage();
 
-paginationTrend.on('afterMove', ({ page, totalPages }) => {
-  console.log(page);
-  mediaPagination();
-  reset();
-  createData(page);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  withLoader.addLoader();
-  paginationBtn.classList.add('visually-hidden');
-  setTimeout(() => {
-    return getFilms(page, totalPages)
-      .then(({ data }) => {
-        console.log(data.results);
-        createFilmoteka(data.results);
-      })
-      .then(withLoader.removeLoader())
-      .then(paginationBtn.classList.remove('visually-hidden'))
-      .catch(error => console.log(error));
-  }, 2000);
-});
+paginationTrend.on(
+  'afterMove',
+  createData(({ page, totalPages }) => {
+    console.log(page);
+    mediaPagination();
+    reset();
+    createData(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    withLoader.addLoader();
+    paginationBtn.classList.add('visually-hidden');
+    setTimeout(() => {
+      return getFilms(page, totalPages)
+        .then(({ data }) => {
+          console.log(data.results);
+          createFilmoteka(data.results);
+        })
+        .then(withLoader.removeLoader())
+        .then(paginationBtn.classList.remove('visually-hidden'))
+        .catch(error => console.log(error));
+    }, 2000);
+  }),
+);
 // paginationTrend.off(container, ({ page }) => {
 //   createData(page);
 // });
