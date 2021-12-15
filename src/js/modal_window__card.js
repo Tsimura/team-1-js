@@ -2,6 +2,7 @@ import storage from './local-storage'
 import axios from "axios";
 import * as basicLightbox from 'basiclightbox'
 import 'simplelightbox/dist/simple-lightbox.min.css';
+// import { getYouTube } from "./youTube"
 
 let moviId = '';
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
@@ -14,7 +15,8 @@ newFilms.addEventListener('click', handleModalCardOpen);
 
 function handleModalCardOpen(event) {
   event.preventDefault()
-  if (event.target.nodeName !== 'IMG') return;
+  console.log(event.target.nodeName);
+  if (event.target.nodeName === 'UL') return;
   moviId = event.target.id;
   modalWindowAPI(moviId).then(markUpModal).catch(error => console.log(error))
 }
@@ -88,19 +90,19 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
   
 
   
-  // function markUpModal({ poster_path, title, release_date, vote_average, vote_count, popularity, original_title, overview, id, genre_ids }) {
+  // function markUpModal({ poster_path, title, release_date, vote_average, vote_count, popularity, original_title, overview, id, genres }) {
   //   getYouTube(title, release_date).then(modal)
-  //   function modal(data) { 
+  //   function modal(data) {
   //     const videoOnYouTube = data.items[0].id.videoId
-  //    let localWatched = storage.load('watchedArray') || []
-    //   let localQueue = storage.load('queueArray') || []
-    //   const genresArr = [...genres];
-    // const arrayNames = [];
-    // for (const genre of genresArr) {
-    //   arrayNames.push(genre.name);
-    // }
-    // const instance = basicLightbox
-    // .create(
+  //     let localWatched = storage.load('watchedArray') || []
+  //     let localQueue = storage.load('queueArray') || []
+  //     const genresArr = [...genres];
+  //     const arrayNames = [];
+  //     for (const genre of genresArr) {
+  //       arrayNames.push(genre.name);
+  //     }
+  //     const instance = basicLightbox
+  //       .create(
   //         `<div class="modal">
   //      <div class="film-card-modal-window">
   //      <button class="close-modal-window-btn" data-modal-card-close>
@@ -139,35 +141,35 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
   //         </div>
   //     </div>
   // </div>`, {
-  //     onShow: () => {
-  //       window.addEventListener('keydown', handleKeydown);
-  //       closeBtn.classList.remove('is-hidden');
-  //       closeBtn.addEventListener('click', handleCloseModalCardBtn);
-  //     },
-  //     onClose: () => {
-  //       window.removeEventListener('keydown', handleKeydown);
-  //       closeBtn.classList.add('is-hidden');
-  //       closeBtn.removeEventListener('click', handleCloseModalCardBtn);
-  //     },
-  //   });
+  //         onShow: () => {
+  //           window.addEventListener('keydown', handleKeydown);
+  //           closeBtn.classList.remove('is-hidden');
+  //           closeBtn.addEventListener('click', handleCloseModalCardBtn);
+  //         },
+  //         onClose: () => {
+  //           window.removeEventListener('keydown', handleKeydown);
+  //           closeBtn.classList.add('is-hidden');
+  //           closeBtn.removeEventListener('click', handleCloseModalCardBtn);
+  //         },
+  //       });
 
-  instance.show()
+      instance.show()
+    
+      function handleCloseModalCardBtn(event) {
+        event.preventDefault()
+        instance.close()
+      }
+    
+      function handleKeydown({ key }) {
+        switch (key) {
+          case 'Escape':
+            instance.close();
+            window.removeEventListener('keydown', handleKeydown);
+            break;
+          default:
+            alert('Что-то пошло не так!');
+        }
 
-  function handleCloseModalCardBtn(event) {
-    event.preventDefault()
-    instance.close()
-  }
-
-  function handleKeydown({ key }) {
-    switch (key) {
-      case 'Escape':
-        instance.close();
-        window.removeEventListener('keydown', handleKeydown);
-        break;
-      default:
-        alert('Что-то пошло не так!');
+      }
     }
-
-  }
-
-}
+// }
