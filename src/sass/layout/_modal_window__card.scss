@@ -50,6 +50,7 @@
 
   border: transparent;
   left: 50%;
+  top: 50%;
   transform: translate(-50%);
   overflow-y: auto;
   @media screen and (max-width: 767px) {
@@ -84,11 +85,13 @@
     top: 430px;
     left: 50%;
     transform: translateX(-50%);
+    padding-bottom: 30px;
   }
   @media screen and (min-width: 1024px) {
     width: 800px;
     height: 500px;
     top: 440px;
+    padding-bottom: 60px;
   }
 }
 
@@ -280,14 +283,14 @@
   }
 }
 .btn-queue-modal-window:hover {
-  border: none;
   cursor: pointer;
+  border: solid 1px #ff6b01;
   background-color: #ff6b01;
   filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
 }
 .btn-watched-modal-window:hover {
-  border: none;
   cursor: pointer;
+  border: solid 1px #ff6b01;
   background-color: #ff6b01;
   filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
 }
