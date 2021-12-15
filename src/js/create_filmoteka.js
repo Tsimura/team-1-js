@@ -7,7 +7,6 @@ import 'tui-pagination/dist/tui-pagination.css';
 import * as withLoader from './spinner';
 
 const films = document.querySelector(`#gallery`);
-const paginationBtn = document.querySelector(`#pagination`)
 
 let page = 1;
 let totalPages = 0;
