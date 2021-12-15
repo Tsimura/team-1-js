@@ -37,11 +37,10 @@ export function createData(page) {
 // createData(page);
 
 export function createFilmoteka(resp) {
-  console.log(resp);
-  // ..................................
-  console.log(resp.page);
-  console.log(resp.total_pages);
-  console.log(resp.total_results);
+  // console.log(resp);
+  // console.log(resp.page);
+  // console.log(resp.total_pages);
+  // console.log(resp.total_results);
   if (resp.total_pages === resp.page) {
     Notiflix.Notify.failure(`We're sorry, but you've reached the end of search results.`);
   }
@@ -71,7 +70,7 @@ export function articles({ poster_path, original_title, release_date, genre_ids,
 
 function onSearch(evt) {
   searchForm = evt.currentTarget.elements.searchQuery.value;
-  console.log(searchForm);
+  // console.log(searchForm);
   evt.preventDefault();
   reset();
   withLoader.addLoader();

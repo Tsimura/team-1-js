@@ -10,7 +10,7 @@ export async function searchFilms(searchForm, page) {
     const { data } = await axios.get(
       `${keys.BASE_URL}/search/movie?${keys.API_KEY}&language=en-US&query=${searchForm}&page=1&include_adult=false`,
     );
-    console.log(searchForm.length);
+    // console.log(searchForm.length);
     if (data.results.length === 0) {
       Notiflix.Notify.failure('Search result not successful. Enter the correct movie name and ');
       getFilms(page)
