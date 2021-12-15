@@ -1,9 +1,11 @@
+// точно рабоий код...................
+
 import axios from 'axios';
 import { makeGenres } from './makeGenres';
 import Notiflix from 'notiflix';
 import { lazyLoad } from './lazyLoad';
 import Pagination from 'tui-pagination';
-import 'tui-pagination/dist/tui-pagination.css';
+import 'tui-pagination/dist/tui-pagination.min.css';
 import * as withLoader from './spinner';
 
 const films = document.querySelector(`#gallery`);
@@ -75,59 +77,12 @@ export function createFilmoteka(data) {
   films.insertAdjacentHTML('beforeend', createFilmoteka);
   const img = document.querySelectorAll('#gallery img');
   lazyLoad(img);
+  // пагинация........ CALL PAGINATION...............................................
   paginationTrend();
+  // ................................................
 }
-function reset() {
-  return (films.innerHTML = '');
-}
-
-// const options = {
-//   totalItems: 1000,
-//   visiblePages: '',
-//   centerAlign: true,
-//   template: {
-//     page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-//     currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-//     moveButton:
-//       '<a href="#" class="tui-page-btn tui-{{type}}">' +
-//       '<span class="tui-ico-{{type}}">{{type}}</span>' +
-//       '</a>',
-//     disabledMoveButton:
-//       '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-//       '<span class="tui-ico-{{type}}">{{type}}</span>' +
-//       '</span>',
-//     moreButton:
-//       '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-//       '<span class="tui-ico-ellip">...</span>' +
-//       '</a>',
-//   },
-// };
-// mediaPagination();
-// const container = document.getElementById('pagination');
-// // const pagination = new Pagination(container, options);
-// page = pagination.getCurrentPage();
-// // createData(page, totalPages);
-// pagination.on('afterMove', ({ page }) => {
-//   withLoader.addLoader();
-//   mediaPagination();
-
-//   reset();
-//   createData(page);
-//   window.scrollTo({ top: 0, behavior: 'smooth' });
-// });
-// function mediaPagination() {
-//   if (window.innerWidth <= 480) {
-//     options.visiblePages = 4;
-//   } else {
-//     options.visiblePages = 7;
-//   }
-// }
-
-// пагинация ...............................................
-// paginationTrend();
-// ..........................................
-console.dir(pagination);
-function paginationTrend() {
+// ......f() PAGINATION..............................
+function paginationTrend(page) {
   const options = {
     totalItems: 1000,
     visiblePages: '',
@@ -151,10 +106,12 @@ function paginationTrend() {
   };
   mediaPagination();
   const container = document.getElementById('pagination');
-  const pagination = new Pagination(container, options);
-  page = pagination.getCurrentPage();
-  // createData(page, totalPages);
-  pagination.on('afterMove', ({ page }) => {
+  // ...INICIAL......................................................
+  const paginationTrend = new Pagination(container, options);
+  // .............................................................
+
+  // ...PAGINATION ON..............................................
+  paginationTrend.on('afterMove', ({ page }) => {
     withLoader.addLoader();
     mediaPagination();
 
@@ -162,7 +119,8 @@ function paginationTrend() {
     createData(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-
+  // ..............................................................
+  // ............f() for media.................
   function mediaPagination() {
     if (window.innerWidth <= 480) {
       options.visiblePages = 4;
@@ -170,74 +128,17 @@ function paginationTrend() {
       options.visiblePages = 7;
     }
   }
-  pagination.off('afterMove', ({ page }) => {
-    createData(page);
-  });
+  // // ...PAGINATION OFF.....можно использовать эту .......................................
+  // paginationTrend.off(container, ({ page }) => {
+  //   return createData(page);
+  // });
+  // //  ......  или эту. ......................
+  // paginationTrend.off(container, createData(page));
+  // // .............................................................
 }
+// .END PAGINATION..........................................
 
-// const pagination = new Pagination('#pagination', {
-//   totalItems: 0,
-//   itemsPerPage: 20,
-//   visiblePages: 5,
-//   page: 1,
-// });
-
-// pagination.getCurrentPage();
-// createData(page);
-// // getFilms(page)
-// //   .then(({ data }) => {
-// //     console.log(data);
-// //     pagination.reset(data.total);
-// //     createFilmoteka(data.results);
-// //   })
-// //   .then(withLoader.removeLoader())
-// //   .catch(error => console.log(error));
-
-// pagination.on('afterMove', event => {
-//   console.log(event);
-//   const currentPage = event.page;
-//   withLoader.addLoader();
-//   reset();
-//   createData(currentPage);
-
-//   // fetchImages(currentPage).then(data => renderImages(data.images));
-// });
-
-// зайвий код з ідеями.....................
-// ......!!!!!!!!....................
-// trendAPI(page).then(data => render(data));
-// function render(data) {
-//   console.log(page);
-//   console.log(totalPages);
-// }
-// .................................
-// trendAPI(page)
-//   .then(data => {
-//     console.log(data);
-//     console.log(data);
-//     makeTrendMarkup(data);
-//   })
-//   .then(withSpinner.removeLoader)
-//   .catch(error => {
-//     console.log(error);
-//   });
-// ..........................
-// function createPage() {
-//   setTimeout(() => {
-//     return trendAPI(page)
-//       .then(data => {
-//         console.log(data);
-//         console.log(data);
-//         makeTrendMarkup(data);
-//       })
-//       .then(withSpinner.removeLoader)
-//       .catch(error => {
-//         console.log(error);
-//       });
-//   }, 2000);
-// }
-// ............................
-// fetchTrending()
-//   .then(data => trendingMarkup(data))
-//   .then(withSpinner.removeLoader);
-//    .............................
+//.......... RESET........................................................
+function reset() {
+  return (films.innerHTML = '');
+}
