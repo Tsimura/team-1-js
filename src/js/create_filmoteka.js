@@ -59,7 +59,7 @@ export function createFilmoteka(data) {
   const createFilmoteka = data
     .map(
       ({ poster_path, original_title, release_date, genre_ids, id, vote_average }) =>
-        `<li id="galleryModal" class="hp__gallery_el">
+        `<li id="galleryModal" class="hp__gallery_el list">
   <a href="#" id="openModal" class='card-links link'>
      ${
        poster_path
