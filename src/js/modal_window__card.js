@@ -42,7 +42,11 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
     .create(
       `<div class="modal">
      <div class="film-card-modal-window" data-btn-close-mod>
-     <img class="film-exemple-photo" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="Фото фільму">
+     ${
+       poster_path
+         ? `<img class="film-exemple-photo" src="https://image.tmdb.org/t/p/w500${poster_path}"`
+         : `<img class="film-exemple-photo" src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Out_Of_Poster.jpg" alt="Poster is missing"`
+     }>
     <div class="modal-window-signature">
     <h2 class="film-title-modal-window">${title}</h2>
     <div class="window-characteristics">
@@ -106,13 +110,11 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
   //       .create(
   //         `<div class="modal">
   //      <div class="film-card-modal-window">
-  //      <button class="close-modal-window-btn" data-modal-card-close>
-  // <svg class="icon-close-modal">
-  //     <use class="icon-close-modal-svg" href="./image/modal-window-card/symbol-defs.svg#icon-close-black">
-  //     </use>
-  // </svg>
-  //     </button>
-  // <img class="film-exemple-photo" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="Фото фільму">
+  //     ${
+  //      poster_path
+  //        ? `<img class="film-exemple-photo" src="https://image.tmdb.org/t/p/w500${poster_path}"`
+  //        : `<img class="film-exemple-photo" src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Out_Of_Poster.jpg" alt="Poster is missing"`
+  //    }>
   //     <div class="modal-window-signature">
   //     <h2 class="film-title-modal-window">${title}</h2>
   //     <div class="window-characteristics">
@@ -151,6 +153,7 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
   //           window.removeEventListener('keydown', handleKeydown);
   //           closeBtn.classList.add('is-hidden');
   //           closeBtn.removeEventListener('click', handleCloseModalCardBtn);
+            // document.body.style.overflowY = "visible";
   //         },
   //       });
 
