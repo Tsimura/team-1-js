@@ -17,11 +17,11 @@ async function getFilms(page) {
   try {
     const { data } = await axios.get(`discover/movie?api_key=${KEY_API}&page=${page}&total_pages`);
     totalPages = data.total_pages;
-    console.log('data', data);
-    console.log('totalPages', totalPages);
-    console.log(page > totalPages);
+    // console.log('data', data);
+    // console.log('totalPages', totalPages);
+    // console.log(page > totalPages);
     // console.log('hasNextPage', hasNextPage);
-    console.log(page);
+    // console.log(page);
     // if (page === 1) {
     //   console.log(поставить);
     // }
@@ -39,16 +39,16 @@ async function getFilms(page) {
     error => console.log(error);
   }
 }
-console.log('page', page);
-console.log('totalPages', totalPages);
+// console.log('page', page);
+// console.log('totalPages', totalPages);
 export function createData(page, totalPages) {
   withLoader.addLoader();
-  console.log('снять');
+  // console.log('снять');
   paginationBtn.classList.add('visually-hidden');
   setTimeout(() => {
     return getFilms(page, totalPages)
       .then(({ data }) => {
-        console.log(data.results);
+        // console.log(data.results);
         createFilmoteka(data.results);
       })
       .then(withLoader.removeLoader())
@@ -59,12 +59,12 @@ export function createData(page, totalPages) {
 createData(page, totalPages);
 export function createFilmoteka(data) {
   // reset();
-  console.log('data', data);
-  console.log('data', data);
+  // console.log('data', data);
+  // console.log('data', data);
   const createFilmoteka = data
     .map(
       ({ poster_path, original_title, release_date, genre_ids, id, vote_average }) =>
-        `<li id="galleryModal" class="hp__gallery_el">
+        `<li id="galleryModal" class="hp__gallery_el list">
   <a href="#" id="openModal" class='card-links link'>
      ${
        poster_path
@@ -115,7 +115,7 @@ const paginationTrend = new Pagination(container, options);
 page = paginationTrend.getCurrentPage();
 
 paginationTrend.on('afterMove', ({ page, totalPages }) => {
-  console.log(page);
+  // console.log(page);
   mediaPagination();
   reset();
   createData(page);
@@ -125,7 +125,7 @@ paginationTrend.on('afterMove', ({ page, totalPages }) => {
   setTimeout(() => {
     return getFilms(page, totalPages)
       .then(({ data }) => {
-        console.log(data.results);
+        // console.log(data.results);
         createFilmoteka(data.results);
       })
       .then(withLoader.removeLoader())

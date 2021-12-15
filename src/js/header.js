@@ -19,7 +19,7 @@ const buttonQueue = document.querySelector('.header-library__button--queue');
 const header = document.querySelector('header');
 const paginationBtn = document.querySelector('#pagination');
 
-console.log(buttonWatched);
+// console.log(buttonWatched);
 
 myLibraryButton.addEventListener('click', () => {
   showFilmsWatched();
@@ -44,7 +44,7 @@ homeButton.addEventListener('click', () => {
   homeButton.classList.add('current');
   ifcurrent();
   reset();
-  console.log(films.attributes);
+  // console.log(films.attributes);
   films.removeAttribute('style');
 
   if (myLibraryButton.classList.contains('current')) {
