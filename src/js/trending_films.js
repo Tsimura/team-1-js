@@ -54,14 +54,8 @@ export function createFilmoteka(resp) {
   paginationSearch.on();
 }
 
-export function articles({
-  poster_path,
-  original_title,
-  release_date,
-  genre_ids,
-  id,
-  vote_average,
-}) {
+
+export function articles({ poster_path, original_title, release_date, genre_ids, id, vote_average }) {
   return `<li id="galleryModal" class="hp__gallery_el">
   <a href="#" id="openModal" class='card-links link'>
      ${
