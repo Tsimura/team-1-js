@@ -9,16 +9,16 @@ const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
 
 
 const newFilms = document.querySelector(`#gallery`);
-const closeBtn = document.querySelector('.close-modal-window-btn')
+const closeBtn = document.querySelector('.close-modal-window-btn');
 
 newFilms.addEventListener('click', handleModalCardOpen);
 
 function handleModalCardOpen(event) {
   event.preventDefault()
-  console.log(event.target.nodeName);
-  if (event.target.nodeName === 'UL') return;
+  if (event.target.nodeName !== 'IMG') return;
   moviId = event.target.id;
   modalWindowAPI(moviId).then(markUpModal).catch(error => console.log(error))
+  document.body.style.overflowY = "hidden";
 }
   
 async function modalWindowAPI(moviId) {
@@ -82,6 +82,7 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
         window.removeEventListener('keydown', handleKeydown);
         closeBtn.classList.add('is-hidden');
         closeBtn.removeEventListener('click', handleCloseModalCardBtn);
+        document.body.style.overflowY = "visible";
       },
     });
 
@@ -155,7 +156,8 @@ function markUpModal({ poster_path, title, vote_average, vote_count, popularity,
 
       instance.show()
     
-      function handleCloseModalCardBtn(event) {
+  function handleCloseModalCardBtn(event) {
+        document.body.style.overflowY = "visible";
         event.preventDefault()
         instance.close()
       }
