@@ -9,6 +9,7 @@ import 'tui-pagination/dist/tui-pagination.min.css';
 import * as withLoader from './spinner';
 
 const films = document.querySelector(`#gallery`);
+const paginationBtn = document.querySelector(`#pagination`)
 
 let page = 1;
 let totalPages = 0;
@@ -41,6 +42,7 @@ async function getFilms(page) {
 console.log('page', page);
 console.log('totalPages', totalPages);
 export function createData(page, totalPages) {
+  paginationBtn.classList.add(`visually-hidden`)
   setTimeout(() => {
     return getFilms(page, totalPages)
       .then(({ data }) => {
@@ -48,6 +50,7 @@ export function createData(page, totalPages) {
         createFilmoteka(data.results);
       })
       .then(withLoader.removeLoader())
+      .then(paginationBtn.classList.remove(`visually-hidden`))
       .catch(error => console.log(error));
   }, 2000);
 }

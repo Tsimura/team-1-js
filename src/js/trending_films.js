@@ -10,6 +10,7 @@ export const films = document.querySelector(`#gallery`);
 const input = document.querySelector(`#search-form`);
 
 input.addEventListener(`submit`, onSearch);
+const paginationBtn = document.querySelector(`#pagination`)
 
 let searchForm = ` `;
 let page = 1;
@@ -74,12 +75,14 @@ function onSearch(evt) {
   evt.preventDefault();
   reset();
   withLoader.addLoader();
+  paginationBtn.classList.add(`visually-hidden`)
   if (searchForm.length === 0) {
     Notiflix.Notify.failure('Search result not successful. Enter the correct movie name and ');
     setTimeout(() => {
       getFilms(page)
         .then(createFilmoteka)
         .then(withLoader.removeLoader())
+        .then(paginationBtn.classList.remove(`visually-hidden`))
         .catch(error => console.log(error));
       return;
     }, 2000);
@@ -88,6 +91,7 @@ function onSearch(evt) {
     searchFilms(searchForm, page)
       .then(createFilmoteka)
       .then(withLoader.removeLoader)
+      .then(paginationBtn.classList.remove(`visually-hidden`))
       .catch(error => console.log(error));
   }, 2000);
 }
