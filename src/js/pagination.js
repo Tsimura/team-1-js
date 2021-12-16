@@ -1,9 +1,9 @@
-import Pagination from 'tui-pagination';
-import 'tui-pagination/dist/tui-pagination.css';
-import { films } from './library';
-import { reset } from './library';
+// import Pagination from 'tui-pagination';
+// import 'tui-pagination/dist/tui-pagination.css';
+// import { films } from './library';
+// import { reset } from './library';
 
-// // пагинация для Librery paginationWatched .........................
+// // // пагинация для Librery paginationWatched .........................
 // let page;
 // let visiblePages = 7;
 // const itemsPerPage = 2;
@@ -45,7 +45,7 @@ import { reset } from './library';
 // };
 
 // const container = document.getElementById('pagination');
-// const paginationWatched = new Pagination(container, options);
+// // const paginationWatched = new Pagination(container, options);
 
 // paginationWatched.getCurrentPage();
 // paginationWatched.on('afterMove', localWatched => {
@@ -73,13 +73,13 @@ import { reset } from './library';
 //   window.scrollTo({ top: 0, behavior: 'smooth' });
 // });
 
-// end пагинация для Librery paginationWatched.....................................................
+// // end пагинация для Librery paginationWatched.....................................................
 
-// пагинация paginationSuarch.....................................................
-
+// // пагинация paginationSuarch.....................................................
 // const options = {
-//   totalItems: 1000,
-//   visiblePages: '',
+//   page,
+//   totalItems,
+//   visiblePages: 5,
 //   centerAlign: true,
 //   template: {
 //     page: '<a href="#" class="tui-page-btn">{{page}}</a>',
@@ -99,27 +99,93 @@ import { reset } from './library';
 //   },
 // };
 // mediaPagination();
-// // const paginationTrend = new Pagination(container, options);
-// page = paginationTrend.getCurrentPage();
-
-// paginationTrend.on('afterMove', ({ page, totalPages }) => {
-//   reset();
+// const container = document.getElementById('pagination');
+// // const paginationSearch = new Pagination(container, options);
+// // page = paginationSearch.getCurrentPage();
+// paginationSearch.on('afterMove', evt => {
+//   const page = evt.page;
+//   consol.log(evt.page);
 //   mediaPagination();
-//   withLoader.addLoader();
-//   paginationBtn.classList.add('visually-hidden');
 //   window.scrollTo({ top: 0, behavior: 'smooth' });
-//   setTimeout(() => {
-//     return getFilms(page, totalPages)
-//       .then(({ data }) => {
-//         createFilmoteka(data.results);
-//       })
-//       .then(withLoader.removeLoader())
-//       .then(paginationBtn.classList.remove('visually-hidden'))
-//       .catch(error => console.log(error));
-//   }, 2000);
+//   searchForm = evt.currentTarget.elements.searchQuery.value;
+//   // console.log(searchForm);
+//   evt.preventDefault();
+//   reset();
+//   withLoader.addLoader();
+//   paginationBtn.classList.add(`visually-hidden`);
+//   if (searchForm.length === 0) {
+//     Notiflix.Notify.failure('Search result not successful. Enter the correct movie name and ');
+//     setTimeout(() => {
+//       getFilms(page)
+//         .then(createFilmoteka)
+//         .then(withLoader.removeLoader())
+//         .then(paginationBtn.classList.remove(`visually-hidden`))
+//         .catch(error => console.log(error));
+//       return;
+//     }, 2000);
+//   }
 // });
 
-// // paginationTrend.off(container, ({ page, totalPages }) => {
+// function mediaPagination() {
+//   if (window.innerWidth <= 480) {
+//     options.visiblePages = 4;
+//   } else {
+//     options.visiblePages = 7;
+//   }
+// }
+
+// paginationSearch.off(container, evt => {
+//   const page = evt.page;
+//   consol.log(evt.page);
+//   mediaPagination();
+//   window.scrollTo({ top: 0, behavior: 'smooth' });
+//   searchForm = evt.currentTarget.elements.searchQuery.value;
+//   // console.log(searchForm);
+//   evt.preventDefault();
+//   reset();
+//   withLoader.addLoader();
+//   paginationBtn.classList.add(`visually-hidden`);
+//   if (searchForm.length === 0) {
+//     Notiflix.Notify.failure('Search result not successful. Enter the correct movie name and ');
+//     setTimeout(() => {
+//       getFilms(page)
+//         .then(createFilmoteka)
+//         .then(withLoader.removeLoader())
+//         .then(paginationBtn.classList.remove(`visually-hidden`))
+//         .catch(error => console.log(error));
+//       return;
+//     }, 2000);
+//   }
+// });
+
+// // end пагинация paginationSuarch.....................................................
+
+// // const options = {
+// //   totalItems: 1000,
+// //   visiblePages: '',
+// //   centerAlign: true,
+// //   template: {
+// //     page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+// //     currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+// //     moveButton:
+// //       '<a href="#" class="tui-page-btn tui-{{type}}">' +
+// //       '<span class="tui-ico-{{type}}">{{type}}</span>' +
+// //       '</a>',
+// //     disabledMoveButton:
+// //       '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+// //       '<span class="tui-ico-{{type}}">{{type}}</span>' +
+// //       '</span>',
+// //     moreButton:
+// //       '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+// //       '<span class="tui-ico-ellip">...</span>' +
+// //       '</a>',
+// //   },
+// // };
+// // mediaPagination();
+// // // const paginationTrend = new Pagination(container, options);
+// // page = paginationTrend.getCurrentPage();
+
+// // paginationTrend.on('afterMove', ({ page, totalPages }) => {
 // //   reset();
 // //   mediaPagination();
 // //   withLoader.addLoader();
@@ -136,10 +202,27 @@ import { reset } from './library';
 // //   }, 2000);
 // // });
 
-// function mediaPagination() {
-//   if (window.innerWidth <= 480) {
-//     options.visiblePages = 4;
-//   } else {
-//     options.visiblePages = 7;
-//   }
-// }
+// // // paginationTrend.off(container, ({ page, totalPages }) => {
+// // //   reset();
+// // //   mediaPagination();
+// // //   withLoader.addLoader();
+// // //   paginationBtn.classList.add('visually-hidden');
+// // //   window.scrollTo({ top: 0, behavior: 'smooth' });
+// // //   setTimeout(() => {
+// // //     return getFilms(page, totalPages)
+// // //       .then(({ data }) => {
+// // //         createFilmoteka(data.results);
+// // //       })
+// // //       .then(withLoader.removeLoader())
+// // //       .then(paginationBtn.classList.remove('visually-hidden'))
+// // //       .catch(error => console.log(error));
+// // //   }, 2000);
+// // // });
+
+// // function mediaPagination() {
+// //   if (window.innerWidth <= 480) {
+// //     options.visiblePages = 4;
+// //   } else {
+// //     options.visiblePages = 7;
+// //   }
+// // }

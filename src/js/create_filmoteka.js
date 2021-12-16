@@ -39,7 +39,7 @@ const options = {
   },
 };
 mediaPagination();
-// const paginationTrend = new Pagination(container, options);
+const paginationTrend = new Pagination(container, options);
 
 paginationTrend.on('afterMove', ({ page, totalPages }) => {
   page = paginationTrend.getCurrentPage();
