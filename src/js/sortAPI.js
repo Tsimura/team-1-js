@@ -8,12 +8,11 @@ import { lazyLoad } from './lazyLoad';
 // ...........................................................
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
-const paginationBtn = document.querySelector('#pagination');
 
 async function sortAPI(year, sortBy, genre) {
   try {
     const { data } = await axios.get(
-      `discover/movie?api_key=${KEY_API}&language=en-EN&sort_by=${sortBy}&vote_count.gte=1000&include_adult=false&page=1&primary_release_year=${year}&with_genres=${genre}`,
+      `discover/movie?api_key=${KEY_API}&language=en-EN&sort_by=${sortBy}&vote_count.gte=1000&include_adult=false&page=1&primary_release_year=${year}&with_genres=${genre}&page=1`,
     );
     if (data.results.length === 0) {
       return Notiflix.Notify.failure('No results matching your request. Choose other parameters', {
@@ -65,7 +64,6 @@ resetBtn.addEventListener('click', e => {
 filtBtnWrap.addEventListener('change', e => {
   clearGallery();
   withSpinner.addLoader();
-  paginationBtn.classList.add('visually-hidden');
   // console.log(sortBy.value);
   // console.log(genreBtn.value);
   // console.log(filterYear.value);
@@ -75,13 +73,11 @@ filtBtnWrap.addEventListener('change', e => {
         makeFilterMarkup(data);
       })
       .then(withSpinner.removeLoader)
-      .then(paginationBtn.classList.remove('visually-hidden'))
       .catch(error => {
         console.log(error);
         fetchTrending()
           .then(data => trendingMarkup(data))
-          .then(withSpinner.removeLoader)
-          .then(paginationBtn.classList.remove('visually-hidden'));
+          .then(withSpinner.removeLoader);
       });
   }, 2000);
 });
