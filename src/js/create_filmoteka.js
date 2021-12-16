@@ -3,7 +3,7 @@ import { makeGenres } from './makeGenres';
 import Notiflix from 'notiflix';
 import { lazyLoad } from './lazyLoad';
 import Pagination from 'tui-pagination';
-import 'tui-pagination/dist/tui-pagination.css';
+import 'tui-pagination/dist/tui-pagination.min.css';
 import * as withLoader from './spinner';
 
 let page = 1;
@@ -15,7 +15,7 @@ const paginationBtn = document.querySelector('#pagination');
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 
-// //////////////////////
+// Pagination ...........................................
 
 const options = {
   totalItems: 1000,
@@ -40,9 +40,9 @@ const options = {
 };
 mediaPagination();
 const paginationTrend = new Pagination(container, options);
-page = paginationTrend.getCurrentPage();
 
 paginationTrend.on('afterMove', ({ page, totalPages }) => {
+  page = paginationTrend.getCurrentPage();
   reset();
   mediaPagination();
   withLoader.addLoader();
@@ -58,6 +58,7 @@ paginationTrend.on('afterMove', ({ page, totalPages }) => {
       .catch(error => console.log(error));
   }, 2000);
 });
+
 // paginationTrend.off(container, ({ page, totalPages }) => {
 //   reset();
 //   mediaPagination();
@@ -82,7 +83,7 @@ function mediaPagination() {
     options.visiblePages = 7;
   }
 }
-///////////////////////////////////////////
+// ........................................................
 createData({ page, totalPages });
 async function getFilms(page) {
   try {
