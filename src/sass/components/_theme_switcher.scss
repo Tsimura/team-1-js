@@ -152,3 +152,8 @@ body[data-theme='dark'] .tui-next-is-ellip .tui-ico-ellip {
   background-color: var(--text-color);
   background-size: cover;
 }
+body[data-theme='dark'] .tui-prev-is-ellip .tui-ico-ellip {
+  background-image: url('https://img.icons8.com/ios-glyphs/1/ffffff/ellipsis.png');
+  background-color: var(--text-color);
+  background-size: cover;
+}
