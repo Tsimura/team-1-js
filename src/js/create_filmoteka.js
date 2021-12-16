@@ -9,16 +9,87 @@ import * as withLoader from './spinner';
 let page = 1;
 let totalPages = 0;
 
+const container = document.getElementById('pagination');
 const films = document.querySelector(`#gallery`);
 const paginationBtn = document.querySelector('#pagination');
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 
+// //////////////////////
+
+const options = {
+  totalItems: 1000,
+  visiblePages: '',
+  centerAlign: true,
+  template: {
+    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+    currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+    moveButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '</a>',
+    disabledMoveButton:
+      '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '</span>',
+    moreButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+      '<span class="tui-ico-ellip">...</span>' +
+      '</a>',
+  },
+};
+mediaPagination();
+const paginationTrend = new Pagination(container, options);
+page = paginationTrend.getCurrentPage();
+
+paginationTrend.on('afterMove', ({ page, totalPages }) => {
+  reset();
+  mediaPagination();
+  withLoader.addLoader();
+  paginationBtn.classList.add('visually-hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(() => {
+    return getFilms(page, totalPages)
+      .then(({ data }) => {
+        createFilmoteka(data.results);
+      })
+      .then(withLoader.removeLoader())
+      .then(paginationBtn.classList.remove('visually-hidden'))
+      .catch(error => console.log(error));
+  }, 2000);
+});
+// paginationTrend.off(container, ({ page, totalPages }) => {
+//   reset();
+//   mediaPagination();
+//   withLoader.addLoader();
+//   paginationBtn.classList.add('visually-hidden');
+//   window.scrollTo({ top: 0, behavior: 'smooth' });
+//   setTimeout(() => {
+//     return getFilms(page, totalPages)
+//       .then(({ data }) => {
+//         createFilmoteka(data.results);
+//       })
+//       .then(withLoader.removeLoader())
+//       .then(paginationBtn.classList.remove('visually-hidden'))
+//       .catch(error => console.log(error));
+//   }, 2000);
+// });
+
+function mediaPagination() {
+  if (window.innerWidth <= 480) {
+    options.visiblePages = 4;
+  } else {
+    options.visiblePages = 7;
+  }
+}
+///////////////////////////////////////////
+createData({ page, totalPages });
 async function getFilms(page) {
   try {
     const { data } = await axios.get(`discover/movie?api_key=${KEY_API}&page=${page}&total_pages`);
     totalPages = data.total_pages;
     if (page === totalPages) {
+      // paginationTrend.off(container, ({ page, createData({ page, totalPages }));
       Notiflix.Notify.info(`We're sorry, but you've reached the end of search results.`, {
         timeout: 1000,
       });
@@ -31,10 +102,12 @@ async function getFilms(page) {
     error => console.log(error);
   }
 }
-
 export function createData(page, totalPages) {
+  reset();
+  mediaPagination();
   withLoader.addLoader();
   paginationBtn.classList.add('visually-hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   setTimeout(() => {
     return getFilms(page, totalPages)
       .then(({ data }) => {
@@ -45,8 +118,6 @@ export function createData(page, totalPages) {
       .catch(error => console.log(error));
   }, 2000);
 }
-
-createData(page, totalPages);
 
 export function createFilmoteka(data) {
   const createFilmoteka = data
@@ -75,55 +146,4 @@ export function createFilmoteka(data) {
 
 function reset() {
   return (films.innerHTML = '');
-}
-
-const options = {
-  totalItems: 1000,
-  visiblePages: '',
-  centerAlign: true,
-  template: {
-    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-    currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-    moveButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
-      '</a>',
-    disabledMoveButton:
-      '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
-      '</span>',
-    moreButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-      '<span class="tui-ico-ellip">...</span>' +
-      '</a>',
-  },
-};
-mediaPagination();
-const container = document.getElementById('pagination');
-const paginationTrend = new Pagination(container, options);
-page = paginationTrend.getCurrentPage();
-
-paginationTrend.on('afterMove', ({ page, totalPages }) => {
-  mediaPagination();
-  reset();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  withLoader.addLoader();
-  paginationBtn.classList.add('visually-hidden');
-  setTimeout(() => {
-    return getFilms(page, totalPages)
-      .then(({ data }) => {
-        createFilmoteka(data.results);
-      })
-      .then(withLoader.removeLoader())
-      .then(paginationBtn.classList.remove('visually-hidden'))
-      .catch(error => console.log(error));
-  }, 2000);
-});
-
-function mediaPagination() {
-  if (window.innerWidth <= 480) {
-    options.visiblePages = 4;
-  } else {
-    options.visiblePages = 7;
-  }
 }
