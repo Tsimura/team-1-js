@@ -87,7 +87,7 @@ function mediaPagination() {
 createData({ page, totalPages });
 async function getFilms(page) {
   try {
-    const { data } = await axios.get(`discover/movie?api_key=${KEY_API}&page=${page}&total_pages`);
+    const { data } = await axios.get(`discover/movie?api_key=${KEY_API}&page=${page}`);
     totalPages = data.total_pages;
     if (page === totalPages) {
       // paginationTrend.off(container, ({ page, createData({ page, totalPages }));
