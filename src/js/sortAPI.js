@@ -8,6 +8,7 @@ import { lazyLoad } from './lazyLoad';
 // ...........................................................
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
+const paginationBtn = document.querySelector('#pagination');
 
 async function sortAPI(year, sortBy, genre) {
   try {
@@ -64,6 +65,7 @@ resetBtn.addEventListener('click', e => {
 filtBtnWrap.addEventListener('change', e => {
   clearGallery();
   withSpinner.addLoader();
+  paginationBtn.classList.add('visually-hidden');
   // console.log(sortBy.value);
   // console.log(genreBtn.value);
   // console.log(filterYear.value);
@@ -73,11 +75,13 @@ filtBtnWrap.addEventListener('change', e => {
         makeFilterMarkup(data);
       })
       .then(withSpinner.removeLoader)
+      .then(paginationBtn.classList.remove('visually-hidden'))
       .catch(error => {
         console.log(error);
         fetchTrending()
           .then(data => trendingMarkup(data))
-          .then(withSpinner.removeLoader);
+          .then(withSpinner.removeLoader)
+          .then(paginationBtn.classList.remove('visually-hidden'));
       });
   }, 2000);
 });
