@@ -5,26 +5,19 @@ import { lazyLoad } from './lazyLoad';
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 import * as withLoader from './spinner';
-
 const films = document.querySelector(`#gallery`);
 
 let page = 1;
 let totalPages = 0;
+
 const paginationBtn = document.querySelector('#pagination');
-axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
+axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
+
 async function getFilms(page) {
   try {
     const { data } = await axios.get(`discover/movie?api_key=${KEY_API}&page=${page}&total_pages`);
     totalPages = data.total_pages;
-    // console.log('data', data);
-    // console.log('totalPages', totalPages);
-    // console.log(page > totalPages);
-    // console.log('hasNextPage', hasNextPage);
-    // console.log(page);
-    // if (page === 1) {
-    //   console.log(поставить);
-    // }
     if (page === totalPages) {
       Notiflix.Notify.info(`We're sorry, but you've reached the end of search results.`, {
         timeout: 1000,
@@ -33,22 +26,17 @@ async function getFilms(page) {
     return {
       data,
       totalPages,
-      // hasNextPage: page > totalPages,
     };
   } catch (error) {
     error => console.log(error);
   }
 }
-// console.log('page', page);
-// console.log('totalPages', totalPages);
 export function createData(page, totalPages) {
   withLoader.addLoader();
-  // console.log('снять');
   paginationBtn.classList.add('visually-hidden');
   setTimeout(() => {
     return getFilms(page, totalPages)
       .then(({ data }) => {
-        // console.log(data.results);
         createFilmoteka(data.results);
       })
       .then(withLoader.removeLoader())
@@ -58,9 +46,6 @@ export function createData(page, totalPages) {
 }
 createData(page, totalPages);
 export function createFilmoteka(data) {
-  // reset();
-  // console.log('data', data);
-  // console.log('data', data);
   const createFilmoteka = data
     .map(
       ({ poster_path, original_title, release_date, genre_ids, id, vote_average }) =>
@@ -82,7 +67,6 @@ export function createFilmoteka(data) {
   films.insertAdjacentHTML('beforeend', createFilmoteka);
   const img = document.querySelectorAll('#gallery img');
   lazyLoad(img);
-  paginationTrend();
 }
 function reset() {
   return (films.innerHTML = '');
@@ -115,17 +99,14 @@ const paginationTrend = new Pagination(container, options);
 page = paginationTrend.getCurrentPage();
 
 paginationTrend.on('afterMove', ({ page, totalPages }) => {
-  // console.log(page);
   mediaPagination();
   reset();
-  createData(page);
   window.scrollTo({ top: 0, behavior: 'smooth' });
   withLoader.addLoader();
   paginationBtn.classList.add('visually-hidden');
   setTimeout(() => {
     return getFilms(page, totalPages)
       .then(({ data }) => {
-        // console.log(data.results);
         createFilmoteka(data.results);
       })
       .then(withLoader.removeLoader())
@@ -133,9 +114,7 @@ paginationTrend.on('afterMove', ({ page, totalPages }) => {
       .catch(error => console.log(error));
   }, 2000);
 });
-// paginationTrend.off(container, ({ page }) => {
-//   createData(page);
-// });
+
 function mediaPagination() {
   if (window.innerWidth <= 480) {
     options.visiblePages = 4;

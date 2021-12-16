@@ -10,7 +10,7 @@ export const films = document.querySelector(`#gallery`);
 const input = document.querySelector(`#search-form`);
 
 input.addEventListener(`submit`, onSearch);
-const paginationBtn = document.querySelector(`#pagination`)
+const paginationBtn = document.querySelector(`#pagination`);
 
 let searchForm = ` `;
 let page = 1;
@@ -38,14 +38,9 @@ export function createData(page) {
 // createData(page);
 
 export function createFilmoteka(resp) {
-  // console.log(resp);
-  // console.log(resp.page);
-  // console.log(resp.total_pages);
-  // console.log(resp.total_results);
   if (resp.total_pages === resp.page) {
-    Notiflix.Notify.failure(`We're sorry, but you've reached the end of search results.`);
+    Notiflix.Notify.info(`We're sorry, but you've reached the end of search results.`);
   }
-  // ..................................
   resp.results.map(data => {
     return films.insertAdjacentHTML(`beforeend`, articles(data));
   });
@@ -53,7 +48,14 @@ export function createFilmoteka(resp) {
   lazyLoad(img);
 }
 
-export function articles({ poster_path, original_title, release_date, genre_ids, id, vote_average }) {
+export function articles({
+  poster_path,
+  original_title,
+  release_date,
+  genre_ids,
+  id,
+  vote_average,
+}) {
   return `<li id="galleryModal" class="hp__gallery_el list">
   <a href="#" id="openModal" class='card-links link'>
      ${
@@ -75,7 +77,7 @@ function onSearch(evt) {
   evt.preventDefault();
   reset();
   withLoader.addLoader();
-  paginationBtn.classList.add(`visually-hidden`)
+  paginationBtn.classList.add(`visually-hidden`);
   if (searchForm.length === 0) {
     Notiflix.Notify.failure('Search result not successful. Enter the correct movie name and ');
     setTimeout(() => {
