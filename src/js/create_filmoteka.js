@@ -5,11 +5,11 @@ import { lazyLoad } from './lazyLoad';
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 import * as withLoader from './spinner';
-const films = document.querySelector(`#gallery`);
 
 let page = 1;
 let totalPages = 0;
 
+const films = document.querySelector(`#gallery`);
 const paginationBtn = document.querySelector('#pagination');
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
@@ -31,6 +31,7 @@ async function getFilms(page) {
     error => console.log(error);
   }
 }
+
 export function createData(page, totalPages) {
   withLoader.addLoader();
   paginationBtn.classList.add('visually-hidden');
@@ -44,7 +45,9 @@ export function createData(page, totalPages) {
       .catch(error => console.log(error));
   }, 2000);
 }
+
 createData(page, totalPages);
+
 export function createFilmoteka(data) {
   const createFilmoteka = data
     .map(
@@ -65,9 +68,11 @@ export function createFilmoteka(data) {
     )
     .join('');
   films.insertAdjacentHTML('beforeend', createFilmoteka);
+
   const img = document.querySelectorAll('#gallery img');
   lazyLoad(img);
 }
+
 function reset() {
   return (films.innerHTML = '');
 }
