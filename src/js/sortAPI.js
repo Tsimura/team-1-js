@@ -8,11 +8,12 @@ import { lazyLoad } from './lazyLoad';
 // ...........................................................
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const KEY_API = '221ed015def0321f18a85f3fc7b4d6fa';
+let page = 3;
 
-async function sortAPI(year, sortBy, genre) {
+async function sortAPI(year, sortBy, genre, page) {
   try {
     const { data } = await axios.get(
-      `discover/movie?api_key=${KEY_API}&language=en-EN&sort_by=${sortBy}&vote_count.gte=1000&include_adult=false&page=1&primary_release_year=${year}&with_genres=${genre}&page=1`,
+      `discover/movie?api_key=${KEY_API}&language=en-EN&sort_by=${sortBy}&vote_count.gte=1000&include_adult=false&page=${page}&primary_release_year=${year}&with_genres=${genre}`,
     );
     if (data.results.length === 0) {
       return Notiflix.Notify.failure('No results matching your request. Choose other parameters', {
@@ -31,7 +32,7 @@ async function sortAPI(year, sortBy, genre) {
 async function fetchTrending() {
   try {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/trending/movie/week?api_key=221ed015def0321f18a85f3fc7b4d6fa&page=1`,
+      `https://api.themoviedb.org/3/trending/movie/week?api_key=${KEY_API}`,
     );
     return data;
   } catch (error) {
@@ -68,7 +69,7 @@ filtBtnWrap.addEventListener('change', e => {
   // console.log(genreBtn.value);
   // console.log(filterYear.value);
   setTimeout(() => {
-    sortAPI(filterYear.value, sortBy.value, genreBtn.value)
+    sortAPI(filterYear.value, sortBy.value, genreBtn.value, page)
       .then(data => {
         makeFilterMarkup(data);
       })
